@@ -18,11 +18,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-[#4A4E69] bg-opacity-100">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="font-serif text-lg tracking-wide">
+        <Link href="/" className="font-serif text-lg tracking-wide text-white">
           LAWONBLOOM
         </Link>
 
-        <nav className="hidden md:flex gap-8 text-sm text-gray-600">
+        <nav className="hidden md:flex gap-8 text-sm text-white">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -62,7 +62,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -12 }}
             className="md:hidden border-t bg-[#2C3E50] bg-opacity-100"
           >
-            <nav className="flex flex-col gap-1 px-6 py-4 text-sm text-gray-700">
+            <nav className="flex flex-col gap-1 px-6 py-4 text-sm text-white">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
