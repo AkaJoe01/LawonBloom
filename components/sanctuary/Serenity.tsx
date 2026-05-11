@@ -15,13 +15,13 @@ export default function Serenity() {
             </div>
 
             {/* CARD */}
-            <div className="grid grid:cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 {/* CARD 1 */}
                 <div className="bg-white/70 rounded-2xl p-10 shadow-sm">
                     <div className="text-3xl mb-6">⚗️</div>
                     <h3 className="font-serif text-2xl mb-4">Pioneering Precision</h3>
-                    <p className="text-gary-600 leading-7">
+                    <p className="text-gray-600 leading-7">
                         Our laboratories utilize next-generation embryo technologies.
                     </p>
                 </div>

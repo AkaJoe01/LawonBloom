@@ -1,10 +1,10 @@
-import Hero from "@/app/components/Sanctuary/Hero";
-import VisionMission from "@/app/components/Sanctuary/VisionMission";
-import Serenity from "@/app/components/Sanctuary/Serenity";
+import Hero from "@/components/sanctuary/Hero";
+import VisionMission from "@/components/sanctuary/VisionMission";
+import Serenity from "@/components/sanctuary/Serenity";
 
 export default function SanctuaryPage() {
     return(
-        <main className="bg-[f5f2ee] text-[#2b2b2b]">
+        <main className="bg-[#f5f2ee] text-[#2b2b2b]">
             <Hero />
             <VisionMission />
             <Serenity />

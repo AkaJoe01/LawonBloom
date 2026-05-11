@@ -1,4 +1,4 @@
-import Timeline from "../components/thejourney/Timeline";
+import Timeline from "@/components/journey/Timeline";
 
 export default function JourneyPage() {
     return (

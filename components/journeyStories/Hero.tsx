@@ -18,7 +18,7 @@ export default function Hero() {
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-3xl">
-        <p className="uppercase tracking-[0.3em] text-xs text-[#9c567] mb-6">
+        <p className="uppercase tracking-[0.3em] text-xs text-[#9c5c67] mb-6">
           The Miracle of Life
         </p>
         <h1 className="font-serif text-[84px] leading-[92px] tracking-[-0.4em] mb-8">

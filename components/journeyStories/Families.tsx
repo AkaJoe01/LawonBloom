@@ -36,7 +36,7 @@ export default function Families() {
     <section className="max-w-6xl mx-auto px-6 py-24">
       <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-20 items-start">
         <div>
-          <p className="uppercase text-xs tracking-[0.3em] text-[#9c567] mb-6">
+          <p className="uppercase text-xs tracking-[0.3em] text-[#9c5c67] mb-6">
             Written Archives
           </p>
           <h2 className="font-serif text-[56px] leading-[1.1] mb-8">

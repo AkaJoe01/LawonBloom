@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function VisionMission() {
     return(
-        <section className="border-t border-[#8e1da]">
+        <section className="border-t border-[#e8e1da]">
             <div className="max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
                 {/* IMAGES */}
