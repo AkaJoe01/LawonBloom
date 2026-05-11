@@ -22,11 +22,7 @@ const navItems = [
     label: "Journey",
     href: "/journey",
     icon: Compass,
-    children: [
-      { label: "Overview", href: "/journey" },
-      { label: "Stories", href: "/journey/stories" },
-      { label: "Consultation", href: "/journey/consultation" },
-    ],
+    children: [{ label: "Consultation", href: "/journey/consultation" }],
   },
 ];
 

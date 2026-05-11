@@ -1,14 +1,14 @@
 export default function VisitPrep(){
     return(
-        <section className="max-w-6xl mx-auto px-6 py-32">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+        <section className="max-w-6xl mx-auto px-6 py-16 md:py-32">
+            <div className="grid grid-cols-1 gap-12 items-center md:grid-cols-2">
 
-                {/* LEFT */ }
-                <div>
-                    <h2 className="font-serif text-[56px] leading-[1.1] mb-8">
+                {/* LEFT */}
+                <div className="max-w-xl">
+                    <h2 className="font-serif text-4xl md:text-[56px] leading-tight md:leading-[1.1] mb-6 md:mb-8">
                         Prepare for your Sanctuary Visit
                     </h2>
-                    <p className="text-gray-600 leading-8 mb-10">
+                    <p className="text-gray-600 leading-8 mb-8 md:mb-10">
                         We believe the journey to parenthood should be enveloped
                         in calm and clarity.
                     </p>
@@ -33,15 +33,15 @@ export default function VisitPrep(){
                 </div>
 
                 {/* RIGHT */}
-                <div>
-                    <img 
+                <div className="flex justify-center">
+                    <img
                         src="/images/corridor.jpg"
                         alt="corridor"
-                        className="rounded-3xl shadow-sm"
-                        />
+                        className="w-full max-w-xl rounded-3xl shadow-sm object-cover"
+                    />
                 </div>
 
             </div>
-        </section> 
+        </section>
     );
 }
