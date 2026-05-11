@@ -7,8 +7,6 @@ import {
   Building2,
   Stethoscope,
   Compass,
-  Crown,
-  HeartHandshake,
 } from "lucide-react";
 
 const navItems = [
@@ -17,12 +15,16 @@ const navItems = [
     label: "Sanctuary",
     href: "/sanctuary",
     icon: Building2,
+    children: [{ label: "Services", href: "/sanctuary/services" }],
   },
   {
     label: "Journey",
     href: "/journey",
     icon: Compass,
-    children: [{ label: "Consultation", href: "/journey/consultation" }],
+    children: [
+      { label: "Stories", href: "/journey/stories" },
+      { label: "Consultation", href: "/journey/consultation" },
+    ],
   },
 ];
 
