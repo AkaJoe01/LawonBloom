@@ -58,7 +58,7 @@ export default function AboutPage() {
                     The Visionary
                   </h3>
                   <p className="font-body-main text-on-surface-variant mb-6">
-                    Dr. Olugbenga's philosophy stems from decades of international practice, recognizing that the missing element in modern fertility care was 'serenity'.
+                    Dr. Olugbenga&apos;s philosophy stems from decades of international practice, recognizing that the missing element in modern fertility care was &apos;serenity&apos;.
                   </p>
                   <span className="font-label-caps text-xs tracking-widest text-primary">
                     Chief Clinical Architect

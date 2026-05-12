@@ -1,5 +1,3 @@
-import Images from "next/image";
-
 export default function TeamPage(){
     return(
         <main className="bg-[#f5f2ee] text-[#2e2e27]">
@@ -16,7 +14,7 @@ export default function TeamPage(){
                 <p className="max-w-xl mt-10 text-sm leading-7 text-[#6f6965]">
                     Meet the globally recognized medical authorities,
                     embryologists, and compassionate counselors who form
-                    the cornerstone of LawonBloom's clinical excellence.
+                    the cornerstone of LawonBloom&apos;s clinical excellence.
                 </p>
             </section>
 
