@@ -1,45 +1,45 @@
 
 export default function Serenity() {
     return(
-       <section className="border-t border-[#e8e1da]">
-        <div className="max-w-6xl mx-auto px-6 py-24">
+       <section className="border-t border-outline-variant/30">
+        <div className="mx-auto max-w-360 px-6 py-20 lg:px-20 lg:py-28">
 
             {/* TITLE */ }
-            <div className="text-center mb-20">
-                <h2 className="font-serif text-[48px] text-[#9c5c67] mb-4">
+            <div className="mb-20 text-center">
+                <h2 className="font-display text-4xl text-primary sm:text-5xl lg:text-[3.3rem]">
                     Scientific Serenity
                 </h2>
-                <p className="text-gray-500">
+                <p className="mt-4 text-lg text-on-surface-variant">
                     The pillars of our clinic approach.
                 </p>
             </div>
 
             {/* CARD */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-3">
 
                 {/* CARD 1 */}
-                <div className="bg-white/70 rounded-2xl p-10 shadow-sm">
-                    <div className="text-3xl mb-6">⚗️</div>
-                    <h3 className="font-serif text-2xl mb-4">Pioneering Precision</h3>
-                    <p className="text-gray-600 leading-7">
+                <div className="glass-panel rounded-4xl p-10">
+                    <div className="mb-6 text-4xl">⚗️</div>
+                    <h3 className="font-display mb-4 text-2xl text-foreground">Pioneering Precision</h3>
+                    <p className="leading-8 text-on-surface-variant">
                         Our laboratories utilize next-generation embryo technologies.
                     </p>
                 </div>
 
                 {/* CARD 2 */}
-                <div className="bg-white/70 rounded-2xl p-10 shadow-sm">
-                    <div className="text-3xl mb-6">🔬</div>
-                    <h3 className="font-serif text-2xl mb-4">Advanced Research</h3>
-                    <p className="text-gray-600 leading-7">
+                <div className="glass-panel rounded-4xl p-10">
+                    <div className="mb-6 text-4xl">🔬</div>
+                    <h3 className="font-display mb-4 text-2xl text-foreground">Advanced Research</h3>
+                    <p className="leading-8 text-on-surface-variant">
                         We are committed to advancing the field of reproductive medicine.
                     </p>
                 </div>
 
                  {/* CARD 3 */}
-                <div className="bg-white/70 rounded-2xl p-10 shadow-sm">
-                    <div className="text-3xl mb-6">❤️</div>
-                    <h3 className="font-serif text-2xl mb-4">Absolute Discretion</h3>
-                    <p className="text-gray-600 leading-7">
+                <div className="glass-panel rounded-4xl p-10">
+                    <div className="mb-6 text-4xl">❤️</div>
+                    <h3 className="font-display mb-4 text-2xl text-foreground">Absolute Discretion</h3>
+                    <p className="leading-8 text-on-surface-variant">
                         Your journey is profoundly private and protected.
                     </p>
                 </div>

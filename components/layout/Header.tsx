@@ -1,140 +1,74 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import {
-  Building2,
-  Stethoscope,
-  Compass,
-} from "lucide-react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "About", href: "/about", icon: Stethoscope },
-  {
-    label: "Sanctuary",
-    href: "/sanctuary",
-    icon: Building2,
-    children: [{ label: "Services", href: "/sanctuary/services" }],
-  },
-  {
-    label: "Journey",
-    href: "/journey",
-    icon: Compass,
-    children: [
-      { label: "Stories", href: "/journey/stories" },
-      { label: "Consultation", href: "/journey/consultation" },
-    ],
-  },
+  { label: "Our Sanctuary", href: "/#sanctuary" },
+  { label: "Clinical Excellence", href: "/#services" },
+  { label: "The Journey", href: "/journey" },
+  { label: "Elite Care", href: "/journey/consultation" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white bg-opacity-100">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="font-serif text-lg tracking-wide text-[#2b2b2b]">
-          LAWONBLOOM
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/80 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-360 items-center justify-between gap-6 px-6 py-5 lg:px-20">
+        <Link href="/" className="font-display text-2xl tracking-[0.22em] text-primary uppercase">
+          Lawonbloom
         </Link>
 
-        <nav className="hidden md:flex gap-8 text-sm text-[#2b2b2b]">
+        <nav className="hidden items-center gap-10 lg:flex">
           {navItems.map((item) => (
-            <div key={item.href} className="relative group">
-              <Link
-                href={item.href}
-                className="transition hover:text-[#B76E79]"
-              >
-                {item.label}
-              </Link>
-              {item.children ? (
-                <div className="pointer-events-none absolute left-0 top-full mt-2 hidden min-w-[220px] rounded-3xl border border-[#E6E3DB] bg-white p-4 shadow-lg shadow-black/5 group-hover:pointer-events-auto group-hover:block">
-                  <div className="space-y-2">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block rounded-2xl px-3 py-2 text-sm text-[#2b2b2b] transition hover:bg-[#f7f6f3] hover:text-[#B76E79]"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </div>
+            <Link key={item.href} href={item.href} className="section-label text-sm italic tracking-wide text-on-surface-variant transition-colors hover:text-primary">
+              {item.label}
+            </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/journey"
-            className="hidden md:inline-flex bg-[#B76E79] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-[#9D5E6A] transition"
-          >
-            BEGIN YOUR JOURNEY
+          <Link href="/journey/consultation" className="hidden rounded-full border border-primary/30 px-6 py-3 section-label text-primary transition-colors hover:bg-primary hover:text-on-primary lg:inline-flex">
+            Begin Your Journey
           </Link>
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-gray-200 bg-white p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/40 bg-surface text-foreground transition-colors hover:border-primary hover:text-primary lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
-            {menuOpen ? "✕" : "☰"}
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen ? (
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            className="md:hidden border-t bg-white bg-opacity-100"
-          >
-            <nav className="flex flex-col gap-1 px-6 py-4 text-sm text-[#2b2b2b]">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-3 rounded-lg px-3 py-3 transition hover:bg-[#B76E79]"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      <Icon size={18} />
-                      {item.label}
-                    </Link>
-                    {item.children ? (
-                      <div className="ml-8 mt-1 flex flex-col gap-1">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="rounded-lg px-3 py-2 text-sm text-[#2b2b2b] transition hover:bg-[#f7f6f3] hover:text-[#B76E79]"
-                            onClick={() => setMenuOpen(false)}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
+      {menuOpen ? (
+        <div className="border-t border-outline-variant/30 bg-surface/95 px-6 py-6 backdrop-blur-2xl lg:hidden">
+          <nav className="mx-auto flex max-w-360 flex-col gap-2">
+            {navItems.map((item) => (
               <Link
-                href="/journey"
-                className="mt-2 inline-flex w-full justify-center rounded-md bg-[#B76E79] px-4 py-3 text-sm font-bold text-white hover:bg-[#9D5E6A]"
+                key={item.href}
+                href={item.href}
+                className="rounded-2xl px-4 py-3 text-sm uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
                 onClick={() => setMenuOpen(false)}
               >
-                BEGIN YOUR JOURNEY
+                {item.label}
               </Link>
-            </nav>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+            ))}
+            <Link
+              href="/journey/consultation"
+              className="mt-2 inline-flex justify-center rounded-full bg-primary px-5 py-4 text-sm uppercase tracking-[0.18em] text-on-primary"
+              onClick={() => setMenuOpen(false)}
+            >
+              Begin Your Journey
+            </Link>
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }
