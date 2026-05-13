@@ -81,10 +81,10 @@ export default function HomePage() {
                             The Pinnacle of Care
                         </p>
                         <h1 className="font-display text-6xl leading-[0.98] tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem]">
-                            <span className="block">Restoring</span>
+                            <span className="block">Where</span>
                             <span className="block italic text-primary">Hope.</span>
-                            <span className="block">Creating</span>
-                            <span className="block italic text-outline">Families.</span>
+                            <span className="block">Blossoms</span>
+                            <span className="block italic text-outline">into Life.</span>
                         </h1>
                         <p className="mt-8 max-w-xl text-lg leading-8 text-on-surface-variant">
                             An elite sanctuary for reproductive health, combining clinical mastery with a profoundly private, concierge-level experience. Where science meets serenity.

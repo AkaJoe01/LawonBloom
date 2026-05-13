@@ -1,13 +1,17 @@
+import Image from 'next/image';
+
 export default function Location(){
     return(
         <section className="max-w-6xl mx-auto px-6 pb-32">
             <div className="relative rounded-[40px] overflow-hidden">
 
                 {/* MAP IMAGE */}
-                <img
-                    src="/images/map.jng"
+                <Image
+                    src="/images/map.jpg"
                     alt="Map"
-                    className="w-full h-[500px] object-cover"
+                    width={1200}
+                    height={500}
+                    className="w-full h-125 object-cover"
                     />
 
                     {/** CARD */}

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function VisitPrep(){
     return(
         <section className="max-w-6xl mx-auto px-6 py-16 md:py-32">
@@ -34,11 +36,15 @@ export default function VisitPrep(){
 
                 {/* RIGHT */}
                 <div className="flex justify-center">
-                    <img
-                        src="/images/corridor.jpg"
-                        alt="corridor"
-                        className="w-full max-w-xl rounded-3xl shadow-sm object-cover"
-                    />
+                    <div className="w-full max-w-xl rounded-3xl shadow-sm overflow-hidden">
+                        <Image
+                            src="/images/corridor.jpg"
+                            alt="corridor"
+                            width={400}
+                            height={500}
+                            className="w-full object-cover"
+                        />
+                    </div>
                 </div>
 
             </div>

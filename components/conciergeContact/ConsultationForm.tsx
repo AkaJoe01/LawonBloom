@@ -10,7 +10,7 @@ export default function ConsultationForm() {
             <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12">
 
                 {/* FORM CRAD */}
-                <div className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[32px] p-10 md:p-14 shadow-sm">
+                <div className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-4xl p-10 md:p-14 shadow-sm">
                     <h2 className="font-serif text-4xl mb-12">
                         Request a Consultation
                     </h2>

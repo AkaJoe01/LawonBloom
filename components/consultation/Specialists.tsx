@@ -48,7 +48,7 @@ export default function Specialists(){
                             <img
                                 src={doctor.image}
                                 alt={doctor.name}
-                                className="w-full h-[260px] object-cover rounded-xl mb-6"
+                                className="w-full h-65 object-cover rounded-xl mb-6"
                             />
                             <h3 className="font-serif text-2xl mb-3">
                                 {doctor.name}

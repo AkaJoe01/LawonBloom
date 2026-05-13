@@ -19,7 +19,7 @@ export default function Services() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service) => (
                     <div key={service.title} 
-                    className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[32px] p-10 shadow-sm"
+                    className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-4xl p-10 shadow-sm"
                     >
                         <h3 className="font-serif text-3xl mb-6">
                             {service.title}
