@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function TeamPage(){
     return(
         <main className="bg-[#f5f2ee] text-[#2e2e27]">
@@ -21,11 +23,12 @@ export default function TeamPage(){
             {/* LEAD DOCTOR */}
             <section className="grid md:grid-cols-2 gap-14 px-8 md:px-20 py-24 items-center">
                 <div className="relative w-full h-[500px]">
-                    <img 
-                        src="/public/images/maleDr.jpg"
+                    <Image
+                        src="/images/maleDr.jpg"
                         alt="Lead Specialist"
+                        fill
                         className="object-cover"
-                        />
+                    />
                 </div>
                 <div>
                     <h2 className="text-4xl font-light mb-4">
@@ -79,11 +82,12 @@ export default function TeamPage(){
                     {/* CARD 1 */ }
                     <div>
                         <div className="relative h-[400px] w-full mb-6">
-                            <img
-                                src="/public/images/nurse.jpg"
+                            <Image
+                                src="/images/nurse.jpg"
                                 alt="nurse"
+                                fill
                                 className="object-cover"
-                                />
+                            />
                         </div>
                         <h3 className="text-2xl font-light">
                             Nurse Elena Rostova
@@ -96,11 +100,12 @@ export default function TeamPage(){
                     {/* CARD 2 */ }
                     <div>
                         <div className="relative h-[400px] w-full mb-6">
-                            <img
-                                src="/public/images/Doc_1"
+                            <Image
+                                src="/images/Doc_1.jpg"
                                 alt="Doctor"
+                                fill
                                 className="object-cover"
-                                />
+                            />
                         </div>
                         <h3 className="text-2xl font-light">
                             Serah Jenkins
@@ -113,11 +118,12 @@ export default function TeamPage(){
                     {/* CARD 3 */}
                     <div>
                         <div className="relative h-[400px] w-full mb-6">
-                            <img
-                                src="/public/images/marcus.jpg"
+                            <Image
+                                src="/images/marcus.jpg"
                                 alt="marcus"
+                                fill
                                 className="object-cover"
-                                />
+                            />
                         </div>
                         <h3 className="text-2xl font-light">
                             Dr. Marcus Thorne
