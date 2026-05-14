@@ -1,5 +1,5 @@
-import Hero from "@/components/sanctuaryServices/Hero";
-import ServicesGrid from "@/components/sanctuaryServices/ServicesGrid";
+import Hero from "@/components/sanctuary/services/Hero";
+import ServicesGrid from "@/components/sanctuary/services/ServicesGrid";
 
 export default function SanctuaryServicesPage() {
     return (
