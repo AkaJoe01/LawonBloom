@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Specialists(){
     const doctors = [
         {
@@ -45,10 +47,12 @@ export default function Specialists(){
                             key={doctor.name}
                             className="bg-[#faf7f4] rounded-2xl p-6 border border-[#ece5de]"
                         >
-                            <img
+                            <Image
                                 src={doctor.image}
                                 alt={doctor.name}
-                                className="w-full h-[260px] object-cover rounded-xl mb-6"
+                                width={400}
+                                height={300}
+                                className="w-full object-cover rounded-xl mb-6"
                             />
                             <h3 className="font-serif text-2xl mb-3">
                                 {doctor.name}

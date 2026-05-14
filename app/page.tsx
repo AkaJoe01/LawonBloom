@@ -81,10 +81,10 @@ export default function HomePage() {
                             The Pinnacle of Care
                         </p>
                         <h1 className="font-display text-6xl leading-[0.98] tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem]">
-                            <span className="block">Restoring</span>
+                            <span className="block">Where</span>
                             <span className="block italic text-primary">Hope.</span>
-                            <span className="block">Creating</span>
-                            <span className="block italic text-outline">Families.</span>
+                            <span className="block">Blossoms</span>
+                            <span className="block italic text-outline">into Life.</span>
                         </h1>
                         <p className="mt-8 max-w-xl text-lg leading-8 text-on-surface-variant">
                             An elite sanctuary for reproductive health, combining clinical mastery with a profoundly private, concierge-level experience. Where science meets serenity.
@@ -145,7 +145,7 @@ export default function HomePage() {
                             A Sanctuary Dedicated to <span className="italic text-primary">Your Beginning.</span>
                         </h2>
                         <p className="mt-8 border-l-2 border-primary/30 pl-6 text-2xl font-light italic leading-[1.4] text-on-surface-variant">
-                            "We believe that the journey to parenthood should be enveloped in grace, absolute privacy, and the highest echelon of clinical precision."
+                            &quot;We believe that the journey to parenthood should be enveloped in grace, absolute privacy, and the highest echelon of clinical precision.&quot;
                         </p>
                         <div className="mt-8 space-y-6 text-base leading-8 text-on-surface-variant lg:text-lg">
                             <p>
@@ -270,7 +270,7 @@ export default function HomePage() {
                 <div className="relative z-10 mx-auto max-w-4xl rounded-[2.5rem] border border-white/40 bg-[rgba(251,249,246,0.72)] p-8 shadow-[0_28px_80px_-28px_rgba(0,0,0,0.25)] backdrop-blur-2xl lg:p-14">
                     <Quote className="mx-auto h-10 w-10 text-primary/70" />
                     <h2 className="mt-8 font-display text-3xl italic leading-tight text-foreground sm:text-4xl lg:text-5xl">
-                        "After years of clinical heartbreak, Lawonbloom didn't just offer us medical excellence; they offered us a sanctuary. They held our hands, respected our privacy, and ultimately, gave us our family."
+                        &quot;After years of clinical heartbreak, Lawonbloom didn&apos;t just offer us medical excellence; they offered us a sanctuary. They held our hands, respected our privacy, and ultimately, gave us our family.&quot;
                     </h2>
                     <p className="mt-8 section-label text-center text-primary">The S. Family — London, UK</p>
                     <div className="mt-10 flex justify-center">

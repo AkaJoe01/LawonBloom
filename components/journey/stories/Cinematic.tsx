@@ -59,14 +59,14 @@ export default function Cinematic() {
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.title}>
-            <div className="relative overflow-hidden rounded-2xl group shadow-lg h-[420px]">
+            <div className="relative overflow-hidden rounded-2xl group shadow-lg h-105">
               <Image
                 src={slide.image}
                 alt={slide.subtitle}
                 fill
                 className="object-cover group-hover:scale-105 transition duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-8 left-8 text-white">
                 <p className="uppercase tracking-[0.2em] text-xs mb-3">
                   {slide.subtitle}
