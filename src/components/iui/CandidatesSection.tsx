@@ -22,7 +22,7 @@ export default function CandidatesSection(){
 
             {/** HEADER */}
             <div className="max-w-3xl mb-20">
-                <h2 className="font-serif text-[56px] leading-[1] tracking-[-0.04em] mb-8">
+                <h2 className="font-serif text-[56px] leading-none tracking-[-0.04em] mb-8">
                     Is IUI Your
                     <br />
                     Next Step?
@@ -52,7 +52,7 @@ export default function CandidatesSection(){
                     {cards.slice(1).map((card) => (
                         <div
                             key={card.title}
-                            className="bg-[#f1ece7] rounded-[32px] p-8"
+                            className="bg-[#f1ece7] rounded-4xl p-8"
                             >
                                 <h3 className="font-serif tetxt-2xl mb-6">
                                     {card.title}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero(){
     return(
@@ -29,10 +30,11 @@ export default function Hero(){
 
                 {/** RIGHT IMAGE */}
                 <div className="relative">
-                    <img
-                         src="/public/images/microscope.jpg"
+                    <Image
+                         src="/images/microscope.jpg"
                          alt="microscope"
-                         className="rounded-[32px] w-full object-cover"
+                         className="rounded-4xl w-full object-cover"
+                         fill
                          />
                 </div>
             </div>

@@ -51,7 +51,7 @@ export default function SequenceSection(){
                             <h3 className="font-serif text-3xl mb-6">
                                 {step.title}
                             </h3>
-                            <p ckassName="text-gray-600 leading-8">
+                            <p className="text-gray-600 leading-8">
                                 {step.text}
                             </p>
                         </div>
