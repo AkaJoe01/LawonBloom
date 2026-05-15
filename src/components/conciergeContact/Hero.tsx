@@ -12,7 +12,7 @@ export default function Hero(){
             <p className="max-w-xl text-gray-600 leading-8">
                 Connect with our elite care coordinators to schedule a
                 private consultation. We provide dedicated support for
-                our global clientele
+                our global clientele.
             </p>
         </section>
     );
