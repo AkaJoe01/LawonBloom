@@ -1,4 +1,5 @@
 import { ArrowRight, Wind, Thermometer, Shield } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
     title: "Clinical Excellence | Lawonbloom",
@@ -31,10 +32,12 @@ export default function ClinicalExcellencePage() {
             {/* Hero Section */}
             <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32">
                 <div className="absolute inset-0 z-0">
-                    <img 
+                    <Image 
                         alt="Immersive laboratory scene" 
                         className="w-full h-full object-cover filter blur-[2px] scale-105" 
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuB29wWouNcZyo8wjoxgLjNNLz157KoG7wXNg36vuqGQIRAS_4PHC_3s2k2UXCTLA3MumBRDE91ni7qkTy8eO4vmw7PC7PRZNCmg_oLI-d77tzdBxabe1q1qgLpeeG3qUb7r1Z9-Tm9Zm36By1UqudfpwAdb3fKATtTWzylBzNmNqGhSecsgSHHcdIN8FfQiz2AMGdjMu8N2KIHZZ5MSozXJg58WSWQCVegFjZiRke8g5brKkhnZzLIu0SyV0qKcFhV9fVfQPjC84Nu4"
+                        fill
+                        unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background"></div>
                 </div>
@@ -42,7 +45,7 @@ export default function ClinicalExcellencePage() {
                     <span className="font-label-caps text-primary tracking-[0.2em] uppercase mb-8 opacity-80">Clinical Excellence</span>
                     <h1 className="font-display-hero text-on-surface mb-8 max-w-4xl mx-auto drop-shadow-sm">The Science of New Beginnings</h1>
                     <p className="font-body-large text-on-surface-variant max-w-2xl mx-auto mb-12">
-                        Where uncompromising technological precision meets profound human empathy. Our laboratory is designed as a sanctuary for life's most delicate origins.
+                        Where uncompromising technological precision meets profound human empathy. Our laboratory is designed as a sanctuary for life&apos;s most delicate origins.
                     </p>
                     <button className="bg-primary text-on-primary font-h2-subheading text-[18px] py-4 px-10 rounded-full hover:bg-surface-tint transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Explore Our Methods
@@ -88,10 +91,12 @@ export default function ClinicalExcellencePage() {
                             </div>
                             <div className="col-span-1 md:col-span-7 order-1 md:order-2">
                                 <div className="relative w-full aspect-4/3 rounded-sm overflow-hidden ambient-shadow">
-                                    <img 
+                                    <Image 
                                         alt="Precision IVF Cultivation" 
                                         className="w-full h-full object-cover" 
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTDkugOfP0d8kRyq9-8EhyZwzOl6mNKCTte-eW4kuSbq-hfRJAfIa8_Q6Qs5qCQOW0gcMlqEnY4JD1pjLv2tYLA4Kc7U0-zFwxO36Ivv9V8SZNbySThr5TveXBMYZ_XCFNuu-Y_9Ri0UrQHX_uN8bpNf6wmGWKj9z69j_cuO2Yxa2Sh_LKC7nSaP2qHgp99kKurX_LNu890eWZLHRdNIK1wCYowYGY1c9VP6YV3jXMxxg8Oja1BzP16qQXR-XeEfPk5PukgDi66J3L"
+                                        fill
+                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
                                 </div>
@@ -102,10 +107,12 @@ export default function ClinicalExcellencePage() {
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                             <div className="col-span-1 md:col-span-7">
                                 <div className="relative w-full aspect-4/3 rounded-sm overflow-hidden ambient-shadow">
-                                    <img 
+                                    <Image 
                                         alt="Time-Lapse Incubation" 
                                         className="w-full h-full object-cover" 
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBH-gqlu1myKy4N3-0rUg-pdLNqOOCI3YTOwk5MbCzOF-9uop-r0pQ7XFHjtAcmxH1qK79bWBXqI_fWacYxpUbDZmvHagrJnGsRRH7YoD0gEEaKH-VB5Eq5MdQ2ktAIUnJ34MxlZOUL44zEfPQsjiGzktWNvTXCEkKkV3OR0H4sadtvjWPTc6qKPfF5pAO1ThMtDDSuNp-pxBSFycoMwwsz9L5n9u8jTS0M9Y0h1tYaEruvXIV8nrQ62_tRfl2iVuwVALEeZyeeaq1"
+                                        fill
+                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
                                 </div>

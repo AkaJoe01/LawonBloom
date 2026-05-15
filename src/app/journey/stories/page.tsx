@@ -1,6 +1,6 @@
-import Hero from "@/components/journey/stories/Hero";
-import Cinematic from "@/components/journey/stories/Cinematic";
-import Families from "@/components/journey/stories/Families";
+import Hero from "@/components/journeyStories/Hero";
+import Cinematic from "@/components/journeyStories/Cinematic";
+import Families from "@/components/journeyStories/Families";
 
 export default function JourneyStoriesPage() {
     return (

@@ -1,6 +1,6 @@
-import Hero from "@/components/journey/consultation/Hero";
-import Specialists from "@/components/journey/consultation/Specialists";
-import VisitPrep from "@/components/journey/consultation/VisitPrep";
+import Hero from "@/components/consultation/Hero";
+import Specialists from "@/components/consultation/Specialists";
+import VisitPrep from "@/components/consultation/VisitPrep";
 
 export default function JourneyConsultationPage() {
     return (
