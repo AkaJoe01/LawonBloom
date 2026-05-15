@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
@@ -12,7 +13,7 @@ export default function Footer() {
                 {/* Brand & Contact */}
                 <div className="lg:col-span-4 flex flex-col gap-8">
                     <div>
-                        <p className="font-display text-3xl tracking-[0.22em] text-primary uppercase">Lawonbloom</p>
+                        <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={240} height={60} className="h-12 w-auto object-contain" />
                         <p className="mt-4 max-w-sm text-base italic leading-7 text-on-surface-variant">
                             A sanctuary for reproductive health, combining clinical mastery with a profoundly private, concierge-level experience.
                         </p>
