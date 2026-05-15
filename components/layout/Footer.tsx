@@ -13,7 +13,7 @@ export default function Footer() {
                 {/* Brand & Contact */}
                 <div className="lg:col-span-4 flex flex-col gap-8">
                     <div>
-                        <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={240} height={60} className="h-12 w-auto object-contain" />
+                        <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={120} height={120} className="h-16 w-16 rounded-full object-cover shadow-sm" />
                         <p className="mt-4 max-w-sm text-base italic leading-7 text-on-surface-variant">
                             A sanctuary for reproductive health, combining clinical mastery with a profoundly private, concierge-level experience.
                         </p>

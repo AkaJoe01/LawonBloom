@@ -19,7 +19,7 @@ export default function Header() {
     <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/80 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-360 items-center justify-between gap-6 px-6 py-5 lg:px-20">
         <Link href="/" className="flex items-center">
-          <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={200} height={50} className="h-10 w-auto object-contain" priority />
+          <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={100} height={100} className="h-12 w-12 rounded-full object-cover shadow-sm" priority />
         </Link>
 
         <nav className="hidden items-center gap-10 lg:flex">
