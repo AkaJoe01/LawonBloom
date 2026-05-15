@@ -17,6 +17,9 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "Lawonbloom Fertility Centre",
   description: "A cinematic fertility centre experience focused on privacy, clinical precision, and calm.",
+  icons: {
+    icon: "/logo/logo.JPG",
+  },
 };
 
 export default function RootLayout({
