@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -17,8 +18,8 @@ export default function Header() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/80 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-360 items-center justify-between gap-6 px-6 py-5 lg:px-20">
-        <Link href="/" className="font-display text-2xl tracking-[0.22em] text-primary uppercase">
-          Lawonbloom
+        <Link href="/" className="flex items-center">
+          <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={100} height={100} className="h-12 w-12 rounded-full object-cover shadow-sm" priority />
         </Link>
 
         <nav className="hidden items-center gap-10 lg:flex">
