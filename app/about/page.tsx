@@ -2,16 +2,16 @@ import Image from 'next/image';
 
 export default function AboutPage() {
   return (
-    <main className="w-full">
+    <main className="w-full overflow-x-hidden">
       {/* 1. Hero Section: Cinematic Split */}
       <section className="relative min-h-screen flex items-stretch overflow-hidden bg-surface-container-lowest">
         <div className="grain-overlay"></div>
-        <div className="w-full md:w-1/2 flex items-center justify-center px-20 z-20">
+        <div className="w-full md:w-1/2 flex items-center justify-center px-6 lg:px-20 z-20">
           <div className="max-w-xl">
             <span className="font-label-caps text-tertiary tracking-widest mb-8 block">
               The Architecture of Hope
             </span>
-            <h1 className="font-display-hero text-primary mb-8 leading-none">
+            <h1 className="font-display text-5xl leading-[0.95] text-primary sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-none mb-8">
               Where Hope Blossoms into Life
             </h1>
             <p className="font-body-large text-on-surface-variant leading-relaxed opacity-90">
@@ -35,7 +35,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Our Story: Asymmetrical Editorial */}
-      <section className="py-40 px-20 bg-background">
+      <section className="py-20 px-6 bg-background lg:py-40 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-12 gap-12">
             <div className="col-span-12 md:col-span-6 mb-24 md:mb-0">
@@ -74,7 +74,7 @@ export default function AboutPage() {
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
                 />
-                <div className="absolute -bottom-10 -left-10 bg-white p-6 shadow-2xl max-w-xs">
+                <div className="absolute -bottom-10 -left-10 bg-surface-bright p-6 shadow-2xl max-w-xs">
                   <span className="block font-label-caps text-xs text-tertiary mb-2">
                     CHAPTER I
                   </span>
@@ -92,7 +92,7 @@ export default function AboutPage() {
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
                 />
-                <div className="absolute -top-10 -right-10 bg-white p-6 shadow-2xl max-w-xs">
+                <div className="absolute -top-10 -right-10 bg-surface-bright p-6 shadow-2xl max-w-xs">
                   <span className="block font-label-caps text-xs text-tertiary mb-2">
                     CHAPTER II
                   </span>
@@ -107,7 +107,7 @@ export default function AboutPage() {
       </section>
 
       {/* 3. Clinical Philosophy: Scientific Serenity */}
-      <section className="py-40 px-20 bg-surface-container-low relative overflow-hidden">
+      <section className="py-20 px-6 bg-surface-container-low relative overflow-hidden lg:py-40 lg:px-20">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-24">
@@ -187,7 +187,7 @@ export default function AboutPage() {
       </section>
 
       {/* 4. Interactive Milestones: Decades of Mastery */}
-      <section className="py-40 px-20 bg-white">
+      <section className="py-20 px-6 bg-surface-bright lg:py-40 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-12 gap-12">
             <div className="col-span-12 md:col-span-4 mb-16 md:mb-0">
@@ -249,7 +249,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. Global Excellence: The Lawonbloom Standard */}
-      <section className="py-40 px-20 bg-surface-container-low">
+      <section className="py-20 px-6 bg-surface-container-low lg:py-40 lg:px-20">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="font-h1-editorial text-primary mb-16">
             The Lawonbloom Standard

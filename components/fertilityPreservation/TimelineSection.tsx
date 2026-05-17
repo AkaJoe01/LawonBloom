@@ -17,8 +17,8 @@ export default function TimelineSection(){
     ];
 
     return(
-        <section className="max-w-6xl mx-auto px-6 pb-32">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-32">
+            <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
 
                 {/* IMAGES */}
                 <div className="relative">
@@ -27,37 +27,37 @@ export default function TimelineSection(){
                         alt="femaleDr"
                         width={400}
                         height={500}
-                        className="rounded-[36px] w-full max-w-md"
+                        className="w-full max-w-md rounded-[36px] object-cover"
                     />
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 border border-[#d6c7c0] rounded-full" />
+                    <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full border border-outline-variant md:-bottom-10 md:-right-10 md:h-40 md:w-40" />
                 </div>
 
                 {/* CONTENT */}
                 <div>
-                    <h2 className="font-serif text-[56px] leading-[1] tracking-[-0.04em] mb-10">
+                    <h2 className="font-display text-4xl leading-[1] tracking-[-0.04em] text-foreground sm:text-5xl md:text-[56px] mb-10">
                         Defining 
                         <br />
                         Your Timeline.
                     </h2>
-                    <p className="text-gray-600 leading-8 mb-14">
+                    <p className="text-on-surface-variant leading-8 mb-14">
                         Preservation empowers future flexibility and reproductive confidence.
                     </p>
                     <div className="space-y-10">
                         {items.map((item, index) => (
                             <div key={index} className="flex gap-6">
-                                <div className="mt-2 w-5 h-5 rounded-full border border-[#9c5c67] flex items-center justify-center">
+                                <div className="mt-2 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary">
                                     <div 
                                         className={`
-                                            w-2 h-2 rounded-full
-                                            ${index === 0 ? "bg-[#9c5c67]" : ""}
-                                            `}
-                                            />
+                                            h-2 w-2 rounded-full
+                                            ${index === 0 ? "bg-primary" : ""}
+                                        `}
+                                    />
                                 </div>
                                 <div>
-                                    <h3 className="font-serif text-2xl mb-3">
+                                    <h3 className="font-display text-2xl text-foreground mb-3">
                                         {item.title}
                                     </h3>
-                                    <p className="text-gray-600 leading-7">
+                                    <p className="text-on-surface-variant leading-7">
                                         {item.text}
                                     </p>
                                 </div>

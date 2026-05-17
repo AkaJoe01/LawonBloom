@@ -26,7 +26,7 @@ export default function PathPage() {
             <div className="film-grain"></div>
 
             {/* Hero Section */}
-            <section className="relative w-full min-h-[921px] flex items-end justify-center pb-32 px-6 lg:px-16 overflow-hidden">
+            <section className="relative w-full min-h-[600px] md:min-h-[921px] flex items-end justify-center pb-16 md:pb-32 px-6 lg:px-16 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img 
                         alt="Your Journey, Illuminated" 
@@ -37,12 +37,12 @@ export default function PathPage() {
                 </div>
                 <div className="relative z-10 w-full max-w-360 flex flex-col items-center text-center mt-32">
                     <span className="font-label-caps text-on-surface-variant uppercase tracking-widest mb-6">The Path to Parenthood</span>
-                    <h1 className="font-display-hero text-on-surface max-w-4xl text-balance">Your Journey, Illuminated</h1>
+                    <h1 className="font-display text-5xl leading-[0.95] text-on-surface sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-[1.1] max-w-4xl text-balance">Your Journey, Illuminated</h1>
                 </div>
             </section>
 
             {/* Stage 1: Consultation */}
-            <section className="w-full py-32 px-6 lg:px-16 relative z-10">
+            <section className="w-full py-20 px-6 lg:py-32 lg:px-16 relative z-10">
                 <div className="max-w-360 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div className="col-span-1 md:col-span-7 relative">
                         <div className="w-full h-[819px] overflow-hidden rounded-sm relative">
@@ -68,7 +68,7 @@ export default function PathPage() {
             </section>
 
             {/* Stage 2: Diagnosis */}
-            <section className="w-full py-32 px-6 lg:px-16 bg-surface-container-low relative z-10">
+            <section className="w-full py-20 px-6 lg:py-32 lg:px-16 bg-surface-container-low relative z-10">
                 <div className="max-w-360 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
                     <div className="col-span-1 md:col-start-2 md:col-span-4 flex flex-col justify-center pt-24 md:pt-0 z-10 order-2 md:order-1 mt-12 md:mt-0">
                         <span className="font-label-caps text-primary uppercase block mb-4">Stage II — Clarity</span>
@@ -92,12 +92,12 @@ export default function PathPage() {
             </section>
 
             {/* Stage 3: Treatment */}
-            <section className="w-full py-48 px-6 lg:px-16 relative z-10">
+            <section className="w-full py-24 px-6 lg:py-48 lg:px-16 relative z-10">
                 <div className="max-w-360 mx-auto flex flex-col items-center text-center">
                     <span className="font-label-caps text-primary uppercase block mb-6">Stage III — The Luminous Path</span>
-                    <h2 className="font-display-hero text-on-surface max-w-3xl mb-24">Guided Healing</h2>
+                    <h2 className="font-display text-5xl leading-[0.95] text-on-surface sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-[1.1] max-w-3xl mb-16 lg:mb-24">Guided Healing</h2>
                     
-                    <div className="w-full h-[614px] md:h-[819px] relative rounded-sm overflow-hidden ambient-shadow">
+                    <div className="w-full min-h-[400px] md:h-[819px] relative rounded-sm overflow-hidden ambient-shadow">
                         <img 
                             alt="Sanctuary recovery space" 
                             className="w-full h-full object-cover" 
@@ -114,7 +114,7 @@ export default function PathPage() {
             </section>
 
             {/* Final CTA */}
-            <section className="w-full py-32 px-6 lg:px-16 flex justify-center items-center relative z-10">
+            <section className="w-full py-20 px-6 lg:py-32 lg:px-16 flex justify-center items-center relative z-10">
                 <div className="text-center">
                     <h3 className="font-h2-subheading text-on-surface mb-8">Ready to illuminate your path?</h3>
                     <button className="bg-primary text-on-primary font-h2-subheading px-12 py-4 rounded-sm hover:bg-primary/90 transition-colors duration-500 flex items-center justify-center gap-4 mx-auto group text-[24px]">

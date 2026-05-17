@@ -26,31 +26,31 @@ const testimonials = [
     author: "Avery & Leo",
     location: "New York, USA",
     quote:
-      "The environment was calming, the science was outstanding, and the result was the dream we’ve waited for.",
+      "The environment was calming, the science was outstanding, and the result was the dream we've waited for.",
     image: "/images/scan_1.jpg",
   },
 ];
 
 export default function Families() {
   return (
-    <section className="max-w-6xl mx-auto px-6 py-24">
-      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-20 items-start">
+    <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20">
         <div>
-          <p className="uppercase text-xs tracking-[0.3em] text-[#9c5c67] mb-6">
+          <p className="section-label mb-6 text-primary">
             Written Archives
           </p>
-          <h2 className="font-serif text-[56px] leading-[1.1] mb-8">
+          <h2 className="font-display text-4xl leading-[1.1] text-foreground sm:text-5xl md:text-[56px] mb-8">
             The Lawonbloom Families
           </h2>
-          <p className="text-gray-600 leading-8 mb-10">
+          <p className="text-on-surface-variant leading-8 mb-10">
             Read the personal accounts of resilience, scientific precision, and the delicate balance of hope that defines our sanctuary.
           </p>
-          <button className="inline-flex items-center gap-2 text-[#9c5c67] uppercase tracking-[0.2em] text-sm">
+          <button className="inline-flex items-center gap-2 text-primary uppercase tracking-[0.2em] text-sm hover:text-primary/80 transition">
             Explore All Stories <ArrowLeft size={20} />
           </button>
         </div>
 
-        <div className="bg-white/70 backdrop-blur rounded-2xl p-10 shadow-sm">
+        <div className="rounded-2xl bg-surface-bright/70 p-8 shadow-sm backdrop-blur md:p-10">
           <Swiper
             modules={[Pagination, Autoplay]}
             pagination={{ clickable: true }}
@@ -71,11 +71,11 @@ export default function Families() {
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <h4 className="font-medium">{testimonial.author}</h4>
-                      <p className="font-medium text-gray-500">{testimonial.location}</p>
+                      <h4 className="font-medium text-foreground">{testimonial.author}</h4>
+                      <p className="font-medium text-on-surface-variant">{testimonial.location}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600 leading-8 italic">{testimonial.quote}</p>
+                  <p className="text-on-surface-variant leading-8 italic">{testimonial.quote}</p>
                 </div>
               </SwiperSlide>
             ))}

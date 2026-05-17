@@ -4,13 +4,11 @@ const steps = [
         title: "Monitoring & Stimulation",
         text: "Ovulation cycles are monitored precisely using advanced imaging and hormonal tracking.",
     },
-
     {
         phase: "Phase 2",
         title: "Sample Preparation",
         text: "Sperm samples undergo laboratory refinement before insemination.",
     },
-
     {
         phase: "Phase 3",
         title: "The Procedure",
@@ -20,38 +18,37 @@ const steps = [
 
 export default function SequenceSection(){
     return(
-        <section className="max-w-6xl mx-auto px-6 pb-32">
-            <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-24">
+        <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-32">
+            <div className="grid grid-cols-1 gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
 
-                {/** LEFT */}
+                {/* LEFT */}
                 <div>
-                    <h2 className="font-serif text-[56px] leading-[1] tracking-[-0.4em] mb-8">
+                    <h2 className="font-display text-4xl leading-[1] tracking-[-0.04em] text-foreground sm:text-5xl md:text-[56px] mb-8">
                         The Sequence
                         <br />
                         of Care
                     </h2>
-                    <p className="text-gray-600 leading-8">
+                    <p className="text-on-surface-variant leading-8">
                         A synchronized evidence-based fertility pathway designed
                         with precision and compassion.
                     </p>
                 </div>
 
-                {/** RIGHT TIMELINE */}
-                <div className="relative border-1 border-[#d8ccc6] pl-12 space-y-16">
+                {/* RIGHT TIMELINE */}
+                <div className="relative border-l border-outline-variant pl-8 space-y-16 md:pl-12">
                     {steps.map((step, index) => (
                         <div key={index} className="relative">
-
-                            {/** DOT */}
-                            <div className="absolute -left-[57px] top-2 w-5 h-5 rounded-full border border-[#9c5c67] bg-[#f5f2ee] flex items-center justify-center">
-                                <div className="w-2 h-2 rounded-full bg-[#9c5c67]" />
+                            {/* DOT */}
+                            <div className="absolute -left-[41px] top-2 flex h-5 w-5 items-center justify-center rounded-full border border-primary bg-surface md:-left-[57px]">
+                                <div className="h-2 w-2 rounded-full bg-primary" />
                             </div>
-                            <p className="uppercase tracking-[0.25em] text-xs text-[#9c5c67] mb-4">
+                            <p className="section-label mb-4 text-primary">
                                 {step.phase}
                             </p>
-                            <h3 className="font-serif text-3xl mb-6">
+                            <h3 className="font-display text-2xl text-foreground mb-6 md:text-3xl">
                                 {step.title}
                             </h3>
-                            <p className="text-gray-600 leading-8">
+                            <p className="text-on-surface-variant leading-8">
                                 {step.text}
                             </p>
                         </div>

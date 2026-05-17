@@ -40,7 +40,7 @@ export default function ClinicalExcellencePage() {
                 </div>
                 <div className="relative z-10 max-w-360 mx-auto px-6 lg:px-16 text-center flex flex-col items-center">
                     <span className="font-label-caps text-primary tracking-[0.2em] uppercase mb-8 opacity-80">Clinical Excellence</span>
-                    <h1 className="font-display-hero text-on-surface mb-8 max-w-4xl mx-auto drop-shadow-sm">The Science of New Beginnings</h1>
+                    <h1 className="font-display text-5xl leading-[0.95] text-on-surface sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-[1.1] mb-8 max-w-4xl mx-auto drop-shadow-sm">The Science of New Beginnings</h1>
                     <p className="font-body-large text-on-surface-variant max-w-2xl mx-auto mb-12">
                         Where uncompromising technological precision meets profound human empathy. Our laboratory is designed as a sanctuary for life's most delicate origins.
                     </p>
@@ -56,7 +56,7 @@ export default function ClinicalExcellencePage() {
             </section>
 
             {/* Section 1: Pioneering Technology */}
-            <section className="py-32 relative bg-surface-bright z-10">
+            <section className="py-20 relative bg-surface-bright z-10 lg:py-32">
                 <div className="max-w-360 mx-auto px-6 lg:px-16">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24 items-end">
                         <div className="col-span-1 md:col-span-5">
@@ -81,7 +81,7 @@ export default function ClinicalExcellencePage() {
                                     <p className="text-base text-on-surface-variant mb-8">
                                         Our bespoke culture media and highly regulated environmental controls mimic the natural womb with unprecedented accuracy, minimizing stress on developing embryos.
                                     </p>
-                                    <a href="#" className="inline-flex items-center text-primary font-label-caps uppercase hover:text-surface-tint transition-colors">
+                                    <a href="/journey" className="inline-flex items-center text-primary font-label-caps uppercase hover:text-surface-tint transition-colors">
                                         Discover the process <ArrowRight className="ml-2 w-4 h-4" />
                                     </a>
                                 </div>
@@ -126,7 +126,7 @@ export default function ClinicalExcellencePage() {
             </section>
 
             {/* Section 2: The Lab Sanctuary */}
-            <section className="py-32 relative bg-surface-container-low border-t border-outline-variant/30 z-10">
+            <section className="py-20 relative bg-surface-container-low border-t border-outline-variant/30 z-10 lg:py-32">
                 <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\\'0 0 200 200\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'noiseFilter\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.85\\' numOctaves=\\'3\\' stitchTiles=\\'stitch\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23noiseFilter)\\'/%3E%3C/svg%3E')"}}></div>
                 
                 <div className="max-w-360 mx-auto px-6 lg:px-16">

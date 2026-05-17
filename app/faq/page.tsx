@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Search, ChevronDown, MessageSquare, Mail } from "lucide-react";
 
 export const metadata = {
@@ -91,10 +92,10 @@ export default function FAQPage() {
                         <h2 className="font-h1-editorial text-primary mb-6">Still Seeking Clarity?</h2>
                         <p className="font-body-large text-on-surface-variant mb-10">Our Concierge Team is available around the clock to provide deeply personal answers to any delicate questions you may hold.</p>
                         <div className="flex flex-wrap gap-6 items-center">
-                            <button className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                            <Link href="/concierge/contact" className="inline-flex bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                                 Connect with a Concierge
-                            </button>
-                            <a href="#" className="font-label-caps text-primary hover:text-primary/70 transition-colors border-b border-primary/30 pb-1">Send a Private Message</a>
+                            </Link>
+                            <a href="/concierge/contact" className="font-label-caps text-primary hover:text-primary/70 transition-colors border-b border-primary/30 pb-1">Send a Private Message</a>
                         </div>
                     </div>
                     
