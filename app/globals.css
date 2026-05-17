@@ -98,12 +98,12 @@
   --color-inverse-on-surface: var(--inverse-on-surface);
   --color-inverse-primary: var(--inverse-primary);
   --color-surface-tint: var(--surface-tint);
-  --font-display: var(--font-newsreader);
-  --font-body: var(--font-manrope);
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
 body {
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-body);
   background: var(--surface);
   color: var(--foreground);
 }
@@ -113,7 +113,7 @@ html {
 }
 
 .font-display {
-  font-family: var(--font-newsreader), Georgia, serif;
+  font-family: var(--font-display);
 }
 
 .section-label {
