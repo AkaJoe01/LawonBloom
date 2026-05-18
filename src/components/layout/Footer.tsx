@@ -20,14 +20,14 @@ export default function Footer() {
                     </div>
                     <div className="flex flex-col gap-4 text-sm text-on-surface-variant">
                         <a href="mailto:sanctuary@lawonbloom.com" className="flex items-center gap-3 hover:text-primary transition-colors">
-                            <Mail className="w-4 h-4 text-primary/70 shrink-0" /> sanctuary@lawonbloom.com
+                            <Mail className="w-4 h-4 text-primary/70 shrink-0" /> lawonbloomfertilitycentre@gmail.com
                         </a>
                         <a href="tel:+442071234567" className="flex items-center gap-3 hover:text-primary transition-colors">
-                            <Phone className="w-4 h-4 text-primary/70 shrink-0" /> +44 20 7123 4567
+                            <Phone className="w-4 h-4 text-primary/70 shrink-0" /> +234 803 337 2153
                         </a>
                         <div className="flex items-start gap-3">
                             <MapPin className="w-4 h-4 text-primary/70 shrink-0 mt-0.5" />
-                            <span>12 Harley Street, Medical District<br/>London, W1G 9PB</span>
+                            <span>Oyo State <br/>Nigeria, W1G 9PB</span>
                         </div>
                     </div>
                 </div>
