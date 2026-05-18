@@ -16,7 +16,7 @@ const slides = [
   {
     title: "Beyond Borders",
     subtitle: "The Al Fassi Family",
-    image: "/images/corridor.jpg",
+    image: "/images/probe.jpg",
   },
   {
     title: "A Quiet Miracle",
