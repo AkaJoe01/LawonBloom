@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 py-35 text-center overflow-hidden">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20 text-center md:py-35">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
         <Image
@@ -14,17 +14,17 @@ export default function Hero() {
       </div>
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-[#f5f2ee]/80" />
+      <div className="absolute inset-0 bg-surface/80" />
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-3xl">
-        <p className="uppercase tracking-[0.3em] text-xs text-[#9c5c67] mb-6">
+        <p className="section-label mb-6 text-primary">
           The Miracle of Life
         </p>
-        <h1 className="font-serif text-[84px] leading-23 tracking-[-0.4em] mb-8">
+        <h1 className="font-display text-5xl leading-tight tracking-[-0.04em] text-foreground sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-23 mb-8">
           Journeys of Hope
         </h1>
-        <p className="text-gray-600 leading-8 max-w-2xl mx-auto">
+        <p className="mx-auto max-w-2xl text-on-surface-variant leading-8">
           Every family&apos;s path is uniquely profound. Explore the emotional narrative and scientific triumphs of those who found sanctuary.
         </p>
       </div>

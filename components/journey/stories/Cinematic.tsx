@@ -27,18 +27,18 @@ const slides = [
 
 export default function Cinematic() {
   return (
-    <section className="max-w-6xl mx-auto px-6 py-24">
-      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-16">
+    <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-center md:justify-between">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-serif text-5xl">Cinematic Journey</h2>
+          <h2 className="font-display text-4xl text-foreground md:text-5xl">Cinematic Journey</h2>
         </motion.div>
 
-        <p className="text-gray-600 max-w-xl">
+        <p className="max-w-xl text-on-surface-variant leading-7">
           Intimate reflections on the path to parenthood.
         </p>
       </div>
@@ -59,19 +59,20 @@ export default function Cinematic() {
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.title}>
-            <div className="relative overflow-hidden rounded-2xl group shadow-lg h-105">
+            <div className="group relative h-80 overflow-hidden rounded-2xl shadow-lg md:h-105">
               <Image
                 src={slide.image}
                 alt={slide.subtitle}
                 fill
-                className="object-cover group-hover:scale-105 transition duration-700"
+                sizes="(max-width: 768px) 90vw, 50vw"
+                className="object-cover transition duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-8 left-8 text-white">
-                <p className="uppercase tracking-[0.2em] text-xs mb-3">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-6 left-6 text-white md:bottom-8 md:left-8">
+                <p className="section-label mb-3 text-white/80">
                   {slide.subtitle}
                 </p>
-                <h3 className="font-serif text-4xl">{slide.title}</h3>
+                <h3 className="font-display text-3xl md:text-4xl">{slide.title}</h3>
               </div>
             </div>
           </SwiperSlide>

@@ -1,13 +1,13 @@
-import Hero from "@/components/consultation/Hero";
-import Specialists from "@/components/consultation/Specialists";
-import VisitPrep from "@/components/consultation/VisitPrep";
+import Hero from "@/components/journey/consultation/Hero";
+import BookingFlow from "@/components/journey/consultation/BookingFlow";
+import VisitPrep from "@/components/journey/consultation/VisitPrep";
 
 export default function JourneyConsultationPage() {
-    return (
-        <main className="bg-[#f5f2ee] text-[#2b2b2b]">
-            <Hero />
-            <Specialists />
-            <VisitPrep />
-        </main>
-    );
+  return (
+    <div className="bg-surface">
+      <Hero />
+      <BookingFlow />
+      <VisitPrep />
+    </div>
+  );
 }

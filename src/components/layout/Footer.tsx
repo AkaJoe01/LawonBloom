@@ -48,11 +48,11 @@ export default function Footer() {
                 <div className="lg:col-span-2">
                     <p className="font-label-caps text-primary mb-6">Specialties</p>
                     <div className="flex flex-col gap-4">
-                        <Link href="/sanctuary/services" className="text-base text-on-surface-variant hover:text-primary transition-colors">In Vitro Fertilization</Link>
-                        <Link href="/sanctuary/services" className="text-base text-on-surface-variant hover:text-primary transition-colors">Oocyte Preservation</Link>
-                        <Link href="/sanctuary/services" className="text-base text-on-surface-variant hover:text-primary transition-colors">Genetic Screening</Link>
-                        <Link href="/sanctuary/services" className="text-base text-on-surface-variant hover:text-primary transition-colors">Surrogacy Concierge</Link>
-                        <Link href="/sanctuary/services" className="text-base text-on-surface-variant hover:text-primary transition-colors">Holistic Support</Link>
+                        <Link href="/sanctuary/services#ivf" className="text-base text-on-surface-variant hover:text-primary transition-colors">In Vitro Fertilization</Link>
+                        <Link href="/sanctuary/services#preservation" className="text-base text-on-surface-variant hover:text-primary transition-colors">Oocyte Preservation</Link>
+                        <Link href="/clinical-excellence/genetic-testing" className="text-base text-on-surface-variant hover:text-primary transition-colors">Genetic Screening</Link>
+                        <Link href="/sanctuary/services#holistic" className="text-base text-on-surface-variant hover:text-primary transition-colors">Surrogacy Concierge</Link>
+                        <Link href="/sanctuary/services#holistic" className="text-base text-on-surface-variant hover:text-primary transition-colors">Holistic Support</Link>
                     </div>
                 </div>
 
@@ -93,9 +93,9 @@ export default function Footer() {
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-6 text-[10px] uppercase tracking-[0.2em] text-on-surface-variant order-1 lg:order-3">
-                    <a className="transition-colors hover:text-primary" href="#">Privacy Registry</a>
-                    <a className="transition-colors hover:text-primary" href="#">Terms of Care</a>
-                    <a className="transition-colors hover:text-primary" href="#">Clinical Ethics</a>
+                    <a className="transition-colors hover:text-primary" href="/legal/privacy">Privacy Registry</a>
+                    <a className="transition-colors hover:text-primary" href="/legal/terms">Terms of Care</a>
+                    <a className="transition-colors hover:text-primary" href="/legal/ethics">Clinical Ethics</a>
                 </div>
             </div>
         </footer>

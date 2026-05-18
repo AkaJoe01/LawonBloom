@@ -1,132 +1,228 @@
-import { Search, ChevronDown, MessageSquare, Mail } from "lucide-react";
+"use client";
 
-export const metadata = {
-    title: "Lawonbloom - FAQ",
-    description: "Find reassurance and detailed guidance within our sanctuary of knowledge.",
-};
+import { useState } from "react";
+import Link from "next/link";
+import { Search, ChevronDown, MessageSquare, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const faqs = [
+  {
+    category: "The First Step",
+    question: "What should I expect during my initial consultation at the Sanctuary?",
+    answer:
+      "Your initial consultation is designed to be a profound listening session rather than a standard clinical appointment. Conducted in one of our private, sunlit suites, you will meet with a Senior Fertility Specialist and a dedicated Wellness Concierge. We review your complete medical history, discuss your emotional and physical readiness, and begin drafting a personalized roadmap. The focus is entirely on your unique story, ensuring you feel heard, understood, and enveloped in our care from the very first moment.",
+  },
+  {
+    category: "Concierge Services",
+    question: "How does Lawonbloom ensure privacy for high-profile clientele?",
+    answer:
+      "Discretion is woven into every layer of our sanctuary. From private entry protocols and unmarked suites to encrypted communications and biometric-secured medical records, every detail is engineered for absolute confidentiality. Our concierge team coordinates all logistics — from discreet transportation to private accommodation — ensuring your journey remains profoundly private. Staff are bound by stringent NDAs, and our facilities are designed to eliminate any unwanted encounters.",
+  },
+  {
+    category: "Clinical Pathways",
+    question: "What holistic therapies are integrated into the clinical pathways?",
+    answer:
+      "We believe the body responds best to treatment when the mind is at peace. Our integrated holistic therapies include acupuncture sessions timed to optimize uterine receptivity, nutritional counseling tailored to fertility, mindfulness and meditation protocols, and gentle yoga designed for reproductive health. Each therapy is scientifically evaluated and coordinated with your clinical timeline to ensure seamless integration.",
+  },
+  {
+    category: "Holistic Support",
+    question: "How is the psychological well-being of intended parents supported?",
+    answer:
+      "Our dedicated psychological support team includes licensed therapists specializing in reproductive mental health. We offer private counselling sessions, support groups, and stress-management protocols throughout your journey. From the initial consultation through post-treatment, our wellness concierge monitors your emotional wellbeing, providing resources and support tailored to your unique needs. We also offer partner and family counselling to ensure your entire support system is nurtured.",
+  },
+  {
+    category: "Concierge Services",
+    question: "What travel and accommodation support is available for international patients?",
+    answer:
+      "Our global concierge team provides end-to-end travel coordination including visa assistance, airport transfers, luxury accommodation booking, and local transportation. We partner with exclusive hotels and serviced apartments that understand the need for privacy and comfort. For longer stays, we can arrange fully equipped private residences with kitchen facilities and dedicated workspaces, ensuring you feel at home throughout your treatment journey.",
+  },
+  {
+    category: "Clinical Pathways",
+    question: "What is the typical timeline for an IVF cycle at Lawonbloom?",
+    answer:
+      "A complete IVF cycle at our sanctuary typically spans 4 to 6 weeks from initial stimulation to embryo transfer. This includes ovarian stimulation (10-14 days), egg retrieval (a single-day procedure), fertilization and embryo culture (5-6 days), and embryo transfer. The exact timeline is personalized based on your individual protocol, diagnostic results, and response to medications. Your dedicated care coordinator will provide a detailed calendar at the start of your journey.",
+  },
+];
+
+const categories = ["All Inquiries", ...new Set(faqs.map((f) => f.category))];
 
 export default function FAQPage() {
-    return (
-        <div className="flex flex-col">
-            {/* Hero Section */}
-            <section className="pt-20 pb-24 px-6 lg:px-20 max-w-360 mx-auto relative overflow-hidden w-full">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-                    <div className="col-span-1 md:col-span-8 md:col-start-3 text-center">
-                        <h1 className="font-display-hero text-primary mb-6">Clarity &amp; Calm</h1>
-                        <p className="font-body-large text-on-surface-variant max-w-2xl mx-auto mb-12">
-                            We understand that the journey to parenthood is filled with profound questions. Find reassurance and detailed guidance within our sanctuary of knowledge.
-                        </p>
-                        {/* Search Bar */}
-                        <div className="relative max-w-2xl mx-auto group">
-                            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                                <Search className="text-primary/50 w-6 h-6 group-focus-within:text-primary transition-colors" />
-                            </div>
-                            <input 
-                                type="text" 
-                                className="w-full glass-panel pl-16 pr-6 py-5 rounded-full text-base text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50 placeholder:text-on-surface-variant/50 transition-all" 
-                                placeholder="What are you seeking clarity on?" 
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [activeCategory, setActiveCategory] = useState("All Inquiries");
+  const [searchQuery, setSearchQuery] = useState("");
 
-            {/* FAQ Categories */}
-            <section className="py-16 px-6 lg:px-20 max-w-360 mx-auto w-full">
-                <div className="flex flex-wrap justify-center gap-4 mb-20">
-                    <button className="px-6 py-3 rounded-full bg-surface-container text-primary font-label-caps shadow-sm">All Inquiries</button>
-                    <button className="px-6 py-3 rounded-full bg-transparent border border-surface-container text-on-surface-variant hover:bg-surface-container/50 font-label-caps transition-colors">The First Step</button>
-                    <button className="px-6 py-3 rounded-full bg-transparent border border-surface-container text-on-surface-variant hover:bg-surface-container/50 font-label-caps transition-colors">Clinical Pathways</button>
-                    <button className="px-6 py-3 rounded-full bg-transparent border border-surface-container text-on-surface-variant hover:bg-surface-container/50 font-label-caps transition-colors">Holistic Support</button>
-                    <button className="px-6 py-3 rounded-full bg-transparent border border-surface-container text-on-surface-variant hover:bg-surface-container/50 font-label-caps transition-colors">Concierge Services</button>
-                </div>
+  const filteredFaqs = faqs.filter((faq) => {
+    const matchesCategory =
+      activeCategory === "All Inquiries" || faq.category === activeCategory;
+    const matchesSearch =
+      searchQuery === "" ||
+      faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
-                {/* FAQ Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20 lg:mb-28">
-                    <div className="col-span-1 md:col-span-10 md:col-start-2 flex flex-col gap-6">
-                        {/* FAQ Item 1 (Expanded State) */}
-                        <div className="glass-panel rounded-2xl p-8 cursor-pointer group">
-                            <div className="flex justify-between items-start">
-                                <h3 className="font-h2-subheading text-primary pr-12 group-hover:text-primary/80 transition-colors">What should I expect during my initial consultation at the Sanctuary?</h3>
-                                <ChevronDown className="text-primary/70 transform rotate-180 transition-transform duration-500 w-6 h-6 shrink-0" />
-                            </div>
-                            <div className="mt-6 text-base text-on-surface-variant leading-relaxed">
-                                <p className="mb-4">Your initial consultation is designed to be a profound listening session rather than a standard clinical appointment. Conducted in one of our private, sunlit suites, you will meet with a Senior Fertility Specialist and a dedicated Wellness Concierge.</p>
-                                <p>We review your complete medical history, discuss your emotional and physical readiness, and begin drafting a personalized roadmap. The focus is entirely on your unique story, ensuring you feel heard, understood, and enveloped in our care from the very first moment.</p>
-                            </div>
-                        </div>
-
-                        {/* FAQ Item 2 */}
-                        <div className="glass-panel rounded-2xl p-8 cursor-pointer group hover:bg-surface-bright/70 transition-all">
-                            <div className="flex justify-between items-center">
-                                <h3 className="font-h2-subheading text-[24px] leading-tight text-on-surface pr-12 group-hover:text-primary transition-colors">How does Lawonbloom ensure privacy for high-profile clientele?</h3>
-                                <ChevronDown className="text-primary/40 group-hover:text-primary/70 transition-colors w-6 h-6 shrink-0" />
-                            </div>
-                        </div>
-
-                        {/* FAQ Item 3 */}
-                        <div className="glass-panel rounded-2xl p-8 cursor-pointer group hover:bg-surface-bright/70 transition-all">
-                            <div className="flex justify-between items-center">
-                                <h3 className="font-h2-subheading text-[24px] leading-tight text-on-surface pr-12 group-hover:text-primary transition-colors">What holistic therapies are integrated into the clinical pathways?</h3>
-                                <ChevronDown className="text-primary/40 group-hover:text-primary/70 transition-colors w-6 h-6 shrink-0" />
-                            </div>
-                        </div>
-
-                        {/* FAQ Item 4 */}
-                        <div className="glass-panel rounded-2xl p-8 cursor-pointer group hover:bg-surface-bright/70 transition-all">
-                            <div className="flex justify-between items-center">
-                                <h3 className="font-h2-subheading text-[24px] leading-tight text-on-surface pr-12 group-hover:text-primary transition-colors">How is the psychological well-being of intended parents supported?</h3>
-                                <ChevronDown className="text-primary/40 group-hover:text-primary/70 transition-colors w-6 h-6 shrink-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-20 lg:py-28 px-6 lg:px-20 relative w-full">
-                <div className="absolute inset-0 bg-surface-container-low/50 z-0"></div>
-                <div className="max-w-360 mx-auto relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div className="col-span-1 md:col-span-5 md:col-start-2">
-                        <h2 className="font-h1-editorial text-primary mb-6">Still Seeking Clarity?</h2>
-                        <p className="font-body-large text-on-surface-variant mb-10">Our Concierge Team is available around the clock to provide deeply personal answers to any delicate questions you may hold.</p>
-                        <div className="flex flex-wrap gap-6 items-center">
-                            <button className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
-                                Connect with a Concierge
-                            </button>
-                            <a href="#" className="font-label-caps text-primary hover:text-primary/70 transition-colors border-b border-primary/30 pb-1">Send a Private Message</a>
-                        </div>
-                    </div>
-                    
-                    <div className="col-span-1 md:col-span-5 mt-10 md:mt-0">
-                        <div className="glass-panel p-8 rounded-[32px] relative overflow-hidden">
-                            <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary-fixed/30 rounded-full blur-3xl"></div>
-                            <div className="absolute -left-12 -bottom-12 w-48 h-48 bg-tertiary-fixed/20 rounded-full blur-3xl"></div>
-                            <div className="relative z-10 flex flex-col gap-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
-                                        <MessageSquare className="text-primary w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <p className="font-label-caps text-on-surface-variant">Live Counsel</p>
-                                        <p className="text-base text-on-surface">Available Now</p>
-                                    </div>
-                                </div>
-                                <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
-                                        <Mail className="text-primary w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <p className="font-label-caps text-on-surface-variant">Confidential Email</p>
-                                        <p className="text-base text-on-surface">lawonbloomfertilitycentre@gmail.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+  return (
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <section className="mx-auto w-full max-w-360 overflow-hidden px-6 pt-20 pb-24 lg:px-20">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div className="col-span-1 text-center md:col-span-8 md:col-start-3">
+            <h1 className="font-display text-5xl leading-[0.95] text-primary sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-[1.1] mb-6">
+              Clarity &amp; Calm
+            </h1>
+            <p className="font-body-large mx-auto mb-12 max-w-2xl text-on-surface-variant">
+              We understand that the journey to parenthood is filled with profound questions. Find reassurance and detailed guidance within our sanctuary of knowledge.
+            </p>
+            <div className="group relative mx-auto max-w-2xl">
+              <div className="pointer-events-none absolute inset-y-0 left-6 flex items-center">
+                <Search className="h-6 w-6 text-primary/50 transition-colors group-focus-within:text-primary" />
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full rounded-full border border-outline-variant/30 bg-surface/80 py-5 pl-16 pr-6 text-base text-foreground backdrop-blur placeholder:text-on-surface-variant/50 transition-all focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30"
+                placeholder="What are you seeking clarity on?"
+              />
+            </div>
+          </div>
         </div>
-    );
+      </section>
+
+      {/* FAQ Categories */}
+      <section className="mx-auto w-full max-w-360 px-6 py-16 lg:px-20">
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={cn(
+                "rounded-full px-6 py-3 font-label-caps transition-all",
+                activeCategory === cat
+                  ? "bg-surface-container text-primary shadow-sm"
+                  : "border border-surface-container bg-transparent text-on-surface-variant hover:bg-surface-container/50",
+              )}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* FAQ Items */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 lg:mb-28">
+          <div className="flex flex-col gap-4 md:col-span-10 md:col-start-2">
+            {filteredFaqs.length === 0 ? (
+              <p className="py-12 text-center text-on-surface-variant">
+                No results found for &quot;{searchQuery}&quot;. Try a different search term.
+              </p>
+            ) : (
+              filteredFaqs.map((faq, i) => {
+                const isOpen = openIndex === i;
+                return (
+                  <div
+                    key={i}
+                    className={cn(
+                      "rounded-2xl border border-outline-variant/30 transition-all",
+                      isOpen
+                        ? "bg-surface-bright shadow-sm"
+                        : "bg-surface/60 hover:bg-surface-bright/70",
+                    )}
+                  >
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? null : i)}
+                      className="flex w-full items-start justify-between gap-4 p-6 text-left md:p-8"
+                    >
+                      <h3
+                        className={cn(
+                          "pr-4 text-lg leading-snug transition-colors md:text-xl",
+                          isOpen
+                            ? "text-primary"
+                            : "text-foreground group-hover:text-primary",
+                        )}
+                      >
+                        {faq.question}
+                      </h3>
+                      <ChevronDown
+                        className={cn(
+                          "mt-1 h-5 w-5 shrink-0 transition-transform duration-300 md:h-6 md:w-6",
+                          isOpen
+                            ? "rotate-180 text-primary"
+                            : "text-on-surface-variant/50",
+                        )}
+                      />
+                    </button>
+                    <div
+                      className={cn(
+                        "overflow-hidden transition-all duration-300 ease-in-out",
+                        isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+                      )}
+                    >
+                      <div className="border-t border-outline-variant/20 px-6 pb-6 pt-4 text-base leading-7 text-on-surface-variant md:px-8 md:pb-8">
+                        {faq.answer}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative w-full px-6 py-20 lg:px-20 lg:py-28">
+        <div className="absolute inset-0 z-0 bg-surface-container-low/50" />
+        <div className="relative z-10 mx-auto grid max-w-360 items-center gap-8 md:grid-cols-12">
+          <div className="col-span-1 md:col-span-5 md:col-start-2">
+            <h2 className="font-h1-editorial mb-6 text-primary">Still Seeking Clarity?</h2>
+            <p className="font-body-large mb-10 text-on-surface-variant">
+              Our Concierge Team is available around the clock to provide deeply personal answers to any delicate questions you may hold.
+            </p>
+            <div className="flex flex-wrap items-center gap-6">
+              <Link
+                href="/concierge/contact"
+                className="inline-flex rounded-full bg-primary px-8 py-4 font-label-caps text-on-primary shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90"
+              >
+                Connect with a Concierge
+              </Link>
+              <Link
+                href="/concierge/contact"
+                className="border-b border-primary/30 pb-1 font-label-caps text-primary transition-colors hover:text-primary/70"
+              >
+                Send a Private Message
+              </Link>
+            </div>
+          </div>
+
+          <div className="col-span-1 mt-10 md:col-span-5 md:mt-0">
+            <div className="relative overflow-hidden rounded-[32px] border border-outline-variant/30 bg-surface-bright/60 p-8 backdrop-blur">
+              <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary-fixed/30 blur-3xl" />
+              <div className="absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-tertiary-fixed/20 blur-3xl" />
+              <div className="relative z-10 flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container">
+                    <MessageSquare className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-label-caps text-on-surface-variant">Live Counsel</p>
+                    <p className="text-base text-foreground">Available Now</p>
+                  </div>
+                </div>
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container">
+                    <Mail className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-label-caps text-on-surface-variant">Confidential Email</p>
+                    <p className="text-base text-foreground">sanctuary@lawonbloom.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

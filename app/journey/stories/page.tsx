@@ -4,7 +4,7 @@ import Families from "@/components/journeyStories/Families";
 
 export default function JourneyStoriesPage() {
     return (
-        <main className="bg-[#f5f2ee] text-[#2b2b2b]">
+        <main className="bg-surface text-foreground">
             <Hero />
             <Cinematic />
             <Families />

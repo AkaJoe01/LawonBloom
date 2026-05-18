@@ -4,7 +4,7 @@ import SequenceSection from "@/components/iui/SequenceSection";
 
 export default function IUIPage(){
     return(
-        <main className="bg-[#f5f2ee] text-[#2b2b2b] overflow-hidden">
+        <main className="bg-surface text-foreground">
              <Hero />
              <CandidateSection />
              <SequenceSection />

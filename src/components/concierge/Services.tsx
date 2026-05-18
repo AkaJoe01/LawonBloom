@@ -19,12 +19,12 @@ export default function Services() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service) => (
                     <div key={service.title} 
-                    className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-4xl p-10 shadow-sm"
+                    className="bg-surface-bright/60 backdrop-blur-xl border border-outline-variant/30 rounded-4xl p-10 shadow-sm"
                     >
-                        <h3 className="font-serif text-3xl mb-6">
+                        <h3 className="font-display text-3xl mb-6 text-foreground">
                             {service.title}
                         </h3>
-                        <p className="text-gray-600 leading-8">
+                        <p className="text-on-surface-variant leading-8">
                             {service.description}
                         </p>
                     </div>

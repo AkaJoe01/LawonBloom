@@ -4,7 +4,7 @@ import Location from "@/components/conciergeContact/Location";
 
 export default function ConciergeContactPage(){
     return(
-        <main className="bg-[#f5f2ee] text-[#2b2b2b]">
+        <main className="bg-surface text-foreground">
             <Hero />
             <ConsultationForm />
             <Location />
