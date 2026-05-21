@@ -67,7 +67,7 @@ export default function Header() {
         <Link href="/" className="relative z-10 flex items-center gap-3">
           <span className="overflow-hidden rounded-full ring-1 ring-primary/10">
             <Image
-              src="/logo/logo.JPG"
+              src="/logo/logo.png"
               alt="Lawonbloom"
               width={44}
               height={44}

@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: "Lawonbloom Fertility Centre",
   description: "A cinematic fertility centre experience focused on privacy, clinical precision, and calm.",
+  icons: [{ rel: "icon", url: "/logo/logo.png" }],
 };
 
 export default function RootLayout({
