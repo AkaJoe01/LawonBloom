@@ -39,13 +39,13 @@ export default function Families() {
           <p className="uppercase text-xs tracking-[0.3em] text-[#9c5c67] mb-6">
             Written Archives
           </p>
-          <h2 className="font-serif text-[56px] leading-[1.1] mb-8">
+          <h2 className="font-serif text-4xl leading-[1.05] mb-8 sm:text-[56px]">
             The Lawonbloom Families
           </h2>
           <p className="text-gray-600 leading-8 mb-10">
             Read the personal accounts of resilience, scientific precision, and the delicate balance of hope that defines our sanctuary.
           </p>
-          <button className="inline-flex items-center gap-2 text-[#9c5c67] uppercase tracking-[0.2em] text-sm">
+          <button className="inline-flex items-center gap-2 text-[#9c5c67] uppercase tracking-[0.2em] text-sm sm:text-base">
             Explore All Stories <ArrowLeft size={20} />
           </button>
         </div>

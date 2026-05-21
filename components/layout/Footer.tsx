@@ -39,7 +39,7 @@ export default function Footer() {
                         <Link href="/about" className="text-base text-on-surface-variant hover:text-primary transition-colors">Our Story</Link>
                         <Link href="/sanctuary" className="text-base text-on-surface-variant hover:text-primary transition-colors">The Sanctuary</Link>
                         <Link href="/clinical-excellence" className="text-base text-on-surface-variant hover:text-primary transition-colors">Clinical Excellence</Link>
-                        <Link href="/path" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Path to Parenthood</Link>
+                        <Link href="/path" className="text-base text-on-surface-variant hover:text-primary transition-colors">Path to Parenthood</Link>
                         <Link href="/faq" className="text-base text-on-surface-variant hover:text-primary transition-colors">Patient FAQ</Link>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/clinical-excellence/ivf" className="text-base text-on-surface-variant hover:text-primary transition-colors">In Vitro Fertilization</Link>
                         <Link href="/clinical-excellence/fertility-preservation" className="text-base text-on-surface-variant hover:text-primary transition-colors">Oocyte Preservation</Link>
-                        <Link href="/clinical-excellence/genetic-testing" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Genetic Screening</Link>
+                        <Link href="/clinical-excellence/genetic-testing" className="text-base text-on-surface-variant hover:text-primary transition-colors">Genetic Screening</Link>
                         <Link href="/sanctuary/services/surrogacy" className="text-base text-on-surface-variant hover:text-primary transition-colors">Surrogacy Concierge</Link>
                         <Link href="/clinical-excellence/holistic-support" className="text-base text-on-surface-variant hover:text-primary transition-colors">Holistic Support</Link>
                     </div>
