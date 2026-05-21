@@ -12,16 +12,6 @@ const doctors = [
     role: "Chief Fertility Specialist",
     image: "/images/maleDr.jpg",
   },
-  {
-    name: "Dr. Elena Rostova",
-    role: "Senior IVF Consultant",
-    image: "/images/femaleDr.jpg",
-  },
-  {
-    name: "Dr. Marcus Chen",
-    role: "Reproductive Endocrinologist",
-    image: "/images/DrChen.jpg",
-  },
 ];
 
 const timeSlots = [
@@ -63,6 +53,7 @@ export default function BookingFlow() {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const canProceed = () => {
     if (step === 1) return selectedDoctor !== null;
@@ -76,9 +67,26 @@ export default function BookingFlow() {
     if (step < 3) setStep((s) => s + 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!canProceed()) return;
-    setSubmitted(true);
+    setSending(true);
+    try {
+      await fetch("/api/send-consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          doctor: doctors[selectedDoctor!].name,
+          date: selectedDate && formatDate(selectedDate),
+          time: selectedTime,
+          ...formData,
+        }),
+      });
+      setSubmitted(true);
+    } catch {
+      alert("Failed to send booking. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   if (submitted) {
@@ -152,7 +160,7 @@ export default function BookingFlow() {
           <div>
             <h2 className="font-display text-3xl text-foreground md:text-4xl">Choose Your Specialist</h2>
             <p className="mt-2 text-on-surface-variant leading-7">Select the fertility specialist you would like to consult with.</p>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="mt-8 grid gap-6 md:grid-cols-1 max-w-md mx-auto">
               {doctors.map((doctor, i) => (
                 <button
                   key={doctor.name}
@@ -332,8 +340,8 @@ export default function BookingFlow() {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             ) : (
-              <Button onClick={handleSubmit} disabled={!canProceed()}>
-                Confirm Booking
+              <Button onClick={handleSubmit} disabled={!canProceed() || sending}>
+                {sending ? "Sending..." : "Confirm Booking"}
               </Button>
             )}
           </div>

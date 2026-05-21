@@ -7,16 +7,6 @@ export default function Specialists(){
             role: "Chief Fertility Specialist",
             image: "/images/maleDr.jpg"
         },
-        {
-            name: "Dr. Elena Rostova",
-            role: "Senior IVF Consultant",
-            image: "/images/femaleDr.jpg"
-        },
-        {
-            name: "Dr Marcus Chen",
-            role: "Reproductive Endocrinologist",
-            image: "/images/DrChen.jpg",
-        },
     ];
 
     return(
@@ -41,7 +31,7 @@ export default function Specialists(){
                 </h2>
 
                 {/* DOCTORS */ }
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-1 max-w-md mx-auto gap-8">
                     {doctors.map((doctor) => (
                         <div
                             key={doctor.name}

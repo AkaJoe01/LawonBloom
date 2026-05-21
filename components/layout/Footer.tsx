@@ -13,7 +13,7 @@ export default function Footer() {
                 {/* Brand & Contact */}
                 <div className="lg:col-span-4 flex flex-col gap-8">
                     <div>
-                        <Image src="/logo/logo.JPG" alt="Lawonbloom Logo" width={120} height={120} className="h-16 w-16 rounded-full object-cover shadow-sm" />
+                        <Image src="/logo/logo.png" alt="Lawonbloom Logo" width={120} height={120} className="h-16 w-16 rounded-full object-cover shadow-sm" />
                         <p className="mt-4 max-w-sm text-base italic leading-7 text-on-surface-variant">
                             A sanctuary for reproductive health, combining clinical mastery with a profoundly private, concierge-level experience.
                         </p>
@@ -48,11 +48,11 @@ export default function Footer() {
                 <div className="lg:col-span-2">
                     <p className="font-label-caps text-primary mb-6">Specialties</p>
                     <div className="flex flex-col gap-4">
-                        <Link href="/sanctuary/services#ivf" className="text-base text-on-surface-variant hover:text-primary transition-colors">In Vitro Fertilization</Link>
-                        <Link href="/sanctuary/services#preservation" className="text-base text-on-surface-variant hover:text-primary transition-colors">Oocyte Preservation</Link>
+                        <Link href="/clinical-excellence/ivf" className="text-base text-on-surface-variant hover:text-primary transition-colors">In Vitro Fertilization</Link>
+                        <Link href="/clinical-excellence/fertility-preservation" className="text-base text-on-surface-variant hover:text-primary transition-colors">Oocyte Preservation</Link>
                         <Link href="/clinical-excellence/genetic-testing" className="text-base text-on-surface-variant hover:text-primary transition-colors">Genetic Screening</Link>
-                        <Link href="/sanctuary/services#holistic" className="text-base text-on-surface-variant hover:text-primary transition-colors">Surrogacy Concierge</Link>
-                        <Link href="/sanctuary/services#holistic" className="text-base text-on-surface-variant hover:text-primary transition-colors">Holistic Support</Link>
+                        <Link href="/sanctuary/services/surrogacy" className="text-base text-on-surface-variant hover:text-primary transition-colors">Surrogacy Concierge</Link>
+                        <Link href="/clinical-excellence/holistic-support" className="text-base text-on-surface-variant hover:text-primary transition-colors">Holistic Support</Link>
                     </div>
                 </div>
 

@@ -120,10 +120,11 @@ export default function ClinicalExcellencePage() {
                             <div className="col-span-1 md:col-span-5 relative z-10">
                                 <div className="glass-panel p-12 rounded-xl md:-ml-16 mt-16 md:mt-0 relative">
                                     <span className="font-h2-subheading text-primary block mb-4 opacity-50">02</span>
-                                    <h3 className="font-h2-subheading text-on-surface mb-4">Time-Lapse Incubation</h3>
+                                    <h3 className="font-h2-subheading text-on-surface mb-4">Continous Embryo Observation</h3>
                                     <div className="elegant-divider w-12 mb-6"></div>
                                     <p className="text-base text-on-surface-variant mb-8">
-                                        Continuous, undisturbed monitoring allows our clinical team to observe critical developmental milestones in real-time, drastically improving selection accuracy without disrupting the delicate microenvironment.
+                                        In the early days after fertilization, yoyr embryos are at their most delicate. With <strong>Continuous Embryo Observation,</strong>
+                                        we use advanced incubator technology to monitor their development 24/7 - all without ever removing them from their safe, stable environment.
                                     </p>
                                 </div>
                             </div>
