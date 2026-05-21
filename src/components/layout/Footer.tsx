@@ -22,12 +22,12 @@ export default function Footer() {
                         <a href="mailto:sanctuary@lawonbloom.com" className="flex items-center gap-3 hover:text-primary transition-colors">
                             <Mail className="w-4 h-4 text-primary/70 shrink-0" /> lawonbloomfertilitycentre@gmail.com
                         </a>
-                        <a href="tel:+442071234567" className="flex items-center gap-3 hover:text-primary transition-colors">
-                            <Phone className="w-4 h-4 text-primary/70 shrink-0" /> +234 803 337 2153
+                        <a href="tel:+2349132504126" className="flex items-center gap-3 hover:text-primary transition-colors">
+                            <Phone className="w-4 h-4 text-primary/70 shrink-0" /> +2349132504126
                         </a>
                         <div className="flex items-start gap-3">
                             <MapPin className="w-4 h-4 text-primary/70 shrink-0 mt-0.5" />
-                            <span>Oyo State <br/>Nigeria, W1G 9PB</span>
+                            <span>NO. 6, CANON ODUSANWO STREET<br/>OFF DEJI OYELESE STREET<br/>OLD BODIJA AVENUE, IBADAN</span>
                         </div>
                     </div>
                 </div>

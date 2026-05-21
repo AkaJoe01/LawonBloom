@@ -71,7 +71,7 @@ export default function ServicesSection() {
           a screening plan aligned with your unique medical history and family goals.
         </p>
         <a
-          href="/concierge/contact"
+          href="/journey/consultation"
           className="inline-flex items-center bg-primary text-on-primary px-8 py-4 rounded-full uppercase tracking-[0.15em] text-sm hover:opacity-90 transition"
         >
           Speak to a Specialist

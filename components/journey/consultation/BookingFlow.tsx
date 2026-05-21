@@ -298,7 +298,7 @@ export default function BookingFlow() {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
-                  placeholder="+234 800 000 0000"
+                  placeholder="+234 900 000 0000"
                   className="mt-1.5 w-full rounded-xl border border-outline-variant/40 bg-surface-container-low px-4 py-3 text-foreground outline-none transition-colors focus:border-primary"
                 />
               </div>
