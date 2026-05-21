@@ -38,7 +38,7 @@ export default function AboutPage() {
       <section className="py-20 px-6 bg-background lg:py-40 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-12 gap-12">
-            <div className="col-span-12 md:col-span-6 mb-24 md:mb-0">
+            <div className="col-span-12 md:col-span-6 mb-12 md:mb-0">
               <div className="md:sticky md:top-32">
                 <h2 className="font-h1-editorial text-primary mb-12">
                   Our Founding Narrative
@@ -65,7 +65,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-5 md:col-start-8 space-y-32">
+            <div className="col-span-12 md:col-span-5 md:col-start-8 space-y-16 md:space-y-32">
               <div className="relative">
                 <Image
                   alt="Laboratory precision"
@@ -74,7 +74,7 @@ export default function AboutPage() {
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
                 />
-                <div className="absolute -bottom-10 -left-10 bg-surface-bright p-6 shadow-2xl max-w-xs">
+                <div className="absolute -bottom-10 -left-4 md:-left-10 bg-surface-bright p-6 shadow-2xl max-w-xs right-4 md:right-auto">
                   <span className="block font-label-caps text-xs text-tertiary mb-2">
                     CHAPTER I
                   </span>
@@ -84,7 +84,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="relative translate-x-12">
+              <div className="relative md:translate-x-12">
                 <Image
                   alt="Consultation room"
                   src="/images/lab.jpg"
@@ -92,7 +92,7 @@ export default function AboutPage() {
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
                 />
-                <div className="absolute -top-10 -right-10 bg-surface-bright p-6 shadow-2xl max-w-xs">
+                <div className="absolute -top-10 -right-4 md:-right-10 bg-surface-bright p-6 shadow-2xl max-w-xs left-4 md:left-auto">
                   <span className="block font-label-caps text-xs text-tertiary mb-2">
                     CHAPTER II
                   </span>
