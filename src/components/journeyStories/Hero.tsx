@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 py-35 text-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-6 py-24 sm:py-32 text-center overflow-hidden">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
         <Image
@@ -21,7 +21,7 @@ export default function Hero() {
         <p className="uppercase tracking-[0.3em] text-xs text-[#9c5c67] mb-6">
           The Miracle of Life
         </p>
-        <h1 className="font-serif text-[84px] leading-23 tracking-[-0.4em] mb-8">
+        <h1 className="font-serif text-5xl leading-[1.05] tracking-[-0.04em] mb-8 sm:text-6xl md:text-[84px]">
           Journeys of Hope
         </h1>
         <p className="text-gray-600 leading-8 max-w-2xl mx-auto">
