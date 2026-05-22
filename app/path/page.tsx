@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
@@ -117,10 +118,13 @@ export default function PathPage() {
             <section className="w-full py-20 px-6 lg:py-32 lg:px-16 flex justify-center items-center relative z-10">
                 <div className="text-center">
                     <h3 className="font-h2-subheading text-on-surface mb-8">Ready to illuminate your path?</h3>
-                    <button className="bg-primary text-on-primary font-h2-subheading px-12 py-4 rounded-sm hover:bg-primary/90 transition-colors duration-500 flex items-center justify-center gap-4 mx-auto group text-[24px]">
-                        Begin Journey
+                    <Link
+                        href="/journey/consultation"
+                        className="bg-primary text-on-primary font-h2-subheading px-12 py-4 rounded-sm hover:bg-primary/90 transition-colors duration-500 flex items-center justify-center gap-4 mx-auto group text-[24px]"
+                    >
+                        Begin Your Journey
                         <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-500" />
-                    </button>
+                    </Link>
                 </div>
             </section>
         </div>

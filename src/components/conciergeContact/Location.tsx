@@ -19,12 +19,20 @@ export default function Location(){
                         <h3 className="font-display text-3xl text-foreground mb-6">
                             The Lawon Bloom Clinic
                         </h3>
-                        <p className="text-on-surface-variant leading-7 mb-6">
-                            Visit our clinic for personalized fertility care and support.
+                        <p className="text-on-surface-variant leading-7 mb-2">
+                            NO. 6, CANON ODUSANWO STREET
                         </p>
-                        <button className="w-full border border-outline-variant rounded-full py-4 uppercase tracking-[0.15em] text-sm text-foreground hover:bg-primary hover:text-on-primary hover:border-primary transition">
+                        <p className="text-on-surface-variant leading-7 mb-6">
+                            OFF DEJI OYELESE STREET, OLD BODIJA AVENUE, IBADAN
+                        </p>
+                        <a
+                            href="https://maps.google.com/maps?daddr=NO.+6+CANON+ODUSANWO+STREET+OFF+DEJI+OYELESE+STREET+OLD+BODIJA+AVENUE+IBADAN"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block w-full text-center border border-outline-variant rounded-full py-4 uppercase tracking-[0.15em] text-sm text-foreground hover:bg-primary hover:text-on-primary hover:border-primary transition"
+                        >
                             Get Directions
-                        </button>
+                        </a>
                     </div>
             </div>
         </section>

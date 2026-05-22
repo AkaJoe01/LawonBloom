@@ -109,7 +109,7 @@ export default function ConsultationForm() {
                                     Whatsapp Concierge
                                 </p>
                                 <p className="text-foreground">
-                                    +234 803 337 2153
+                                    +2349132504126
                                 </p>
                             </div>
                         </div>

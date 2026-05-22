@@ -4,7 +4,7 @@ export default function Location(){
             <div className="relative rounded-[40px] overflow-hidden">
 
                 <iframe
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=-0.149%2C51.519%2C-0.144%2C51.522&layer=mapnik&marker=51.5205%2C-0.1465"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=3.8973%2C7.4278%2C3.9073%2C7.4378&layer=mapnik&marker=7.4328%2C3.9023"
                     width="100%"
                     height="500"
                     className="w-full min-h-[300px] md:h-125"
@@ -19,13 +19,13 @@ export default function Location(){
                         The Lawon Bloom Clinic
                     </h3>
                     <p className="text-on-surface-variant leading-7 mb-2">
-                        12 Harley Street
+                        NO. 6, CANON ODUSANWO STREET
                     </p>
                     <p className="text-on-surface-variant leading-7 mb-6">
-                        London, W1G 9PB
+                        OFF DEJI OYELESE STREET, OLD BODIJA AVENUE, IBADAN
                     </p>
                     <a
-                        href="https://maps.google.com/maps?daddr=12+Harley+Street+London+W1G+9PB"
+                        href="https://maps.google.com/maps?daddr=NO.+6+CANON+ODUSANWO+STREET+OFF+DEJI+OYELESE+STREET+OLD+BODIJA+AVENUE+IBADAN"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block w-full text-center border border-outline-variant rounded-full py-4 uppercase tracking-[0.15em] text-sm text-foreground hover:bg-primary hover:text-on-primary hover:border-primary transition"
