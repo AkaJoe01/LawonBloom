@@ -71,7 +71,7 @@ export default function BookingFlow() {
     if (!canProceed()) return;
     setSending(true);
     try {
-      await fetch("/api/send-consultation", {
+      const res = await fetch("/api/send-consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -81,8 +81,15 @@ export default function BookingFlow() {
           ...formData,
         }),
       });
-      setSubmitted(true);
-    } catch {
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        alert(data.error || "Failed to send booking. Please try again.");
+        console.error("Booking error:", data.error);
+      }
+    } catch (err) {
+      console.error("Booking fetch error:", err);
       alert("Failed to send booking. Please try again.");
     } finally {
       setSending(false);
@@ -96,9 +103,9 @@ export default function BookingFlow() {
           <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Check className="h-8 w-8 text-primary" />
           </div>
-          <h2 className="font-display text-4xl text-primary md:text-5xl">Your Consultation is Booked</h2>
+          <h2 className="font-display text-4xl text-primary md:text-5xl">Inquiry Received</h2>
           <p className="mx-auto mt-4 max-w-lg text-on-surface-variant leading-7">
-            A confirmation has been sent to <strong>{formData.email}</strong>. Your
+            We have received your request. A confirmation has been sent to <strong>{formData.email}</strong>. Your
             concierge will reach out within 24 hours.
           </p>
           <div className="mx-auto mt-8 inline-block rounded-2xl border border-outline-variant/30 bg-surface-container-low px-6 py-4 text-left">

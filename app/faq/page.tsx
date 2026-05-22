@@ -339,7 +339,7 @@ export default function FAQPage() {
                   </div>
                   <div>
                     <p className="font-label-caps text-on-surface-variant">Confidential Email</p>
-                    <p className="text-base text-foreground">lawonbloomfertilitycentre@gmail.com.com</p>
+                    <p className="text-base text-foreground">lawonbloomf@gmail.com</p>
                   </div>
                 </div>
               </div>
