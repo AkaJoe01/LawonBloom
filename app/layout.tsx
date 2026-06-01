@@ -4,8 +4,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Lawonbloom Fertility Centre",
-  description: "A cinematic fertility centre experience focused on privacy, clinical precision, and calm.",
+  title: "Lawon Bloom Fertility Centre | IVF & Fertility Clinic in Ibadan",
+  description:
+    "Lawon Bloom Fertility Centre offers IVF, IUI, egg freezing, and fertility testing in Ibadan. Personalized care with advanced technology. Book a consultation.",
   icons: [{ rel: "icon", url: "/logo/logo.png" }],
 };
 
