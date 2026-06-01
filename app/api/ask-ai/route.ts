@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const prompt = `COMPANY INFO:
 - Name: Lawonbloom Fertility Centre (Lawonbloom). Tagline: "Where Hope Blossoms into Life."
 - Founded: 1998 in Lagos, Nigeria. Now located at NO. 6, Canon Odusanwo Street, Off Deji Oyelese Street, Old Bodija Avenue, Ibadan, Nigeria.
-- Phone: +2349132504126. Email: lawonbloomf@gmail.com
+- Phone: +2349132504126. Email: lawonbloomfertilitycentre@gmail.com
 - Founder & Lead Doctor: Dr. Olugbenga Oluseun Saanu \u2014 Chief Medical Director, Lead Fertility Specialist, Chief Clinical Architect. Decades of global experience, Royal College of Obstetricians & Gynecologists recognition.
 - Other team: Nurse Elena Rostova (Fertility Nurse), Serah Jenkins (Director of Patient Wellness), Dr. Marcus Thorne (Reproductive Geneticist).
 
