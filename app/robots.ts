@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://lawon-bloom.vercel.app/sitemap.xml",
+    sitemap: "https://lawonbloomfertilitycentre.com/sitemap.xml",
   };
 }
