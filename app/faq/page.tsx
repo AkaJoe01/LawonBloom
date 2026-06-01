@@ -310,10 +310,10 @@ export default function FAQPage() {
             </p>
             <div className="flex flex-wrap items-center gap-6">
               <Link
-                href="/concierge/contact"
+                href="/journey/consultation"
                 className="inline-flex rounded-full bg-primary px-8 py-4 font-label-caps text-on-primary shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90"
               >
-                Connect with a Concierge
+                Choose Your Specialist
               </Link>
             </div>
           </div>
