@@ -45,7 +45,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-8 max-w-lg">
                   <p className="font-body-large text-on-surface-variant">
-                    In 1998, Lawonbloom was established with a singular vision: to marry the cold precision of high-science with the warmth of human sanctuary. What began as a boutique clinic has evolved into a global benchmark for reproductive excellence.
+                    In 2015, Lawonbloom was established with a singular vision: to marry the cold precision of high-science with the warmth of human sanctuary. What began as a boutique clinic has evolved into a global benchmark for reproductive excellence.
                   </p>
                   <p className="font-body-large text-on-surface-variant">
                     We believe that the environment is as vital as the embryology. Every curved corridor, every filtered ray of light, and every botanical element in our space is curated to lower cortisol and nurture the soul during the most delicate journey of your life.
