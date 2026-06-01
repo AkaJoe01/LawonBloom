@@ -124,7 +124,7 @@ export default function ConsultationForm() {
                                     Private Email
                                 </p>
                                 <p className="text-foreground">
-                                    lawonbloomf@gmail.com
+                                    lawonbloomfertilitycentre@gmail.com
                                 </p>
                             </div>
                         </div>
