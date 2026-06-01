@@ -19,8 +19,8 @@ export default function Footer() {
                         </p>
                     </div>
                     <div className="flex flex-col gap-4 text-sm text-on-surface-variant">
-                        <a href="mailto:sanctuary@lawonbloom.com" className="flex items-center gap-3 hover:text-primary transition-colors">
-                            <Mail className="w-4 h-4 text-primary/70 shrink-0" /> lawonbloomfertilitycentre@gmail.com
+                        <a href="mailto:lawonbloomf@gmail.com" className="flex items-center gap-3 hover:text-primary transition-colors">
+                            <Mail className="w-4 h-4 text-primary/70 shrink-0" /> lawonbloomf@gmail.com
                         </a>
                         <a href="tel:+2349132504126" className="flex items-center gap-3 hover:text-primary transition-colors">
                             <Phone className="w-4 h-4 text-primary/70 shrink-0" /> +2349132504126

@@ -82,7 +82,7 @@ export default function EthicsPage() {
             Our Ethics Committee welcomes questions and feedback from patients, staff, and the broader community.
           </p>
           <a
-            href="mailto:ethics@lawonbloom.com"
+            href="mailto:lawonbloomf@gmail.com"
             className="inline-flex items-center bg-primary text-on-primary px-8 py-4 rounded-full uppercase tracking-[0.15em] text-sm hover:opacity-90 transition"
           >
             Contact Ethics Committee

@@ -22,7 +22,7 @@ const sections = [
   {
     title: "Your Rights",
     content:
-      "You have the right to access, correct, or request deletion of your personal data at any time. You may withdraw consent for data processing, request a copy of your records, or lodge a complaint with your local data protection authority. To exercise these rights, contact our Data Protection Officer at privacy@lawonbloom.com.",
+      "You have the right to access, correct, or request deletion of your personal data at any time. You may withdraw consent for data processing, request a copy of your records, or lodge a complaint with your local data protection authority. To exercise these rights, contact our Data Protection Officer at lawonbloomf@gmail.com.",
   },
   {
     title: "Data Retention",
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
             Our Data Protection Officer is available to address any concerns regarding your personal information.
           </p>
           <a
-            href="mailto:privacy@lawonbloom.com"
+            href="mailto:lawonbloomf@gmail.com"
             className="inline-flex items-center bg-primary text-on-primary px-8 py-4 rounded-full uppercase tracking-[0.15em] text-sm hover:opacity-90 transition"
           >
             Contact DPO
