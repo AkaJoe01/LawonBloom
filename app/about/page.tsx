@@ -205,13 +205,13 @@ export default function AboutPage() {
                 <div className="relative">
                   <div className="absolute -left-[0.6875rem] top-2 w-2 h-2 rounded-full bg-primary ring-8 ring-background"></div>
                   <span className="font-label-caps text-primary tracking-widest block mb-2">
-                    1998 — FOUNDATION
+                    2010 — FOUNDATION
                   </span>
                   <h4 className="font-h2-subheading text-xl mb-4 italic">
                     The Seed is Sown
                   </h4>
                   <p className="text-on-surface-variant max-w-md">
-                    Opening of the first boutique clinic in Lagos, focusing on personalized patient experiences that were missing in the region.
+                    Opening of the first boutique clinic in Ibadan, focusing on personalized patient experiences that were missing in the region.
                   </p>
                 </div>
 
@@ -224,9 +224,9 @@ export default function AboutPage() {
                   <h4 className="font-h2-subheading text-xl mb-4 italic">
                     Global Accreditation
                   </h4>
-                  <p className="text-on-surface-variant max-w-md">
+                  {/* <p className="text-on-surface-variant max-w-md">
                     Lawonbloom achieves international laboratory certifications, becoming a primary destination for the global African diaspora.
-                  </p>
+                  </p> */}
                 </div>
 
                 {/* 2022 */}

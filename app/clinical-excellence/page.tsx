@@ -47,7 +47,7 @@ export default function ClinicalExcellencePage() {
                     <p className="font-body-large text-on-surface-variant max-w-2xl mx-auto mb-12">
                         Where uncompromising technological precision meets profound human empathy. Our laboratory is designed as a sanctuary for life&apos;s most delicate origins.
                     </p>
-                    <button className="bg-primary text-on-primary font-h2-subheading text-[18px] py-4 px-10 rounded-full hover:bg-surface-tint transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <button className="bg-primary text-on-primary font-h2-subheading text-sm sm:text-base md:text-[18px] py-3 sm:py-4 px-6 sm:px-10 rounded-full hover:bg-surface-tint transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Explore Our Methods
                     </button>
                 </div>
@@ -63,7 +63,7 @@ export default function ClinicalExcellencePage() {
                 <div className="max-w-360 mx-auto px-6 lg:px-16">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24 items-end">
                         <div className="col-span-1 md:col-span-5">
-                            <h2 className="font-h1-editorial text-on-surface mb-6">Pioneering Technology</h2>
+                            <h2 className="font-h1-editorial text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-on-surface mb-6">Pioneering Technology</h2>
                         </div>
                         <div className="col-span-1 md:col-span-6 md:col-start-7">
                             <p className="font-body-large text-on-surface-variant">
