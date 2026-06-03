@@ -24,7 +24,7 @@ export default function TeamPage(){
             <section className="grid grid-cols-1 gap-10 px-6 py-16 items-center md:grid-cols-2 md:gap-14 md:px-20 md:py-24">
                 <div className="relative w-full h-[400px] md:h-[500px]">
                     <Image
-                        src="/images/maleDr.jpg"
+                        src="/images/Dr. Saanu.jpg"
                         alt="Lead Specialist"
                         fill
                         className="object-cover"
