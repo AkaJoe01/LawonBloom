@@ -10,7 +10,7 @@ const doctors = [
   {
     name: "Dr. Olugbenga Oluseun Saanu",
     role: "Chief Fertility Specialist",
-    image: "/images/maleDr.jpg",
+    image: "/images/Dr. Saanu.jpg",
   },
 ];
 

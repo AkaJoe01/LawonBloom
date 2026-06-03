@@ -5,7 +5,7 @@ export default function Specialists(){
         {
             name: "Dr. Olugbenga Oluseun Saanu",
             role: "Chief Fertility Specialist",
-            image: "/images/maleDr.jpg"
+            image: "/images/Dr. Saanu.jpg"
         },
         {
             name: "Dr. Elena Rostova",

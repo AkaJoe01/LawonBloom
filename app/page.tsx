@@ -221,7 +221,7 @@ export default function HomePage() {
                     <div className="sticky top-28">
                         <div className="relative aspect-3/4 overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/images/maleDr.jpg"
+                                src="/images/Dr. Saanu.jpg"
                                 alt="Medical director portrait"
                                 fill
                                 className="h-full w-full object-cover"
