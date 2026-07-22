@@ -38,7 +38,7 @@ export default function VisitPrep() {
         <div className="flex justify-center">
           <div className="w-full max-w-xl overflow-hidden rounded-3xl">
             <Image
-              src="/Whatsapp/1 (7).jpeg"
+              src="/WhatsApp/1 (7).jpeg"
               alt="Sanctuary corridor"
               width={600}
               height={700}

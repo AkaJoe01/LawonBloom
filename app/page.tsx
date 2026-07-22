@@ -101,7 +101,7 @@ export default function HomePage() {
 
                     <div className="relative min-h-130 overflow-hidden rounded-4xl cinematic-shadow lg:min-h-190">
                         <Image
-                            src="/Whatsapp/1 (6).jpeg"
+                            src="/WhatsApp/1 (6).jpeg"
                             alt="Serene clinic interior"
                             fill
                             priority
@@ -221,7 +221,7 @@ export default function HomePage() {
                     <div className="sticky top-28">
                         <div className="relative aspect-3/4 overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/Whatsapp/1 (9).jpeg"
+                                src="/WhatsApp/1 (9).jpeg"
                                 alt="Medical director portrait"
                                 fill
                                 className="h-full w-full object-cover"
@@ -262,7 +262,7 @@ export default function HomePage() {
 
             <section id="stories" className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-6 py-20 lg:px-20 lg:py-32">
                 <div className="absolute inset-0">
-                    <Image src="/Whatsapp/1 (12).jpeg" alt="Family moment" fill sizes="100vw" className="object-cover object-center" />
+                    <Image src="/WhatsApp/1 (12).jpeg" alt="Family moment" fill sizes="100vw" className="object-cover object-center" />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,249,246,0.72)_0%,rgba(251,249,246,0.18)_45%,rgba(251,249,246,0.72)_100%)]" />
                     <div className="absolute inset-0 bg-surface-container-highest/35 backdrop-blur-sm mix-blend-multiply" />
                 </div>
