@@ -6,7 +6,7 @@ export default function Hero(){
 
             {/* IMAGES */}
             <Image
-                src="public/images/scan_1.jpg"
+                src="/images/scan_1.jpg"
                 alt="scan"
                 fill
                 priority
