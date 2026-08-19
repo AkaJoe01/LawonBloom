@@ -23,7 +23,7 @@ const services = [
         title: "Oocyte Preservation",
         description:
             "Securing your future timeline with advanced vitrification techniques, empowering your choices on your own terms.",
-        image: "/images/lab.jpg",
+        image: "/images/theater.jpg",
         icon: ShieldCheck,
         tone: "from-rose-200/20 to-surface",
     },

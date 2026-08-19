@@ -87,7 +87,7 @@ export default function AboutPage() {
               <div className="relative md:translate-x-12">
                 <Image
                   alt="Consultation room"
-                  src="/images/lab.jpg"
+                  src="/images/theater.jpg"
                   width={500}
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"

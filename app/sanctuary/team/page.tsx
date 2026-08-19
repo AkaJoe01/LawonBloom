@@ -83,17 +83,17 @@ export default function TeamPage(){
                     <div>
                         <div className="relative mb-6 h-[350px] w-full md:h-[400px]">
                             <Image
-                                src="/images/nurse.jpg"
-                                alt="nurse"
+                                src="/images/Lizzy_Microscope.jpg"
+                                alt="Lizzy_Microscope"
                                 fill
                                 className="object-cover"
                             />
                         </div>
                         <h3 className="text-xl font-light md:text-2xl">
-                            Nurse Elena Rostova
+                            Nwachukwu Elizabeth
                         </h3>
                         <p className="section-label mt-2 text-on-surface-variant">
-                            Fertility nurse
+                            Embryologist & IVF Lab Specialist
                         </p>
                     </div>
 

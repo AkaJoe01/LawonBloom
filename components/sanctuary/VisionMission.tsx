@@ -8,7 +8,7 @@ export default function VisionMission() {
                 {/* IMAGES */}
                 <div>
                     <Image
-                        src="/images/lab.jpg"
+                        src="/images/theater.jpg"
                         alt="lab"
                         width={900}
                         height={600}
