@@ -35,7 +35,7 @@ export default function ClinicalExcellencePage() {
                     <Image 
                         alt="Immersive laboratory scene" 
                         className="w-full h-full object-cover filter blur-[2px] scale-105" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB29wWouNcZyo8wjoxgLjNNLz157KoG7wXNg36vuqGQIRAS_4PHC_3s2k2UXCTLA3MumBRDE91ni7qkTy8eO4vmw7PC7PRZNCmg_oLI-d77tzdBxabe1q1qgLpeeG3qUb7r1Z9-Tm9Zm36By1UqudfpwAdb3fKATtTWzylBzNmNqGhSecsgSHHcdIN8FfQiz2AMGdjMu8N2KIHZZ5MSozXJg58WSWQCVegFjZiRke8g5brKkhnZzLIu0SyV0qKcFhV9fVfQPjC84Nu4"
+                        src="/WhatsApp/Incubator_2.jpg"
                         fill
                         unoptimized
                     />
@@ -94,7 +94,7 @@ export default function ClinicalExcellencePage() {
                                     <Image 
                                         alt="Precision IVF Cultivation" 
                                         className="w-full h-full object-cover" 
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTDkugOfP0d8kRyq9-8EhyZwzOl6mNKCTte-eW4kuSbq-hfRJAfIa8_Q6Qs5qCQOW0gcMlqEnY4JD1pjLv2tYLA4Kc7U0-zFwxO36Ivv9V8SZNbySThr5TveXBMYZ_XCFNuu-Y_9Ri0UrQHX_uN8bpNf6wmGWKj9z69j_cuO2Yxa2Sh_LKC7nSaP2qHgp99kKurX_LNu890eWZLHRdNIK1wCYowYGY1c9VP6YV3jXMxxg8Oja1BzP16qQXR-XeEfPk5PukgDi66J3L"
+                                        src="/WhatsApp/Incubtor.jpg"
                                         fill
                                         unoptimized
                                     />
@@ -110,7 +110,7 @@ export default function ClinicalExcellencePage() {
                                     <Image 
                                         alt="Time-Lapse Incubation" 
                                         className="w-full h-full object-cover" 
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBH-gqlu1myKy4N3-0rUg-pdLNqOOCI3YTOwk5MbCzOF-9uop-r0pQ7XFHjtAcmxH1qK79bWBXqI_fWacYxpUbDZmvHagrJnGsRRH7YoD0gEEaKH-VB5Eq5MdQ2ktAIUnJ34MxlZOUL44zEfPQsjiGzktWNvTXCEkKkV3OR0H4sadtvjWPTc6qKPfF5pAO1ThMtDDSuNp-pxBSFycoMwwsz9L5n9u8jTS0M9Y0h1tYaEruvXIV8nrQ62_tRfl2iVuwVALEeZyeeaq1"
+                                        src="/WhatsApp/Integra.jpg"
                                         fill
                                         unoptimized
                                     />

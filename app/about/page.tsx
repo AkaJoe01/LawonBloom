@@ -69,7 +69,7 @@ export default function AboutPage() {
               <div className="relative">
                 <Image
                   alt="Laboratory precision"
-                  src="/images/microscope.jpg"
+                  src="/WhatsApp/microscope.jpg"
                   width={500}
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
@@ -87,7 +87,7 @@ export default function AboutPage() {
               <div className="relative md:translate-x-12">
                 <Image
                   alt="Consultation room"
-                  src="/images/theater.jpg"
+                  src="/WhatsApp/theater.jpg"
                   width={500}
                   height={400}
                   className="rounded-2xl shadow-2xl object-cover w-full"
