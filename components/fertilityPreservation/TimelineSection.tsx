@@ -23,7 +23,7 @@ export default function TimelineSection(){
                 {/* IMAGES */}
                 <div className="relative">
                     <Image
-                        src="/images/femaleDr.jpg"
+                        src="/WhatsApp/1 (2).jpeg"
                         alt="femaleDr"
                         width={400}
                         height={500}
