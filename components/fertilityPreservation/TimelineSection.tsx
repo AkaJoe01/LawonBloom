@@ -24,7 +24,7 @@ export default function TimelineSection(){
                 <div className="relative">
                     <Image
                         src="/WhatsApp/1 (2).jpeg"
-                        alt="femaleDr"
+                        alt="Elizabeth Nwachukwu"
                         width={400}
                         height={500}
                         className="w-full max-w-md rounded-[36px] object-cover"
