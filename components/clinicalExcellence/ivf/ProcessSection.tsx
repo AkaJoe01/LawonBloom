@@ -3,25 +3,25 @@ const steps = [
     phase: "Phase 1",
     title: "Ovarian Stimulation",
     text: "Personalized hormone protocols to encourage healthy follicle development, monitored with advanced imaging and hormonal tracking.",
-    image: "/images/probe.jpg",
+    image: "/WhatsApp/Integra.jpg",
   },
   {
     phase: "Phase 2",
     title: "Egg Retrieval",
     text: "A minimally conscious procedure performed under gentle sedation, using ultrasound-guided precision to collect mature eggs.",
-    image: "/images/setoscope.jpg",
+    image: "/WhatsApp/Incubator.jpg",
   },
   {
     phase: "Phase 3",
     title: "Fertilization & Culture",
     text: "Eggs are fertilized in our class-100 cleanroom laboratory using ICSI or conventional insemination, then nurtured in time-lapse incubators.",
-    image: "/images/microscope.jpg",
+    image: "/WhatsApp/microscope.jpg",
   },
   {
     phase: "Phase 4",
     title: "Embryo Transfer",
     text: "The healthiest embryo is gently placed into the uterine cavity in a procedure designed for comfort and precision.",
-    image: "/images/scan_2.jpg",
+    image: "/WhatsApp/Incubator_2.jpg",
   },
 ];
 

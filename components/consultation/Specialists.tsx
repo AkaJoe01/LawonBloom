@@ -10,12 +10,12 @@ export default function Specialists(){
         {
             name: "Dr. Elena Rostova",
             role: "Senior IVF Consultant",
-            image: "/images/femaleDr.jpg"
+            image: "/WhatsApp/Lizzy.jpg"
         },
         {
             name: "Dr Marcus Chen",
             role: "Reproductive Endocrinologist",
-            image: "/images/DrChen.jpg",
+            image: "/WhatsApp/Lizzy.jpg",
         },
     ];
 
