@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="hidden md:block w-1/2 relative hero-split-image overflow-hidden">
           <Image
             alt="Sanctuary Interior"
-            src="/images/corridor.jpg"
+            src="/WhatsApp/1 (7).jpeg"
             fill
             className="object-cover"
           />
