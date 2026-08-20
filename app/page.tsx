@@ -15,7 +15,7 @@ const services = [
         title: "In Vitro Fertilization (IVF)",
         description:
             "Our cornerstone program, utilizing world-class embryology, state-of-the-art incubation, and highly personalized stimulation protocols.",
-        image: "/images/microscope.jpg",
+        image: "/WhatsApp/microscope.jpg",
         icon: Microscope,
         tone: "from-primary/15 to-surface",
     },
@@ -23,7 +23,7 @@ const services = [
         title: "Oocyte Preservation",
         description:
             "Securing your future timeline with advanced vitrification techniques, empowering your choices on your own terms.",
-        image: "/images/theater.jpg",
+        image: "/WhatsApp/theater.jpg",
         icon: ShieldCheck,
         tone: "from-rose-200/20 to-surface",
     },
@@ -31,7 +31,7 @@ const services = [
         title: "IUI Protocols",
         description:
             "Minimally invasive beginnings. A supportive, precisely timed approach for natural conception assistance.",
-        image: "/images/probe.jpg",
+        image: "/WhatsApp/microscope.jpg",
         icon: Baby,
         tone: "from-secondary/15 to-surface",
     },
@@ -39,7 +39,7 @@ const services = [
         title: "Advanced Genetic Screening",
         description:
             "Precision medicine (PGT-A/PGT-M) ensuring the highest viability and peace of mind before transfer, mapping a healthy future.",
-        image: "/images/scan.jpg",
+        image: "/WhatsApp/Integra.jpg",
         icon: Dna,
         tone: "from-tertiary/15 to-surface",
     },
@@ -101,7 +101,7 @@ export default function HomePage() {
 
                     <div className="relative min-h-130 overflow-hidden rounded-4xl cinematic-shadow lg:min-h-190">
                         <Image
-                            src="/WhatsApp/1 (6).jpeg"
+                            src="/WhatsApp/1 (7).jpeg"
                             alt="Serene clinic interior"
                             fill
                             priority
@@ -126,7 +126,7 @@ export default function HomePage() {
                     <div className="relative">
                         <div className="relative aspect-4/5 overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/images/bed.jpg"
+                                src="/WhatsApp/theater.jpg"
                                 alt="Soft sunlight in clinic room"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 40vw"
