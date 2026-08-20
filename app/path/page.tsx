@@ -32,7 +32,7 @@ export default function PathPage() {
                     <img 
                         alt="Your Journey, Illuminated" 
                         className="w-full h-full object-cover object-center" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM4SADsE6L9rvRL0FIgw96kinwpE8lHV1PcU3EljyHJmQZK2Ad8704NHqCupdl1GCLdfKPv96D4crOalbh_k_hn7aEkx1wnDUwJnw1uHJ2WmhuYXwkwcBK3gAtngcy4QyoLObYyE822k3qpKJNn8t8GxRJF7MTwf96BaxKKoilM7J_Lq4vj84iQx2QFh-cJ3G9RswDrwAAWDRbGFwQ6yvxtJdVOxIsu9rkak9RFMtrZjm21Kk0AjfOBI92N64I1OETURM7HKS8-UJC"
+                        src="/WhatsApp/1 (6).jpeg"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
                 </div>
@@ -50,7 +50,7 @@ export default function PathPage() {
                             <img 
                                 alt="Consultation Room" 
                                 className="w-full h-full object-cover" 
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDosJHB0EGZYhduZslVOyCb7Yt9oGku-vIekc-pI3prDPMrT-YXdAgEld7-kwopXgKH1OUOky0PksLoHeJcjxXm9CqoVcrVrS7T-h1O2gBeF_sT71pzxGjRLZGduwQquN4lBPTFVNUcEQcLppRr83-wcU-iCwVAM-DXfPoqxV39WVdSWps14hCJYapSwp1IA09cKWLBYyhQsmsaH73TSy-HzVnSeyXwlHXabiifxoCR83T7P-bAAaTv0nEuPGyS6rrCR57lFxekvSJb"
+                                src="/WhatsApp/1 (3).jpeg"
                             />
                             <div className="absolute inset-0 border border-white/10 mix-blend-overlay pointer-events-none"></div>
                         </div>
@@ -83,7 +83,7 @@ export default function PathPage() {
                             <img 
                                 alt="Abstract medical detail" 
                                 className="w-full h-full object-cover" 
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcfOnN2k3hUvTUE1CHNEdrua0ZeY0B9d25cPTKcNtyR7K0SfhwAHZmBjauE0bqk-tS9WOl3GFmitjs08hgneviGghUHfuk9wNLstmFUvQi-k6xC3B2eaVLchkKav3Vb3WFXy0AOk5CVbW75Ja2cOSYmGVCnwcvqiAcU2k6GnhY43wHJOQ8Usc3UzqZL5kUMaNywOYckJ6rL9dA1uNRhKGxb7VBDXGdAhviNBCZGxGchPbcArCN4pd8p3frdo13qoO_VXJQ19i8G59o"
+                                src="/WhatsApp/Lizzy_Microscope.jpg"
                             />
                             {/* Soft vignette overlay */}
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-transparent to-surface-container-low/60 pointer-events-none"></div>
@@ -102,7 +102,7 @@ export default function PathPage() {
                         <img 
                             alt="Sanctuary recovery space" 
                             className="w-full h-full object-cover" 
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTU7dHC6CI6lexSjJbLJp0Z7ucG9tuJe56JsZalGSLpzC07S7Rx_N8rRB0j6NKhsRm-6cy295huEcguf_usCvKPd23Ypf3eI07M8ZrQ030wYA2O81OHLQj6zA6YF0s9-wrhtPqnnrRkXjX1KxD-abXxccTqCa2rG-goncOz84alZkavkaJdX0jq7REs_ieHUz6T47_OsulajUMwnrKPMcNy-TrsZ6hYgP_dUxYvmP2hDGBA5235bSKZ12EPQNHe2r1TQQPCIBqW8vX"
+                            src="/WhatsApp/Integra.jpg"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90"></div>
                         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex justify-center">
