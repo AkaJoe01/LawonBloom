@@ -94,7 +94,7 @@ export default function Timeline() {
 
                     <div className="order-1 pl-0 md:order-2 md:pl-16">
                         <Image
-                            src="/images/blood.jpg"
+                            src="/WhatsApp/Lizzy_Microscope.jpg"
                             alt="Treatment"
                             width={1200}
                             height={800}
