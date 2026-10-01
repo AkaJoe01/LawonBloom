@@ -20,7 +20,7 @@ const slides = [
   },
   {
     title: "A Quiet Miracle",
-    subtitle: "The Rivera Family",
+    subtitle: "A Vision in Motion",
     image: "/WhatsApp/1 (3).jpeg",
   },
 ];
