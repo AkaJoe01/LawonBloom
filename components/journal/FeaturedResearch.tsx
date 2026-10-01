@@ -7,7 +7,7 @@ return (
 
 {/* IMAGE */}
 <Image
-src="/images/journal-scan_1.jpg"
+src="/images/scan_1.jpg"
 alt=""
 className="rounded-4xl w-full object-cover"
 fill
