@@ -123,7 +123,7 @@ export default function ClinicalExcellencePage() {
                                     <h3 className="font-h2-subheading text-on-surface mb-4">Continuous Embryo Observation</h3>
                                     <div className="elegant-divider w-12 mb-6"></div>
                                     <p className="text-base text-on-surface-variant mb-8">
-                                        In the early days after fertilization, yoyr embryos are at their most delicate. With <strong>Continuous Embryo Observation,</strong>
+                                        In the early days after fertilization, your embryos are at their most delicate. With <strong>Continuous Embryo Observation,</strong>
                                         we use advanced incubator technology to monitor their development 24/7 - all without ever removing them from their safe, stable environment.
                                     </p>
                                 </div>

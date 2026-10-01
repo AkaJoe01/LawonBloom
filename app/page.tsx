@@ -124,7 +124,7 @@ export default function HomePage() {
                 <div className="elegant-divider absolute left-0 top-0 w-full" />
                 <div className="mx-auto grid max-w-360 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
                     <div className="relative">
-                        <div className="relative aspect-4/5 overflow-hidden rounded-4xl cinematic-shadow">
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
                                 src="/WhatsApp/theater.jpg"
                                 alt="Soft sunlight in clinic room"

@@ -55,7 +55,7 @@ export default function AboutPage() {
                   <h3 className="font-h2-subheading text-primary mb-4 italic">
                     The Visionary
                   </h3>
-                  <p className="font-body-main text-on-surface-variant mb-6">
+                  <p className="font-body-large text-on-surface-variant mb-6">
                     Dr. Olugbenga&apos;s philosophy stems from decades of international practice, recognizing that the missing element in modern fertility care was &apos;serenity&apos;.
                   </p>
                   <span className="font-label-caps text-xs tracking-widest text-primary">
@@ -132,7 +132,7 @@ export default function AboutPage() {
                 <h3 className="font-h2-subheading text-primary mb-6">
                   Pioneering Precision
                 </h3>
-                <p className="font-body-main text-on-surface-variant leading-relaxed opacity-80 mb-6">
+                <p className="font-body-large text-on-surface-variant leading-relaxed opacity-80 mb-6">
                   Our class-10,000 cleanroom laboratories utilize next-generation AI-assisted embryology. By monitoring embryo development with Time-Lapse technology, we ensure the most stable environment possible.
                 </p>
                 <ul className="text-xs font-label-caps tracking-widest text-primary/60 space-y-2">
@@ -152,7 +152,7 @@ export default function AboutPage() {
                 <h3 className="font-h2-subheading text-primary mb-6">
                   Holistic Harmony
                 </h3>
-                <p className="font-body-main text-on-surface-variant leading-relaxed opacity-80 mb-6">
+                <p className="font-body-large text-on-surface-variant leading-relaxed opacity-80 mb-6">
                   We treat the whole person, not just the diagnosis. Our integration of acupuncture, nutritional counseling, and mindfulness protocols is scientifically designed to optimize the uterine environment.
                 </p>
                 <ul className="text-xs font-label-caps tracking-widest text-primary/60 space-y-2">
@@ -172,7 +172,7 @@ export default function AboutPage() {
                 <h3 className="font-h2-subheading text-primary mb-6">
                   Absolute Discretion
                 </h3>
-                <p className="font-body-main text-on-surface-variant leading-relaxed opacity-80 mb-6">
+                <p className="font-body-large text-on-surface-variant leading-relaxed opacity-80 mb-6">
                   For our global clientele, privacy is paramount. Our sanctuary features private entry protocols, encrypted communications, and personalized concierge services that manage every logistical detail of your stay.
                 </p>
                 <ul className="text-xs font-label-caps tracking-widest text-primary/60 space-y-2">

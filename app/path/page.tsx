@@ -79,7 +79,7 @@ export default function PathPage() {
                         </p>
                     </div>
                     <div className="col-span-1 md:col-start-7 md:col-span-6 relative order-1 md:order-2 mt-16 md:mt-0 md:-mt-24">
-                        <div className="w-full aspect-4/5 overflow-hidden rounded-sm relative">
+                        <div className="w-full aspect-[4/5] overflow-hidden rounded-sm relative">
                             <img 
                                 alt="Abstract medical detail" 
                                 className="w-full h-full object-cover" 
