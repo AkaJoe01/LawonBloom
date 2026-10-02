@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, A11y, Keyboard, Navigation } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
+import { Pagination, Autoplay, A11y, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -34,8 +34,7 @@ const testimonials = [
 ];
 
 export default function Families() {
-  const prevRef = useRef<HTMLButtonElement | null>(null);
-  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   return (
     <section id="lawonbloom-families" className="max-w-6xl mx-auto px-6 py-24">
@@ -60,13 +59,11 @@ export default function Families() {
 
         <div className="bg-white/70 backdrop-blur rounded-2xl p-10 shadow-sm">
           <Swiper
-            modules={[Pagination, Autoplay, A11y, Keyboard, Navigation]}
-            navigation={{ prevEl: prevRef, nextEl: nextRef }}
+            modules={[Pagination, Autoplay, A11y, Keyboard]}
             pagination={{ clickable: true }}
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             rewind
             watchSlidesProgress
-            preloadImages
             spaceBetween={24}
             slidesPerView={1}
             a11y={{
@@ -75,6 +72,7 @@ export default function Families() {
               paginationBulletMessage: "Go to testimonial {{index}}",
             }}
             onSwiper={(swiper) => {
+              swiperRef.current = swiper;
               swiper.update();
             }}
           >
@@ -113,7 +111,7 @@ export default function Families() {
           <div className="flex items-center justify-between gap-6 mt-8">
             <button
               type="button"
-              ref={prevRef}
+              onClick={() => swiperRef.current?.slidePrev()}
               aria-label="Previous testimonial"
               className="rounded-full border border-[#e7ddd7] p-2 text-[#9c5c67] transition-colors hover:bg-[#9c5c67] hover:text-white"
             >
@@ -121,7 +119,7 @@ export default function Families() {
             </button>
             <button
               type="button"
-              ref={nextRef}
+              onClick={() => swiperRef.current?.slideNext()}
               aria-label="Next testimonial"
               className="rounded-full border border-[#e7ddd7] p-2 text-[#9c5c67] transition-colors hover:bg-[#9c5c67] hover:text-white"
             >
