@@ -54,6 +54,7 @@ export default function BookingFlow() {
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [delivered, setDelivered] = useState(true);
 
   const canProceed = () => {
     if (step === 1) return selectedDoctor !== null;
@@ -82,10 +83,14 @@ export default function BookingFlow() {
         }),
       });
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (res.ok && data.notified === true) {
+        setDelivered(true);
+        setSubmitted(true);
+      } else if (res.ok && data.notified === false) {
+        setDelivered(false);
         setSubmitted(true);
       } else {
-        alert(data.error || "Failed to send booking. Please try again.");
+        alert(data.error?.message || "Failed to send booking. Please try again.");
         console.error("Booking error:", data.error);
       }
     } catch (err) {
@@ -105,8 +110,18 @@ export default function BookingFlow() {
           </div>
           <h2 className="font-display text-4xl text-primary md:text-5xl">Inquiry Received</h2>
           <p className="mx-auto mt-4 max-w-lg text-on-surface-variant leading-7">
-            We have received your request. A confirmation has been sent to <strong>{formData.email}</strong>. Your
-            concierge will reach out within 24 hours.
+            {delivered ? (
+              <>
+                We have received your request. Your concierge will reach out within 24 hours at{" "}
+                <strong>{formData.email}</strong>.
+              </>
+            ) : (
+              <>
+                We could not deliver your request online just now. Please call{" "}
+                <strong>+234 913 250 4126</strong> or email{" "}
+                <strong>lawonbloomfertilitycentre@gmail.com</strong> and we will book you in.
+              </>
+            )}
           </p>
           <div className="mx-auto mt-8 inline-block rounded-2xl border border-outline-variant/30 bg-surface-container-low px-6 py-4 text-left">
             <p className="text-sm text-on-surface-variant">Specialist</p>
@@ -268,7 +283,7 @@ export default function BookingFlow() {
         {step === 3 && (
           <div>
             <h2 className="font-display text-3xl text-foreground md:text-4xl">Your Details</h2>
-            <p className="mt-2 text-on-surface-variant leading-7">We will send your confirmation to this address.</p>
+            <p className="mt-2 text-on-surface-variant leading-7">We&apos;ll use this address to follow up on your request.</p>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               <div>
@@ -336,7 +351,7 @@ export default function BookingFlow() {
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
-              onClick={() => { setStep(1); setSelectedDoctor(null); setSelectedDate(null); setSelectedTime(null); setFormData({ firstName: "", lastName: "", email: "", phone: "", notes: "" }); setSubmitted(false); }}
+              onClick={() => { setStep(1); setSelectedDoctor(null); setSelectedDate(null); setSelectedTime(null); setFormData({ firstName: "", lastName: "", email: "", phone: "", notes: "" }); setSubmitted(false); setDelivered(true); }}
               className="text-sm"
             >
               Reset
