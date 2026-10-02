@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run images:check
+      - run: npm run test:coverage
+      - name: prisma validate
+        run: |
+          if [ -f prisma/schema.prisma ]; then
+            npx prisma validate
+          else
+            echo "no prisma schema yet - skipping"
+          fi
+      - run: npm audit --omit=dev --audit-level=high

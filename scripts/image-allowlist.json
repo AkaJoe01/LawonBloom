@@ -1,0 +1,147 @@
+{
+  "public/images/bed.jpg": {
+    "bytes": 2056270,
+    "width": 4608,
+    "height": 3456
+  },
+  "public/images/blood.jpg": {
+    "bytes": 1020735,
+    "width": 3600,
+    "height": 2400
+  },
+  "public/images/corridor.jpg": {
+    "bytes": 1996508,
+    "width": 5552,
+    "height": 4164
+  },
+  "public/images/Doc_1.jpg": {
+    "bytes": 1845979,
+    "width": 3582,
+    "height": 4478
+  },
+  "public/images/doctor.jpg": {
+    "bytes": 613200,
+    "width": 3840,
+    "height": 2160
+  },
+  "public/images/DrChen.jpg": {
+    "bytes": 892868,
+    "width": 2965,
+    "height": 3810
+  },
+  "public/images/family.jpg": {
+    "bytes": 3431068,
+    "width": 5920,
+    "height": 3947
+  },
+  "public/images/femaleDr.jpg": {
+    "bytes": 665660,
+    "width": 3840,
+    "height": 2160
+  },
+  "public/images/Lizzy_Microscope.jpg": {
+    "bytes": 8901315,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/images/marcus.jpg": {
+    "bytes": 1460306,
+    "width": 5472,
+    "height": 3648
+  },
+  "public/images/microscope.jpg": {
+    "bytes": 4876164,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/images/probe.jpg": {
+    "bytes": 1213564,
+    "width": 3456,
+    "height": 5184
+  },
+  "public/images/Profile.jpg": {
+    "bytes": 1861678,
+    "width": 4608,
+    "height": 3072
+  },
+  "public/images/scan_1.jpg": {
+    "bytes": 2830027,
+    "width": 3648,
+    "height": 5472
+  },
+  "public/images/scan_2.jpg": {
+    "bytes": 1219309,
+    "width": 4032,
+    "height": 3024
+  },
+  "public/images/scan.jpg": {
+    "bytes": 1409865,
+    "width": 3456,
+    "height": 5184
+  },
+  "public/images/setoscope.jpg": {
+    "bytes": 5687872,
+    "width": 6016,
+    "height": 4000
+  },
+  "public/images/Surgery.jpg": {
+    "bytes": 5541303,
+    "width": 6326,
+    "height": 7994
+  },
+  "public/images/theater.jpg": {
+    "bytes": 10075300,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Clean.jpg": {
+    "bytes": 7567972,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Incubator_2.jpg": {
+    "bytes": 7918537,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Incubtor.jpg": {
+    "bytes": 1582498,
+    "width": 2816,
+    "height": 2011
+  },
+  "public/WhatsApp/Inspect.jpg": {
+    "bytes": 8778552,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Integra.jpg": {
+    "bytes": 7003312,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Jar.jpg": {
+    "bytes": 5838256,
+    "width": 4914,
+    "height": 3276
+  },
+  "public/WhatsApp/Lizzy_Microscope.jpg": {
+    "bytes": 8901315,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/Lizzy.jpg": {
+    "bytes": 9935322,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/microscope.jpg": {
+    "bytes": 5407118,
+    "width": 6000,
+    "height": 4000
+  },
+  "public/WhatsApp/theater.jpg": {
+    "bytes": 10075300,
+    "width": 6000,
+    "height": 4000
+  }
+}
