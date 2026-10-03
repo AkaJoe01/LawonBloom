@@ -15,7 +15,7 @@ interface NavItem {
 const ITEMS: NavItem[] = [
   { href: "/admin", label: "Dashboard", exact: true },
   { href: "/admin/posts", label: "Posts" },
-  { label: "Media", soon: true },
+  { href: "/admin/media", label: "Media" },
   { label: "Enquiries", adminOnly: true, soon: true },
   { label: "Users", adminOnly: true, soon: true },
   { label: "Account", soon: true },

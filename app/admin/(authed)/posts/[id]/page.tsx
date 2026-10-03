@@ -15,7 +15,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ id: s
   const { id } = await params;
   const db = getDb();
   const [post, categories] = await Promise.all([
-    db.post.findUnique({ where: { id } }),
+    db.post.findUnique({ where: { id }, include: { coverImage: { select: { url: true, width: true } } } }),
     db.category.findMany({ orderBy: { name: "asc" }, select: { id: true, name: true } }),
   ]);
   if (!post) notFound();
@@ -28,6 +28,8 @@ export default async function EditPostPage({ params }: { params: Promise<{ id: s
     content: post.content ? (post.content as unknown as TiptapDoc) : null,
     categoryId: post.categoryId,
     coverImageId: post.coverImageId,
+    coverImageUrl: post.coverImage?.url ?? null,
+    coverImageWidth: post.coverImage?.width ?? null,
     status: post.status,
     disclaimer: post.disclaimer,
     reviewerName: post.reviewerName,

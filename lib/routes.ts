@@ -25,6 +25,7 @@ export const SITE_ROUTES = [
   "/admin",
   "/admin/login",
   "/admin/onboarding/2fa",
+  "/admin/media",
   "/admin/posts",
   "/admin/posts/new",
   "/admin/posts/[id]",

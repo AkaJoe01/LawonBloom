@@ -6,6 +6,7 @@ import { apiError } from "@/lib/api-error";
 import { docStats, refFieldErrors, revalidatePostTags } from "@/lib/posts/write";
 import { originRejection } from "@/lib/security/origin";
 import { zodFieldErrors } from "@/lib/validation/common";
+import { MIN_COVER_WIDTH } from "@/lib/validation/media";
 import { postPublish } from "@/lib/validation/post";
 
 export const runtime = "nodejs";
@@ -53,6 +54,15 @@ export async function POST(request: Request, { params }: Params) {
   });
   if (refErrors) {
     return apiError(422, "validation", "Post is not ready to publish.", { fieldErrors: refErrors });
+  }
+
+  const cover = await db.media.findUnique({ where: { id: input.coverImageId }, select: { width: true } });
+  if (cover && cover.width < MIN_COVER_WIDTH) {
+    return apiError(422, "validation", "Post is not ready to publish.", {
+      fieldErrors: {
+        coverImageId: `Cover image must be at least ${MIN_COVER_WIDTH}px wide (this one is ${cover.width}px).`,
+      },
+    });
   }
 
   if (input.slug !== existing.slug) {

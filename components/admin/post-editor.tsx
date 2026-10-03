@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, Eye, Lock, Plus, Trash2, X } from "lucide-react";
 import TiptapEditor from "./tiptap-editor";
+import CoverPicker, { type CoverSelection } from "./cover-picker";
 import { slugify } from "@/lib/posts/derive";
 import { zodFieldErrors } from "@/lib/validation/common";
 import { hasBlockContent, postPublish, type TiptapDoc } from "@/lib/validation/post";
+import { MIN_COVER_WIDTH } from "@/lib/validation/media";
 
 export interface AdminCategory {
   id: string;
@@ -22,6 +24,8 @@ export interface EditorPost {
   content: TiptapDoc | null;
   categoryId: string;
   coverImageId: string | null;
+  coverImageUrl?: string | null;
+  coverImageWidth?: number | null;
   status: "DRAFT" | "PUBLISHED";
   disclaimer: string;
   reviewerName: string | null;
@@ -59,6 +63,11 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [slugSuggestion, setSlugSuggestion] = useState<string | null>(null);
   const [categoryId, setCategoryId] = useState(initial?.categoryId ?? categories[0]?.id ?? "");
+  const [cover, setCover] = useState<CoverSelection | null>(() =>
+    initial?.coverImageId && initial.coverImageUrl
+      ? { id: initial.coverImageId, url: initial.coverImageUrl, width: initial.coverImageWidth ?? 0 }
+      : null,
+  );
   const [excerpt, setExcerpt] = useState(initial?.excerpt ?? "");
   const [content, setContent] = useState<TiptapDoc>(initial?.content ?? EMPTY_DOC);
   const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>(initial?.faqs ?? []);
@@ -89,6 +98,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       slug,
       slugTouched,
       categoryId,
+      cover,
       excerpt,
       content,
       faqs,
@@ -116,6 +126,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       slug: string;
       status: string;
       categoryId: string;
+      cover: CoverSelection | null;
       excerpt: string;
       content: TiptapDoc;
       faqs: { question: string; answer: string }[];
@@ -131,7 +142,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       slug: s.slug,
       content: s.content,
       categoryId: s.categoryId,
-      coverImageId: null as string | null,
+      coverImageId: s.cover ? s.cover.id : null,
       excerpt: s.excerpt.trim() ? s.excerpt.trim() : undefined,
       disclaimer: s.disclaimer,
       reviewerName: s.reviewerName.trim() || null,
@@ -327,7 +338,9 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
   const blockers: string[] = [];
   if (!hasBlockContent(content)) blockers.push("Add body content");
   if (disclaimer.trim().length < 20) blockers.push("Write a disclaimer (20+ characters)");
-  blockers.push("Attach a cover image (Media library arrives in M3)");
+  if (!cover) blockers.push("Attach a cover image");
+  else if (cover.width < MIN_COVER_WIDTH)
+    blockers.push(`Cover image must be at least ${MIN_COVER_WIDTH}px wide (this one is ${cover.width}px)`);
   const publishBlocked = blockers.length > 0;
 
   const slugLocked = status === "PUBLISHED";
@@ -530,12 +543,15 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
         </div>
         <div>
           <span className={labelClass}>Cover image</span>
-          <div className="mt-1 rounded-lg border border-dashed border-outline-variant bg-surface-container-low px-4 py-6 text-center">
-            <p className="text-sm text-on-surface-variant">
-              Cover uploads arrive with the Media library (M3).
-            </p>
-            <p className="mt-1 text-xs text-error">A cover image is required before publishing.</p>
-          </div>
+          <CoverPicker
+            value={cover}
+            onChange={(next) => {
+              setCover(next);
+              clearError("coverImageId");
+              markDirty();
+            }}
+            errorMessage={fieldErrors.coverImageId}
+          />
         </div>
         <div>
           <label htmlFor="post-excerpt" className={labelClass}>

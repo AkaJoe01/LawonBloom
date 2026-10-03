@@ -128,7 +128,7 @@ describe("admin posts endpoints", () => {
     mocks.checkRateLimit.mockResolvedValue({ ok: true });
     mocks.transaction.mockImplementation(async (ops: Promise<unknown>[]) => Promise.all(ops));
     mocks.categoryFindUnique.mockResolvedValue({ id: "cat_1", slug: "fertility", name: "Fertility" });
-    mocks.mediaFindUnique.mockResolvedValue({ id: "media_1" });
+    mocks.mediaFindUnique.mockResolvedValue({ id: "media_1", width: 1600 });
     mocks.postFindUnique.mockResolvedValue(null);
     mocks.postFindFirst.mockResolvedValue(null);
     mocks.postFindMany.mockResolvedValue([]);
@@ -416,6 +416,21 @@ describe("admin posts endpoints", () => {
         context("x"),
       );
       expect(response.status).toBe(404);
+    });
+
+    it("returns 422 when the cover image is narrower than 1200px", async () => {
+      mocks.auth.mockResolvedValue(session("EDITOR", false));
+      mocks.postFindUnique.mockResolvedValue({ ...basePost });
+      mocks.mediaFindUnique.mockResolvedValue({ id: "media_1", width: 800 });
+      const response = await publishPOST(
+        request("http://localhost/api/admin/posts/p1/publish", "POST", publishablePost),
+        context("p1"),
+      );
+      expect(response.status).toBe(422);
+      const payload = await response.json();
+      expect(payload.error.fieldErrors.coverImageId).toContain("1200");
+      expect(payload.error.fieldErrors.coverImageId).toContain("800");
+      expect(mocks.postUpdate).not.toHaveBeenCalled();
     });
 
     it("locks the slug on an already-published post", async () => {
