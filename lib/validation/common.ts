@@ -30,6 +30,15 @@ export const slugSchema = z
 
 export const emailSchema = z.string().trim().email().max(254);
 
+export function zodFieldErrors(error: z.ZodError): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const issue of error.issues) {
+    const key = issue.path.join(".");
+    if (!out[key]) out[key] = issue.message;
+  }
+  return out;
+}
+
 export const phoneSchema = z
   .string()
   .trim()

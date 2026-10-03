@@ -33,6 +33,29 @@ export async function requireAdmin(): Promise<SessionGuard> {
   return result;
 }
 
+export async function requireStaff(): Promise<SessionGuard> {
+  const result = await requireSession();
+  if (!result.ok) return result;
+  const { role } = result.session.user;
+  if (role !== "ADMIN" && role !== "EDITOR") {
+    return { ok: false, response: errorResponse(403, "forbidden", "Staff access required.") };
+  }
+  return result;
+}
+
+export async function perUserGate(
+  userId: string,
+  limit: number,
+  windowSeconds: number,
+  prefix: string,
+): Promise<NextResponse | null> {
+  const gate = await checkRateLimit({ key: `${prefix}:${userId}`, limit, windowSeconds, prefix }, "open");
+  if (!gate.ok) {
+    return errorResponse(429, "rate_limited", "Too many requests. Try again shortly.");
+  }
+  return null;
+}
+
 export async function adminMutationGate(userId: string): Promise<NextResponse | null> {
   const gate = await checkRateLimit(
     { key: `admin-mutations:${userId}`, limit: 60, windowSeconds: 60, prefix: "admin_mutations" },
