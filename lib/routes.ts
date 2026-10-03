@@ -22,6 +22,13 @@ export const SITE_ROUTES = [
   "/sanctuary/services",
   "/sanctuary/services/surrogacy",
   "/sanctuary/team",
+  "/admin",
+  "/admin/login",
+  "/admin/onboarding/2fa",
+  "/admin/posts",
+  "/admin/posts/new",
+  "/admin/posts/[id]",
+  "/admin/preview/[id]",
 ] as const;
 
 export type SiteRoute = (typeof SITE_ROUTES)[number];

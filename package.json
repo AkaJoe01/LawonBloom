@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -11,7 +12,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "images:check": "tsx scripts/check-image-dims.ts",
-    "images:update": "tsx scripts/check-image-dims.ts --update"
+    "images:update": "tsx scripts/check-image-dims.ts --update",
+    "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
@@ -25,6 +27,7 @@
     "@tiptap/extension-link": "^3.31.4",
     "@tiptap/extension-table": "^3.31.4",
     "@tiptap/extension-underline": "^3.31.4",
+    "@tiptap/html": "^3.31.4",
     "@tiptap/react": "^3.31.4",
     "@tiptap/starter-kit": "^3.31.4",
     "@upstash/ratelimit": "^2.2.0",
@@ -37,7 +40,6 @@
     "lucide-react": "^1.14.0",
     "next": "16.3.8",
     "next-auth": "5.0.0-beta.32",
-    "nodemailer": "^10.0.13",
     "otplib": "13.5.0",
     "qrcode": "^1.5.4",
     "react": "19.2.4",
@@ -61,6 +63,7 @@
     "@types/react-dom": "^19",
     "@types/sanitize-html": "^2.16.2",
     "@vitest/coverage-v8": "^5.0.3",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
     "prisma": "^7.10.0",

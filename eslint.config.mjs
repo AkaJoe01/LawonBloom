@@ -34,7 +34,7 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ["components/blog/**/*.tsx", "app/blog/**/*.tsx"],
+    files: ["components/blog/**/*.tsx", "app/(site)/blog/**/*.tsx"],
     rules: {
       "no-restricted-syntax": ["error", dangerouslyRestricted, legacyFontClasses],
     },
@@ -46,7 +46,7 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ["app/clinical-excellence/page.tsx", "app/path/page.tsx"],
+    files: ["app/(site)/clinical-excellence/page.tsx", "app/(site)/path/page.tsx"],
     rules: {
       "no-restricted-syntax": "off",
     },

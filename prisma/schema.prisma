@@ -1,0 +1,141 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+  extensions      = [pg_trgm]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  passwordHash   String
+  name           String?
+  role           Role      @default(EDITOR)
+  isActive       Boolean   @default(true)
+  totpSecret     String?
+  totpEnabled    Boolean   @default(false)
+  sessionEpoch   Int       @default(0)
+  failedLogins   Int       @default(0)
+  lockedUntil    DateTime?
+  lockoutCount   Int       @default(0)
+  lastLoginAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  sessions       Session[]
+  backupCodes    BackupCode[]
+  postsCreated   Post[]    @relation("postCreatedBy")
+  postsUpdated   Post[]    @relation("postUpdatedBy")
+  postsPublished Post[]    @relation("postPublishedBy")
+  media          Media[]
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  tokenHash  String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  expiresAt  DateTime
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model BackupCode {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash  String
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String?
+  sortOrder   Int     @default(0)
+  posts       Post[]
+}
+
+model Post {
+  id                 String     @id @default(cuid())
+  title              String
+  slug               String     @unique
+  excerpt            String?
+  content            Json?
+  plainText          String     @default("")
+  categoryId         String
+  category           Category   @relation(fields: [categoryId], references: [id])
+  coverImageId       String?
+  coverImage         Media?     @relation(fields: [coverImageId], references: [id], onDelete: SetNull)
+  status             PostStatus @default(DRAFT)
+  disclaimer         String     @default("")
+  reviewerName       String?
+  reviewerCredential String?
+  reviewedAt         DateTime?
+  faqs               Json?
+  metaTitle          String?
+  metaDescription    String?
+  readingTime        Int        @default(0)
+  createdBy          String
+  createdByUser      User       @relation("postCreatedBy", fields: [createdBy], references: [id])
+  updatedBy          String?
+  updatedByUser      User?      @relation("postUpdatedBy", fields: [updatedBy], references: [id])
+  publishedBy        String?
+  publishedByUser    User?      @relation("postPublishedBy", fields: [publishedBy], references: [id])
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  publishedAt        DateTime?
+
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([categoryId, status])
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  url          String   @unique
+  pathname     String   @unique
+  bytes        Int
+  width        Int
+  height       Int
+  mimeType     String
+  altText      String?
+  isDecorative Boolean  @default(false)
+  uploadedBy   String
+  uploader     User     @relation(fields: [uploadedBy], references: [id])
+  posts        Post[]
+  createdAt    DateTime @default(now())
+}
+
+model Enquiry {
+  id             String   @id @default(cuid())
+  name           String
+  email          String
+  phone          String?
+  message        String
+  postSlug       String?
+  consentAt      DateTime
+  consentVersion String
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+}
