@@ -1,13 +1,26 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import {
+  categorySitemapEntries,
+  getSitemapData,
+  postSitemapEntries,
+  staticSitemapEntries,
+} from "@/lib/sitemap";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 86400;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let data: { posts: { slug: string; updatedAt: Date }[]; categories: { slug: string }[] } = {
+    posts: [],
+    categories: [],
+  };
+  try {
+    data = await getSitemapData();
+  } catch {
+    data = { posts: [], categories: [] };
+  }
   return [
-    {
-      url: "https://lawonbloomfertilitycentre.com",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    // Add other pages here later
+    ...staticSitemapEntries(),
+    ...categorySitemapEntries(data.categories),
+    ...postSitemapEntries(data.posts),
   ];
 }

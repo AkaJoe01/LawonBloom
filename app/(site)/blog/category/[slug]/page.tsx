@@ -5,19 +5,31 @@ import BlogPagination from "@/components/blog/BlogPagination";
 import CategoryNav from "@/components/blog/CategoryNav";
 import PostCard from "@/components/blog/PostCard";
 import { BLOG_PAGE_SIZE, getBlogCategories, getBlogCategory } from "@/lib/blog/queries";
+import { buildCategoryMetadata } from "@/lib/seo";
 import { blogPageQuery } from "@/lib/validation/blog";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const category = await getBlogCategory(slug, 1);
-  if (!category) return { title: "Category not found" };
-  return { title: category.category.name };
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  const parsed = blogPageQuery.safeParse({
+    page: typeof sp.page === "string" ? sp.page : undefined,
+  });
+  const page = parsed.success ? parsed.data.page : 1;
+  const result = await getBlogCategory(slug, 1);
+  if (!result) return { title: "Category not found", robots: { index: false } };
+  return buildCategoryMetadata({
+    name: result.category.name,
+    slug,
+    description: result.category.description,
+    page,
+  });
 }
 
 export default async function BlogCategoryPage({

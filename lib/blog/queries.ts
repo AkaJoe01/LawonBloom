@@ -23,6 +23,7 @@ export const postPageSelect = {
   ...postCardSelect,
   categoryId: true,
   content: true,
+  plainText: true,
   disclaimer: true,
   reviewerName: true,
   reviewerCredential: true,
@@ -30,10 +31,29 @@ export const postPageSelect = {
   faqs: true,
   metaTitle: true,
   metaDescription: true,
+  updatedAt: true,
+  createdByUser: { select: { name: true } },
 } satisfies Prisma.PostSelect;
 
 export type PostCardData = Prisma.PostGetPayload<{ select: typeof postCardSelect }>;
 export type PostPageData = Prisma.PostGetPayload<{ select: typeof postPageSelect }>;
+
+function asDate(value: Date | string): Date {
+  return value instanceof Date ? value : new Date(value);
+}
+
+function reviveCard<T extends { publishedAt: Date | string | null }>(row: T): T {
+  if (!row.publishedAt) return row;
+  return { ...row, publishedAt: asDate(row.publishedAt) };
+}
+
+function revivePage(row: PostPageData): PostPageData {
+  return {
+    ...reviveCard(row),
+    updatedAt: asDate(row.updatedAt),
+    reviewedAt: row.reviewedAt ? asDate(row.reviewedAt) : null,
+  };
+}
 
 async function fetchIndexPage(page: number): Promise<{ items: PostCardData[]; total: number }> {
   const db = getDb();
@@ -51,8 +71,15 @@ async function fetchIndexPage(page: number): Promise<{ items: PostCardData[]; to
   return { items, total };
 }
 
-export function getBlogIndex(page: number) {
-  return unstable_cache(fetchIndexPage, ["blog-index"], { revalidate: 60, tags: [BLOG_TAG] })(page);
+export async function getBlogIndex(page: number): Promise<{
+  items: PostCardData[];
+  total: number;
+}> {
+  const data = await unstable_cache(fetchIndexPage, ["blog-index"], {
+    revalidate: 60,
+    tags: [BLOG_TAG],
+  })(page);
+  return { total: data.total, items: data.items.map(reviveCard) };
 }
 
 async function fetchCategoryPage(
@@ -79,8 +106,20 @@ async function fetchCategoryPage(
   return { category, items, total };
 }
 
-export function getBlogCategory(slug: string, page: number) {
-  return unstable_cache(fetchCategoryPage, ["blog-category"], { revalidate: 60, tags: [BLOG_TAG] })(slug, page);
+export async function getBlogCategory(
+  slug: string,
+  page: number,
+): Promise<{
+  category: { name: string; slug: string; description: string | null };
+  items: PostCardData[];
+  total: number;
+} | null> {
+  const data = await unstable_cache(fetchCategoryPage, ["blog-category"], {
+    revalidate: 60,
+    tags: [BLOG_TAG],
+  })(slug, page);
+  if (!data) return null;
+  return { category: data.category, total: data.total, items: data.items.map(reviveCard) };
 }
 
 export async function searchPublishedPosts(
@@ -105,7 +144,7 @@ export async function searchPublishedPosts(
     }),
     db.post.count({ where }),
   ]);
-  return { items, total };
+  return { items: items.map(reviveCard), total };
 }
 
 async function fetchPostBySlug(slug: string): Promise<PostPageData | null> {
@@ -113,24 +152,26 @@ async function fetchPostBySlug(slug: string): Promise<PostPageData | null> {
   return db.post.findFirst({ where: { slug, status: PUBLISHED }, select: postPageSelect });
 }
 
-export function getPostBySlug(slug: string) {
-  return unstable_cache(fetchPostBySlug, ["blog-post"], {
+export async function getPostBySlug(slug: string): Promise<PostPageData | null> {
+  const post = await unstable_cache(fetchPostBySlug, ["blog-post"], {
     revalidate: 300,
     tags: [BLOG_TAG, postTag(slug)],
   })(slug);
+  return post ? revivePage(post) : null;
 }
 
 async function fetchRelatedPosts(slug: string, categoryId: string): Promise<PostCardData[]> {
   const db = getDb();
-  return db.post.findMany({
+  const rows = await db.post.findMany({
     where: { status: PUBLISHED, category: { id: categoryId }, slug: { not: slug } },
     orderBy: { publishedAt: "desc" },
     take: 3,
     select: postCardSelect,
   });
+  return rows.map(reviveCard);
 }
 
-export function getRelatedPosts(slug: string, categoryId: string) {
+export async function getRelatedPosts(slug: string, categoryId: string): Promise<PostCardData[]> {
   return unstable_cache(fetchRelatedPosts, ["blog-related"], { revalidate: 60, tags: [BLOG_TAG] })(
     slug,
     categoryId,
@@ -161,8 +202,8 @@ async function fetchRssPosts(): Promise<
     title: string;
     slug: string;
     excerpt: string | null;
+    plainText: string;
     publishedAt: Date | null;
-    metaDescription: string | null;
     category: { name: string };
   }[]
 > {
@@ -175,13 +216,17 @@ async function fetchRssPosts(): Promise<
       title: true,
       slug: true,
       excerpt: true,
+      plainText: true,
       publishedAt: true,
-      metaDescription: true,
       category: { select: { name: true } },
     },
   });
 }
 
-export function getRssPosts() {
-  return unstable_cache(fetchRssPosts, ["blog-rss"], { revalidate: 1800, tags: [BLOG_TAG] })();
+export async function getRssPosts() {
+  const posts = await unstable_cache(fetchRssPosts, ["blog-rss"], {
+    revalidate: 1800,
+    tags: [BLOG_TAG],
+  })();
+  return posts.map(reviveCard);
 }

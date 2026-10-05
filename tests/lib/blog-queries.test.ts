@@ -11,12 +11,13 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("next/cache", () => ({
   unstable_cache: (
-    fn: (...args: never[]) => unknown,
+    fn: (...args: never[]) => Promise<unknown>,
     keyParts: string[],
     options: { revalidate?: number; tags?: string[] },
   ) => {
     mocks.configs.push({ keyParts, options });
-    return (...args: never[]) => fn(...args);
+    return async (...args: never[]) =>
+      JSON.parse(JSON.stringify(await fn(...args))) as Awaited<ReturnType<typeof fn>>;
   },
   revalidateTag: vi.fn(),
 }));
@@ -56,7 +57,12 @@ describe("blog queries", () => {
     mocks.configs.length = 0;
     mocks.postFindMany.mockResolvedValue([card]);
     mocks.postCount.mockResolvedValue(1);
-    mocks.postFindFirst.mockResolvedValue({ ...card, categoryId: "c1" });
+    mocks.postFindFirst.mockResolvedValue({
+      ...card,
+      categoryId: "c1",
+      updatedAt: new Date("2026-01-02T00:00:00.000Z"),
+      reviewedAt: new Date("2026-01-01T00:00:00.000Z"),
+    });
     mocks.categoryFindUnique.mockResolvedValue({ name: "IVF", slug: "ivf", description: null });
     mocks.categoryFindMany.mockResolvedValue([
       { name: "IVF", slug: "ivf", _count: { posts: 3 } },
@@ -66,6 +72,7 @@ describe("blog queries", () => {
   it("queries published posts newest-first for the index with blog tag and 60s revalidate", async () => {
     const result = await getBlogIndex(2);
     expect(result.total).toBe(1);
+    expect(result.items[0].publishedAt).toBeInstanceOf(Date);
     expect(mocks.postFindMany).toHaveBeenCalledWith(
       expect.objectContaining({
         where: { status: "PUBLISHED" },
@@ -116,11 +123,18 @@ describe("blog queries", () => {
   it("fetches only published posts by slug with post tag + blog tag", async () => {
     const post = await getPostBySlug("understanding-ivf");
     expect(post).not.toBeNull();
+    expect(post!.publishedAt).toBeInstanceOf(Date);
+    expect(post!.updatedAt).toBeInstanceOf(Date);
+    expect(post!.reviewedAt).toBeInstanceOf(Date);
     expect(mocks.postFindFirst).toHaveBeenCalledWith(
       expect.objectContaining({
         where: { slug: "understanding-ivf", status: "PUBLISHED" },
       }),
     );
+    const select = mocks.postFindFirst.mock.calls[0][0].select as Record<string, unknown>;
+    expect(select.plainText).toBe(true);
+    expect(select.updatedAt).toBe(true);
+    expect(select.createdByUser).toEqual({ select: { name: true } });
     expect(mocks.configs[0]).toEqual({
       keyParts: ["blog-post"],
       options: { revalidate: 300, tags: ["blog", "post:understanding-ivf"] },
@@ -155,6 +169,9 @@ describe("blog queries", () => {
     expect(mocks.postFindMany).toHaveBeenCalledWith(
       expect.objectContaining({ take: 20, where: { status: "PUBLISHED" } }),
     );
+    const select = mocks.postFindMany.mock.calls[0][0].select as Record<string, unknown>;
+    expect(select.plainText).toBe(true);
+    expect(select.metaDescription).toBeUndefined();
     expect(mocks.configs[0]).toEqual({
       keyParts: ["blog-rss"],
       options: { revalidate: 1800, tags: ["blog"] },

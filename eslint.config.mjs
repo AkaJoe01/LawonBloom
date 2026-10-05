@@ -40,7 +40,7 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ["components/blog/PostBody.tsx"],
+    files: ["components/blog/PostBody.tsx", "components/seo/**/*.tsx"],
     rules: {
       "no-restricted-syntax": "off",
     },

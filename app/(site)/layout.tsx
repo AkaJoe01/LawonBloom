@@ -4,10 +4,15 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lawonbloomfertilitycentre.com"),
   title: "Lawon Bloom Fertility Centre | IVF & Fertility Clinic in Ibadan",
   description:
     "Lawon Bloom Fertility Centre offers IVF, IUI, egg freezing, and fertility testing in Ibadan. Personalized care with advanced technology. Book a consultation.",
   icons: [{ rel: "icon", url: "/logo/logo.png" }],
+  alternates: {
+    types: { "application/rss+xml": "https://lawonbloomfertilitycentre.com/blog/rss.xml" },
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function SiteRootLayout({

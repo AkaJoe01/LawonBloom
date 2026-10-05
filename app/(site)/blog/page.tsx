@@ -4,12 +4,29 @@ import BlogPagination from "@/components/blog/BlogPagination";
 import CategoryNav from "@/components/blog/CategoryNav";
 import EnquiryForm from "@/components/blog/EnquiryForm";
 import PostCard from "@/components/blog/PostCard";
+import JsonLd from "@/components/seo/JsonLd";
 import { BLOG_PAGE_SIZE, getBlogCategories, getBlogIndex } from "@/lib/blog/queries";
+import { buildIndexMetadata, organizationJsonLd } from "@/lib/seo";
 import { blogPageQuery } from "@/lib/validation/blog";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = { title: "Journal" };
+function readPage(
+  sp: Record<string, string | string[] | undefined>,
+): number {
+  const parsed = blogPageQuery.safeParse({
+    page: typeof sp.page === "string" ? sp.page : undefined,
+  });
+  return parsed.success ? parsed.data.page : 1;
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}): Promise<Metadata> {
+  return buildIndexMetadata(readPage(await searchParams));
+}
 
 export default async function BlogIndexPage({
   searchParams,
@@ -17,10 +34,7 @@ export default async function BlogIndexPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
-  const parsed = blogPageQuery.safeParse({
-    page: typeof sp.page === "string" ? sp.page : undefined,
-  });
-  const page = parsed.success ? parsed.data.page : 1;
+  const page = readPage(sp);
 
   const [{ items, total }, categories] = await Promise.all([
     getBlogIndex(page),
@@ -30,6 +44,7 @@ export default async function BlogIndexPage({
 
   return (
     <div className="mx-auto max-w-6xl px-6 pb-24 pt-10 md:pt-16">
+      <JsonLd data={organizationJsonLd()} />
       <BlogHeader />
       <CategoryNav categories={categories} />
 

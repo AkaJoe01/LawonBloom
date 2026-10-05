@@ -14,22 +14,30 @@ describe("GET /blog/rss.xml", () => {
         title: "IVF & IUI basics",
         slug: "ivf-iui-basics",
         excerpt: "Explaining <both> treatments",
+        plainText: "Ignored because the excerpt exists.",
         publishedAt: new Date("2026-01-15T12:00:00.000Z"),
-        metaDescription: null,
         category: { name: "Treatments" },
       },
       {
-        title: "Draft-looking post without a date",
-        slug: "no-date",
+        title: "Plain text post",
+        slug: "plain-text-post",
         excerpt: null,
+        plainText: "A".repeat(400),
+        publishedAt: new Date("2026-01-10T08:00:00.000Z"),
+        category: { name: "Treatments" },
+      },
+      {
+        title: "Not published yet",
+        slug: "draft-looking",
+        excerpt: null,
+        plainText: "Draft body",
         publishedAt: null,
-        metaDescription: null,
         category: { name: "Treatments" },
       },
     ]);
   });
 
-  it("serves an RSS feed with escaped XML and cache headers", async () => {
+  it("serves an RSS feed with escaped XML, en-ng, and cache headers", async () => {
     const response = await GET();
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toBe("application/rss+xml; charset=utf-8");
@@ -38,6 +46,7 @@ describe("GET /blog/rss.xml", () => {
     const body = await response.text();
     expect(body).toContain("<rss version=\"2.0\"");
     expect(body).toContain("<title>Lawon Bloom Fertility Centre Journal</title>");
+    expect(body).toContain("<language>en-ng</language>");
     expect(body).toContain("<title>IVF &amp; IUI basics</title>");
     expect(body).toContain("<description>Explaining &lt;both&gt; treatments</description>");
     expect(body).toContain("https://lawonbloomfertilitycentre.com/blog/ivf-iui-basics");
@@ -45,9 +54,19 @@ describe("GET /blog/rss.xml", () => {
     expect(body).toContain('<atom:link href="https://lawonbloomfertilitycentre.com/blog/rss.xml"');
   });
 
+  it("describes excerpt-less posts with plainText capped at 300 characters", async () => {
+    const body = await (await GET()).text();
+    expect(body).toContain(`<description>${"A".repeat(300)}…</description>`);
+  });
+
+  it("sets lastBuildDate to the newest publish date", async () => {
+    const body = await (await GET()).text();
+    expect(body).toContain("<lastBuildDate>Thu, 15 Jan 2026 12:00:00 GMT</lastBuildDate>");
+  });
+
   it("skips posts without a publish date", async () => {
     const body = await (await GET()).text();
-    expect(body).not.toContain("no-date");
+    expect(body).not.toContain("draft-looking");
   });
 
   it("serves a valid empty feed when the query fails instead of a 500", async () => {
@@ -56,6 +75,8 @@ describe("GET /blog/rss.xml", () => {
     expect(response.status).toBe(200);
     const body = await response.text();
     expect(body).toContain("<channel>");
+    expect(body).toContain("<language>en-ng</language>");
+    expect(body).toContain("<lastBuildDate>");
     expect(body).not.toContain("<item>");
     expect(body).toContain("</rss>");
   });
