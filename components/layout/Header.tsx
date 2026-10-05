@@ -14,6 +14,7 @@ const navItems = [
   { label: "Our Sanctuary", href: "/#sanctuary" },
   { label: "Clinical Excellence", href: "/clinical-excellence" },
   { label: "The Journey", href: "/journey" },
+  { label: "Journal", href: "/blog" },
   { label: "Elite Care", href: "/journey/consultation" },
 ];
 

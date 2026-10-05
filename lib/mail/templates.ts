@@ -19,6 +19,13 @@ export interface MailTemplateMap {
     commit: string;
     reason: string;
   };
+  blog_enquiry: {
+    name: string;
+    email: string;
+    phone?: string;
+    message: string;
+    postSlug?: string;
+  };
 }
 
 export type TemplateName = keyof MailTemplateMap;
@@ -102,6 +109,24 @@ export function renderTemplate<T extends TemplateName>(
           row("Environment", d.environment),
           row("Commit", d.commit),
           row("Reason", d.reason),
+        ].join(""),
+      ),
+    };
+  }
+
+  if (template === "blog_enquiry") {
+    const d = data as MailTemplateMap["blog_enquiry"];
+    return {
+      subject: `New blog enquiry - ${d.name}`,
+      html: layout(
+        "New Blog Enquiry",
+        [
+          row("Name", d.name),
+          row("Email", d.email),
+          row("Phone", d.phone ?? "Not provided"),
+          row("Post", d.postSlug ?? "Blog index"),
+          "<hr/>",
+          row("Message", d.message),
         ].join(""),
       ),
     };

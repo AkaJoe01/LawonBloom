@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
 import { revalidateTag } from "next/cache";
+import { BLOG_TAG, postTag } from "@/lib/cache";
 import { computeReadingTime, derivePlainText } from "@/lib/posts/derive";
 import type { TiptapDoc } from "@/lib/validation/post";
 
@@ -27,6 +28,6 @@ export function docStats(doc: TiptapDoc): { plainText: string; readingTime: numb
 }
 
 export function revalidatePostTags(slug: string): void {
-  revalidateTag(`post:${slug}`, { expire: 0 });
-  revalidateTag("blog", { expire: 0 });
+  revalidateTag(postTag(slug), { expire: 0 });
+  revalidateTag(BLOG_TAG, { expire: 0 });
 }

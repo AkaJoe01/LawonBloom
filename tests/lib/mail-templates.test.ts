@@ -75,6 +75,19 @@ describe("mail templates", () => {
     expect(escapeHtml(`&<>"'`)).toBe("&amp;&lt;&gt;&quot;&#39;");
   });
 
+  it("renders blog_enquiry with post context and safe defaults", () => {
+    const rendered = renderTemplate("blog_enquiry", {
+      name: "Ada Obi",
+      email: "ada@example.com",
+      message: "What is the success rate for IVF over 40?",
+      postSlug: "ivf-over-40",
+    });
+    expect(rendered.subject).toBe("New blog enquiry - Ada Obi");
+    expect(rendered.html).toContain("ada@example.com");
+    expect(rendered.html).toContain("ivf-over-40");
+    expect(rendered.html).toContain("Not provided");
+  });
+
   it("throws on an unknown template", () => {
     expect(() =>
       renderTemplate("nope" as "consultation_notification", {} as never),

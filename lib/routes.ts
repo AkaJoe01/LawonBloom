@@ -1,6 +1,10 @@
 export const SITE_ROUTES = [
   "/",
   "/about",
+  "/blog",
+  "/blog/[slug]",
+  "/blog/category/[slug]",
+  "/blog/search",
   "/clinical-excellence",
   "/clinical-excellence/fertility-preservation",
   "/clinical-excellence/genetic-testing",
