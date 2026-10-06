@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const steps = [
   {
     phase: "Phase 1",
@@ -57,10 +59,12 @@ export default function ProcessSection() {
                 index % 2 === 1 ? "md:order-1" : ""
               }`}
             >
-              <img
+              <Image
                 src={step.image}
                 alt={step.title}
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
           </div>

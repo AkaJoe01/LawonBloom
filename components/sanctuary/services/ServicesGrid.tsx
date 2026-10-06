@@ -71,7 +71,7 @@ export default function ServicesGrid() {
                 }}
                 className="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-[260px]"
             >
-                {services.map((service, index) => {
+                {services.map((service) => {
                     const Icon = service.icon;
 
                     return (
