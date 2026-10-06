@@ -65,19 +65,17 @@ export const Embed = Node.create({
     ];
   },
   renderHTML({ node }) {
+    const url = typeof node.attrs.url === "string" ? node.attrs.url : "";
     const provider = node.attrs.provider === "vimeo" ? "vimeo" : "youtube";
+    const allowed = YOUTUBE_EMBED.test(url) || VIMEO_EMBED.test(url);
+    if (!allowed) {
+      return ["div", { "data-blocked-embed": "true" }];
+    }
+    const title = provider === "vimeo" ? "Vimeo video" : "YouTube video";
     return [
-      "iframe",
-      {
-        src: node.attrs.url,
-        title: provider === "vimeo" ? "Vimeo video" : "YouTube video",
-        width: 640,
-        height: 360,
-        loading: "lazy",
-        allow: "accelerometer; encrypted-media; picture-in-picture; web-share",
-        allowfullscreen: true,
-        class: "post-embed",
-      },
+      "div",
+      { "data-embed-src": url, "data-embed-title": title },
+      ["p", {}, `Play video: ${title}`],
     ];
   },
 });

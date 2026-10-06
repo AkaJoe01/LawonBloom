@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -15,11 +16,12 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function SiteRootLayout({
+export default async function SiteRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await connection();
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-[var(--surface)] text-[var(--foreground)]">

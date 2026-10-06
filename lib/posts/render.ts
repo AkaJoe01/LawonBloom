@@ -36,7 +36,7 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
   allowedAttributes: {
     a: ["href", "rel", "target"],
     img: ["src", "alt", "width", "height", "loading"],
-    div: ["data-variant"],
+    div: ["data-variant", "data-blocked-embed", "data-embed-src", "data-embed-title"],
     iframe: [
       "src",
       "title",
@@ -70,7 +70,7 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
       const src = attribs.src ?? "";
       const allowed = YOUTUBE_EMBED.test(src) || VIMEO_EMBED.test(src);
       if (!allowed) {
-        return { tagName: "span", attribs: { "data-blocked-embed": "true" } };
+        return { tagName: "div", attribs: { "data-blocked-embed": "true" } };
       }
       return {
         tagName: "iframe",

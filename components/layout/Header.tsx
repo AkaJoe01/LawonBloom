@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
@@ -40,12 +39,9 @@ export default function Header() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <header
       className={cn(
-        "sticky top-0 z-50 mx-auto w-full max-w-5xl border-b border-transparent md:rounded-md md:border md:transition-all md:ease-out",
+        "header-enter sticky top-0 z-50 mx-auto w-full max-w-5xl border-b border-transparent md:rounded-md md:border md:transition-all md:ease-out",
         {
           "bg-surface/80 supports-[backdrop-filter]:bg-surface/50 border-outline-variant/25 backdrop-blur-2xl md:top-4 md:max-w-4xl md:shadow":
             scrolled && !open,
@@ -89,14 +85,8 @@ export default function Header() {
             >
               {item.label}
               {isActive(item.href) && (
-                <motion.span
-                  layoutId="navIndicator"
-                  className="absolute bottom-0 left-4 right-4 h-px bg-primary"
-                  transition={{
-                    type: "spring",
-                    stiffness: 380,
-                    damping: 30,
-                  }}
+                <span
+                  className="header-underline absolute bottom-0 left-4 right-4 h-px bg-primary"
                 />
               )}
             </Link>
@@ -167,6 +157,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

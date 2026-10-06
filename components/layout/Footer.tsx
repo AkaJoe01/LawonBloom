@@ -68,7 +68,7 @@ export default function Footer() {
                             placeholder="Your email address" 
                             className="w-full glass-panel pl-6 pr-12 py-4 rounded-full text-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50 placeholder:text-on-surface-variant/50 transition-all bg-surface/50"
                         />
-                        <button type="submit" className="absolute inset-y-0 right-2 flex items-center justify-center text-primary/60 group-focus-within:text-primary transition-colors px-3 hover:text-surface-tint">
+                        <button type="submit" aria-label="Subscribe to the newsletter" className="absolute inset-y-0 right-2 flex items-center justify-center text-primary/60 group-focus-within:text-primary transition-colors px-3 hover:text-surface-tint">
                             <Mail className="w-5 h-5" />
                         </button>
                     </form>

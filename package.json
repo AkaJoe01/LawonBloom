@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "images:check": "tsx scripts/check-image-dims.ts",
     "images:update": "tsx scripts/check-image-dims.ts --update",
+    "secrets:check": "tsx scripts/check-build-secrets.ts",
     "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {

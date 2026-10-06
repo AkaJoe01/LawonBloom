@@ -52,7 +52,7 @@ describe("docToHtml", () => {
     expect(html).toContain("callout callout-note");
   });
 
-  it("renders an embed node as an iframe", () => {
+  it("renders an embed node as a click-to-load facade", () => {
     const html = docToHtml(
       doc([
         {
@@ -61,10 +61,18 @@ describe("docToHtml", () => {
         },
       ]),
     );
-    expect(html).toContain("<iframe");
-    expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
-    expect(html).toContain('title="YouTube video"');
-    expect(html).toContain('class="post-embed"');
+    expect(html).toContain('<div data-embed-src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
+    expect(html).toContain('data-embed-title="YouTube video"');
+    expect(html).toContain("Play video: YouTube video");
+    expect(html).not.toContain("<iframe");
+  });
+
+  it("renders a blocked div instead of a facade for disallowed embed urls", () => {
+    const html = docToHtml(
+      doc([{ type: "embed", attrs: { provider: "youtube", url: "https://evil.com/embed" } }]),
+    );
+    expect(html).toContain('data-blocked-embed="true"');
+    expect(html).not.toContain("evil.com");
   });
 });
 

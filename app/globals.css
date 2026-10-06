@@ -385,3 +385,97 @@ html {
   border: 0;
   border-radius: 0.75rem;
 }
+
+/* Header entrance + nav underline (CSS replaces framer-motion for bundle weight) */
+@keyframes header-enter {
+  from { transform: translateY(-24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.header-enter {
+  animation: header-enter 0.5s ease-out both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header-underline {
+  animation: fade-in 0.3s ease-out both;
+}
+
+/* Video embed facade: click-to-load keeps third-party player JS off the page */
+[data-embed-src] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  border-radius: 0.75rem;
+  background: var(--surface-container-low);
+}
+
+[data-embed-src] p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+.embed-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--primary);
+  cursor: pointer;
+  transition: transform 0.2s ease-out, background 0.2s ease-out;
+}
+
+.embed-play:hover {
+  transform: scale(1.06);
+  background: var(--surface-bright);
+}
+
+.embed-play:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.embed-play svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: 0.15rem;
+}
+
+[data-embed-playing] {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.post-embed-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-enter,
+  .header-underline {
+    animation: none;
+  }
+
+  .embed-play {
+    transition: none;
+  }
+}

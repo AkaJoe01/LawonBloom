@@ -13,6 +13,7 @@
 # testing
 /coverage
 /.vitest
+/.lighthouseci
 
 # next.js
 /.next/

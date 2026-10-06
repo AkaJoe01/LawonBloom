@@ -115,7 +115,7 @@ export default function FAQPage() {
                     <Sparkles className="h-3.5 w-3.5 text-primary" />
                   </div>
                   <span className="text-sm font-medium text-foreground">AI Concierge</span>
-                  <span className="ml-auto text-[11px] uppercase tracking-wider text-on-surface-variant/60">Live</span>
+                  <span className="ml-auto text-[11px] uppercase tracking-wider text-on-surface-variant">Live</span>
                 </div>
 
                 <div className="px-6 pb-3">
@@ -145,7 +145,7 @@ export default function FAQPage() {
                           )}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-medium text-on-surface-variant/60 mb-1">
+                          <p className="text-xs font-medium text-on-surface-variant mb-1">
                             {msg.role === "user" ? "You" : "AI Concierge"}
                           </p>
                           <p className="text-foreground leading-7">{msg.text}</p>
@@ -158,7 +158,7 @@ export default function FAQPage() {
                           <Bot className="h-3.5 w-3.5 text-primary" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-medium text-on-surface-variant/60 mb-1">AI Concierge</p>
+                          <p className="text-xs font-medium text-on-surface-variant mb-1">AI Concierge</p>
                           <div className="flex gap-1.5">
                             <span className="h-2 w-2 rounded-full bg-primary/40 animate-bounce" style={{ animationDelay: "0ms" }} />
                             <span className="h-2 w-2 rounded-full bg-primary/40 animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -173,7 +173,7 @@ export default function FAQPage() {
 
                 {messages.length === 0 && (
                   <div className="px-6 pb-2">
-                    <p className="text-sm text-on-surface-variant/60 leading-7">
+                    <p className="text-sm text-on-surface-variant leading-7">
                       Ask me anything about our fertility services, treatments, or what to expect at Lawonbloom.
                     </p>
                   </div>
