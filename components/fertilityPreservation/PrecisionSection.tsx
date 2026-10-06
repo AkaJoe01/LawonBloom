@@ -30,7 +30,7 @@ export default function PrecisionSection(){
                 {/* LARGE CARD */}
                 <div className="relative min-h-[400px] overflow-hidden rounded-[36px] md:min-h-[500px]">
                     <Image
-                        src="/images/scan_2.jpg"
+                        src="/WhatsApp/Clean.jpg"
                         alt="largeGrid"
                         fill
                         priority

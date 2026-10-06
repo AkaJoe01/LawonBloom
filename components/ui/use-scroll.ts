@@ -9,14 +9,12 @@ export function useScroll(threshold: number) {
     return false;
   });
 
-  const onScroll = React.useCallback(() => {
-    setScrolled(window.scrollY > threshold);
-  }, [threshold]);
-
   React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
-  }, [onScroll]);
+  }, [threshold]);
 
   return scrolled;
 }

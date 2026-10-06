@@ -18,7 +18,7 @@ const services = [
         description: "Our IVF program combines cutting-edge technology with personalized care to maximize your chances of success.",
         icon: FlaskConical,
         large: true,
-        image: "/images/scan_2.jpg",
+        image: "/WhatsApp/Incubator.jpg",
     },
     {
         title: "IUI",
@@ -44,7 +44,7 @@ const services = [
         title: "Holistic Counseling",
         description: "Private therapeutic guidance ensuring emotional harmony throughout your journey.",
         icon: HeartPulse,
-        image: "/images/scan_1.jpg",
+        image: "/WhatsApp/Incubator_2.jpg",
     },
 ];
 

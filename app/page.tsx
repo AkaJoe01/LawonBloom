@@ -15,7 +15,7 @@ const services = [
         title: "In Vitro Fertilization (IVF)",
         description:
             "Our cornerstone program, utilizing world-class embryology, state-of-the-art incubation, and highly personalized stimulation protocols.",
-        image: "/images/microscope.jpg",
+        image: "/WhatsApp/microscope.jpg",
         icon: Microscope,
         tone: "from-primary/15 to-surface",
     },
@@ -23,7 +23,7 @@ const services = [
         title: "Oocyte Preservation",
         description:
             "Securing your future timeline with advanced vitrification techniques, empowering your choices on your own terms.",
-        image: "/images/lab.jpg",
+        image: "/WhatsApp/theater.jpg",
         icon: ShieldCheck,
         tone: "from-rose-200/20 to-surface",
     },
@@ -31,7 +31,7 @@ const services = [
         title: "IUI Protocols",
         description:
             "Minimally invasive beginnings. A supportive, precisely timed approach for natural conception assistance.",
-        image: "/images/probe.jpg",
+        image: "/WhatsApp/microscope.jpg",
         icon: Baby,
         tone: "from-secondary/15 to-surface",
     },
@@ -39,7 +39,7 @@ const services = [
         title: "Advanced Genetic Screening",
         description:
             "Precision medicine (PGT-A/PGT-M) ensuring the highest viability and peace of mind before transfer, mapping a healthy future.",
-        image: "/images/scan.jpg",
+        image: "/WhatsApp/Integra.jpg",
         icon: Dna,
         tone: "from-tertiary/15 to-surface",
     },
@@ -101,7 +101,7 @@ export default function HomePage() {
 
                     <div className="relative min-h-130 overflow-hidden rounded-4xl cinematic-shadow lg:min-h-190">
                         <Image
-                            src="/images/corridor.jpg"
+                            src="/WhatsApp/1 (7).jpeg"
                             alt="Serene clinic interior"
                             fill
                             priority
@@ -124,9 +124,9 @@ export default function HomePage() {
                 <div className="elegant-divider absolute left-0 top-0 w-full" />
                 <div className="mx-auto grid max-w-360 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
                     <div className="relative">
-                        <div className="relative aspect-4/5 overflow-hidden rounded-4xl cinematic-shadow">
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/images/bed.jpg"
+                                src="/WhatsApp/theater.jpg"
                                 alt="Soft sunlight in clinic room"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -221,7 +221,7 @@ export default function HomePage() {
                     <div className="sticky top-28">
                         <div className="relative aspect-3/4 overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/images/Dr. Saanu.jpg"
+                                src="/WhatsApp/1 (9).jpeg"
                                 alt="Medical director portrait"
                                 fill
                                 className="h-full w-full object-cover"
@@ -262,7 +262,7 @@ export default function HomePage() {
 
             <section id="stories" className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-6 py-20 lg:px-20 lg:py-32">
                 <div className="absolute inset-0">
-                    <Image src="/images/family.jpg" alt="Family moment" fill sizes="100vw" className="object-cover object-center" />
+                    <Image src="/WhatsApp/1 (12).jpeg" alt="Family moment" fill sizes="100vw" className="object-cover object-center" />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,249,246,0.72)_0%,rgba(251,249,246,0.18)_45%,rgba(251,249,246,0.72)_100%)]" />
                     <div className="absolute inset-0 bg-surface-container-highest/35 backdrop-blur-sm mix-blend-multiply" />
                 </div>

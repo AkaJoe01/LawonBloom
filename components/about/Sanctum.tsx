@@ -17,7 +17,7 @@ export default function Sanctum() {
 
             <div>
                 <Image 
-                src="/images/lab.jpg" 
+                src="/images/theater.jpg" 
                 alt="Laboratory" 
                 width={500}
                 height={400}

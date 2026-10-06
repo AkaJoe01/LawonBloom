@@ -9,19 +9,19 @@ import "swiper/css/pagination";
 
 const slides = [
   {
-    title: "A Decade of Dreaming",
-    subtitle: "The Chen Family",
-    image: "/images/family.jpg",
+    title: "Driven by Purpose",
+    subtitle: "People. Vision. Impact.",
+    image: "/WhatsApp/1 (1).jpeg",
   },
   {
     title: "Beyond Borders",
-    subtitle: "The Al Fassi Family",
-    image: "/images/corridor.jpg",
+    subtitle: "A Space Designed for Excellence",
+    image: "/WhatsApp/1 (7).jpeg",
   },
   {
     title: "A Quiet Miracle",
-    subtitle: "The Rivera Family",
-    image: "/images/doctor.jpg",
+    subtitle: "A Vision in Motion",
+    image: "/WhatsApp/1 (3).jpeg",
   },
 ];
 

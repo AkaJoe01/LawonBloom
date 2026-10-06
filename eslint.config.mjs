@@ -2,17 +2,55 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
+const dangerouslyRestricted = {
+  selector: 'JSXAttribute[name.name="dangerouslySetInnerHTML"]',
+  message:
+    "dangerouslySetInnerHTML is restricted to sanitized blog output in components/blog/PostBody.tsx",
+};
+
+const legacyFontClasses = {
+  selector:
+    'JSXAttribute[name.name="className"][value.value=/\\bfont-(display|display-hero|h1-editorial|h2-subheading|body-large|label-caps)\\b/]',
+  message:
+    "Legacy unlayered font classes are banned in blog components; use the blog typography scale",
+};
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "coverage/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
+  {
+    files: ["**/*.tsx"],
+    rules: {
+      "no-restricted-syntax": ["error", dangerouslyRestricted],
+    },
+  },
+  {
+    files: ["components/blog/**/*.tsx", "app/blog/**/*.tsx"],
+    rules: {
+      "no-restricted-syntax": ["error", dangerouslyRestricted, legacyFontClasses],
+    },
+  },
+  {
+    files: ["components/blog/PostBody.tsx"],
+    rules: {
+      "no-restricted-syntax": "off",
+    },
+  },
+  {
+    files: ["app/clinical-excellence/page.tsx", "app/path/page.tsx"],
+    rules: {
+      "no-restricted-syntax": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

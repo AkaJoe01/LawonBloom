@@ -33,7 +33,7 @@ export default function PathPage() {
                     <Image 
                         alt="Your Journey, Illuminated" 
                         className="object-cover object-center" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM4SADsE6L9rvRL0FIgw96kinwpE8lHV1PcU3EljyHJmQZK2Ad8704NHqCupdl1GCLdfKPv96D4crOalbh_k_hn7aEkx1wnDUwJnw1uHJ2WmhuYXwkwcBK3gAtngcy4QyoLObYyE822k3qpKJNn8t8GxRJF7MTwf96BaxKKoilM7J_Lq4vj84iQx2QFh-cJ3G9RswDrwAAWDRbGFwQ6yvxtJdVOxIsu9rkak9RFMtrZjm21Kk0AjfOBI92N64I1OETURM7HKS8-UJC"
+                        src="/WhatsApp/1 (6).jpeg"
                         fill
                         sizes="100vw"
                     />
@@ -53,7 +53,7 @@ export default function PathPage() {
                             <Image 
                                 alt="Consultation Room" 
                                 className="object-cover" 
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDosJHB0EGZYhduZslVOyCb7Yt9oGku-vIekc-pI3prDPMrT-YXdAgEld7-kwopXgKH1OUOky0PksLoHeJcjxXm9CqoVcrVrS7T-h1O2gBeF_sT71pzxGjRLZGduwQquN4lBPTFVNUcEQcLppRr83-wcU-iCwVAM-DXfPoqxV39WVdSWps14hCJYapSwp1IA09cKWLBYyhQsmsaH73TSy-HzVnSeyXwlHXabiifxoCR83T7P-bAAaTv0nEuPGyS6rrCR57lFxekvSJb"
+                                src="/WhatsApp/1 (3).jpeg"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 60vw"
                             />
@@ -84,11 +84,11 @@ export default function PathPage() {
                         </p>
                     </div>
                     <div className="col-span-1 md:col-start-7 md:col-span-6 relative order-1 md:order-2 mt-16 md:mt-0 md:-mt-24">
-                        <div className="w-full aspect-4/5 overflow-hidden rounded-sm relative">
+                        <div className="w-full aspect-[4/5] overflow-hidden rounded-sm relative">
                             <Image 
                                 alt="Abstract medical detail" 
                                 className="object-cover" 
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcfOnN2k3hUvTUE1CHNEdrua0ZeY0B9d25cPTKcNtyR7K0SfhwAHZmBjauE0bqk-tS9WOl3GFmitjs08hgneviGghUHfuk9wNLstmFUvQi-k6xC3B2eaVLchkKav3Vb3WFXy0AOk5CVbW75Ja2cOSYmGVCnwcvqiAcU2k6GnhY43wHJOQ8Usc3UzqZL5kUMaNywOYckJ6rL9dA1uNRhKGxb7VBDXGdAhviNBCZGxGchPbcArCN4pd8p3frdo13qoO_VXJQ19i8G59o"
+                                src="/WhatsApp/Lizzy_Microscope.jpg"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
                             />
@@ -109,7 +109,7 @@ export default function PathPage() {
                         <Image 
                             alt="Sanctuary recovery space" 
                             className="object-cover" 
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTU7dHC6CI6lexSjJbLJp0Z7ucG9tuJe56JsZalGSLpzC07S7Rx_N8rRB0j6NKhsRm-6cy295huEcguf_usCvKPd23Ypf3eI07M8ZrQ030wYA2O81OHLQj6zA6YF0s9-wrhtPqnnrRkXjX1KxD-abXxccTqCa2rG-goncOz84alZkavkaJdX0jq7REs_ieHUz6T47_OsulajUMwnrKPMcNy-TrsZ6hYgP_dUxYvmP2hDGBA5235bSKZ12EPQNHe2r1TQQPCIBqW8vX"
+                            src="/WhatsApp/Integra.jpg"
                             fill
                             sizes="100vw"
                         />

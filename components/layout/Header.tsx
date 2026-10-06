@@ -130,6 +130,7 @@ export default function Header() {
       </nav>
 
       <div
+        key={`mobile-menu-${pathname}`}
         className={cn(
           "bg-surface/90 fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y lg:hidden",
           open ? "block" : "hidden",
