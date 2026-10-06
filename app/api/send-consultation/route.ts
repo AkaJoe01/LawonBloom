@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendMail } from "@/lib/mail";
+import { ridOf } from "@/lib/observability/log";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { originRejection } from "@/lib/security/origin";
 import { consultationSchema } from "@/lib/validation/consultation";
@@ -60,16 +61,20 @@ export async function POST(request: Request) {
   }
 
   const input = parsed.data;
-  const result = await sendMail("consultation_notification", {
-    doctor: input.doctor,
-    date: input.date,
-    time: input.time,
-    firstName: input.firstName,
-    lastName: input.lastName,
-    email: input.email,
-    phone: input.phone,
-    notes: input.notes,
-  });
+  const result = await sendMail(
+    "consultation_notification",
+    {
+      doctor: input.doctor,
+      date: input.date,
+      time: input.time,
+      firstName: input.firstName,
+      lastName: input.lastName,
+      email: input.email,
+      phone: input.phone,
+      notes: input.notes,
+    },
+    { rid: ridOf(request) ?? undefined },
+  );
 
   if (result.sent) {
     return NextResponse.json({ notified: true });

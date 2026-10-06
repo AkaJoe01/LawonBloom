@@ -1,4 +1,5 @@
 export const metadata = {
+  alternates: { canonical: "/legal/ethics" },
   title: "Clinical Ethics | Lawonbloom",
   description: "The ethical framework guiding every clinical decision at Lawonbloom Fertility Centre.",
 };

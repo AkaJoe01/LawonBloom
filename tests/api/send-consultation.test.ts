@@ -103,16 +103,20 @@ describe("POST /api/send-consultation", () => {
     const payload = await response.json();
     expect(payload).toEqual({ notified: true });
     expect(sendMail).toHaveBeenCalledTimes(1);
-    expect(sendMail).toHaveBeenCalledWith("consultation_notification", {
-      doctor: "Dr. Saanu",
-      date: "2026-10-05",
-      time: "10:00",
-      firstName: "Ada",
-      lastName: "Obi",
-      email: "ada@example.com",
-      phone: "+2348000000000",
-      notes: "First visit",
-    });
+    expect(sendMail).toHaveBeenCalledWith(
+      "consultation_notification",
+      {
+        doctor: "Dr. Saanu",
+        date: "2026-10-05",
+        time: "10:00",
+        firstName: "Ada",
+        lastName: "Obi",
+        email: "ada@example.com",
+        phone: "+2348000000000",
+        notes: "First visit",
+      },
+      { rid: undefined },
+    );
   });
 
   it("returns notified=false when mail is disabled (skipped)", async () => {

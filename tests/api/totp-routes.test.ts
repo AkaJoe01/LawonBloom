@@ -254,7 +254,7 @@ describe("POST /api/auth/totp/verify", () => {
       data: codes.map((code) => ({ userId: "user_1", codeHash: `hash:${code}` })),
     });
     expect(vi.mocked(console.info)).toHaveBeenCalledWith(
-      expect.stringContaining('"event":"totp_enabled"'),
+      expect.stringContaining('"evt":"totp_enabled"'),
     );
   });
 });

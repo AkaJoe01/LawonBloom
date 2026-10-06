@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { requireStaff, perUserGate } from "@/lib/auth/guards";
 import { getDb } from "@/lib/db";
 import { apiError } from "@/lib/api-error";
+import { logEvent, ridOf } from "@/lib/observability/log";
 import { docStats, refFieldErrors, revalidatePostTags } from "@/lib/posts/write";
 import { originRejection } from "@/lib/security/origin";
 import { zodFieldErrors } from "@/lib/validation/common";
@@ -16,6 +17,7 @@ type Params = { params: Promise<{ id: string }> };
 export async function POST(request: Request, { params }: Params) {
   const rejected = originRejection(request);
   if (rejected) return rejected;
+  const rid = ridOf(request) ?? undefined;
 
   const guard = await requireStaff();
   if (!guard.ok) return guard.response;
@@ -104,7 +106,7 @@ export async function POST(request: Request, { params }: Params) {
   revalidatePostTags(existing.slug);
   if (existing.slug !== published.slug) revalidatePostTags(published.slug);
 
-  console.info(JSON.stringify({ event: "post_published", userId: guard.session.user.id, postId: id }));
+  logEvent("publish", { rid, userId: guard.session.user.id, postId: id });
 
   return NextResponse.json(published);
 }

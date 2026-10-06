@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logEvent } from "@/lib/observability/log";
 import { getDb } from "@/lib/db";
 import { adminMutationGate, requireAdmin } from "@/lib/auth/guards";
 import { generatePassword, hashPassword } from "@/lib/auth/password";
@@ -76,9 +77,7 @@ export async function POST(request: Request) {
     select: { id: true, email: true, name: true },
   });
 
-  console.info(
-    JSON.stringify({ event: "editor_created", adminId: guard.session.user.id, editorId: user.id }),
-  );
+  logEvent("editor_created", { adminId: guard.session.user.id, editorId: user.id });
 
   return NextResponse.json(
     { id: user.id, email: user.email, name: user.name, displayOncePassword },

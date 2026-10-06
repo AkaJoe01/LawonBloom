@@ -1,4 +1,5 @@
 import { del } from "@vercel/blob";
+import { logEvent } from "@/lib/observability/log";
 import { NextResponse } from "next/server";
 import { apiError } from "@/lib/api-error";
 import { adminMutationGate, requireAdmin, requireStaff } from "@/lib/auth/guards";
@@ -75,15 +76,13 @@ export async function DELETE(request: Request, { params }: Params) {
   try {
     await del(existing.pathname);
   } catch (error) {
-    console.error(
-      JSON.stringify({ event: "media_blob_delete_failed", err: error instanceof Error ? error.message : "unknown" }),
-    );
+    logEvent("media_blob_delete_failed", { err: error instanceof Error ? error.message : "unknown" }, "error");
     return apiError(500, "storage_failed", "Could not remove the stored image. Try again.");
   }
 
   await db.media.delete({ where: { id } });
 
-  console.info(JSON.stringify({ event: "media_delete", userId: guard.session.user.id, mediaId: id }));
+  logEvent("media_delete", { userId: guard.session.user.id, mediaId: id });
 
   return NextResponse.json({ usedBy: 0 });
 }

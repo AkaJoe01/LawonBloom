@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { optionalPhone, slugMax } from "./common";
 
-export const CONSENT_VERSION = "v1";
+export const CONSENT_VERSION = "v2";
 export const ENQUIRY_MIN_FILL_MS = 2000;
 
 export const blogPageQuery = z.object({

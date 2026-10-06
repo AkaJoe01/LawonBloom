@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Hero from "@/components/journal/Hero";
 import FeaturedResearch from "@/components/journal/FeaturedResearch";
 import SearchBar from "@/components/journal/SearchBar";
+
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/clinical-excellence/journal" },
+};
 
 export default function JournalPage(){
     return(

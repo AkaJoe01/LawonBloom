@@ -246,7 +246,7 @@ describe("admin posts endpoints", () => {
       expect(data.readingTime).toBe(1);
       expect(data.createdBy).toBe("editor_1");
       expect(data.excerpt).toBe("A short summary of IVF.");
-      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"post_created"'));
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"post_created"'));
     });
   });
 
@@ -373,7 +373,7 @@ describe("admin posts endpoints", () => {
       expect(response.status).toBe(204);
       expect(mocks.postDelete).toHaveBeenCalledWith({ where: { id: "p1" } });
       expect(mocks.revalidateTag).toHaveBeenCalledWith("post:understanding-ivf", { expire: 0 });
-      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"post_deleted"'));
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"post_deleted"'));
     });
   });
 
@@ -468,7 +468,7 @@ describe("admin posts endpoints", () => {
       expect(data.plainText).toContain("Hello world body content");
       expect(mocks.revalidateTag).toHaveBeenCalledWith("post:understanding-ivf", { expire: 0 });
       expect(mocks.revalidateTag).toHaveBeenCalledWith("blog", { expire: 0 });
-      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"post_published"'));
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"publish"'));
     });
 
     it("rejects a publish that would collide with another post slug", async () => {
@@ -515,7 +515,7 @@ describe("admin posts endpoints", () => {
       expect(data.data.status).toBe("DRAFT");
       expect(data.data.updatedBy).toBe("editor_1");
       expect(mocks.revalidateTag).toHaveBeenCalledWith("post:understanding-ivf", { expire: 0 });
-      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"post_unpublished"'));
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"post_unpublished"'));
     });
   });
 });

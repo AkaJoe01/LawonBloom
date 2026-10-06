@@ -8,6 +8,7 @@ import { searchQuery } from "@/lib/validation/blog";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/search" },
   title: "Search the journal",
   robots: { index: false, follow: false },
 };

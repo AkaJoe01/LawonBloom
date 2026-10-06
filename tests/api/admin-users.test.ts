@@ -167,7 +167,7 @@ describe("admin users endpoints", () => {
       expect(createArgs.data.passwordHash).toContain("$argon2id$");
       expect(createArgs.data.passwordHash).not.toBe(payload.displayOncePassword);
       expect(vi.mocked(console.info)).toHaveBeenCalledWith(
-        expect.stringContaining('"event":"editor_created"'),
+        expect.stringContaining('"evt":"editor_created"'),
       );
     });
   });
@@ -210,7 +210,7 @@ describe("admin users endpoints", () => {
         data: { isActive: false, sessionEpoch: { increment: 1 } },
       });
       expect(vi.mocked(console.info)).toHaveBeenCalledWith(
-        expect.stringContaining('"event":"user_deactivated"'),
+        expect.stringContaining('"evt":"user_deactivated"'),
       );
     });
 
@@ -238,7 +238,7 @@ describe("admin users endpoints", () => {
       expect(updateArgs.data.failedLogins).toBe(0);
       expect(updateArgs.data.lockedUntil).toBeNull();
       expect(vi.mocked(console.info)).toHaveBeenCalledWith(
-        expect.stringContaining('"event":"password_reset"'),
+        expect.stringContaining('"evt":"password_reset"'),
       );
     });
   });

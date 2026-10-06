@@ -14,6 +14,8 @@
     "images:check": "tsx scripts/check-image-dims.ts",
     "images:update": "tsx scripts/check-image-dims.ts --update",
     "secrets:check": "tsx scripts/check-build-secrets.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "dns:check": "tsx scripts/check-resend-dns.ts",
     "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {

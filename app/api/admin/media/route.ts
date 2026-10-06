@@ -1,4 +1,5 @@
 import { put } from "@vercel/blob";
+import { logEvent } from "@/lib/observability/log";
 import { NextResponse } from "next/server";
 import { apiError } from "@/lib/api-error";
 import { perUserGate, requireStaff } from "@/lib/auth/guards";
@@ -81,9 +82,7 @@ export async function POST(request: Request) {
   try {
     processed = await processUpload(buffer);
   } catch (error) {
-    console.error(
-      JSON.stringify({ event: "media_process_failed", err: error instanceof Error ? error.message : "unknown" }),
-    );
+    logEvent("media_process_failed", { err: error instanceof Error ? error.message : "unknown" }, "error");
     return apiError(500, "processing_failed", "Image processing failed. Try a different file.");
   }
 
@@ -97,9 +96,7 @@ export async function POST(request: Request) {
       contentType: processed.mimeType,
     });
   } catch (error) {
-    console.error(
-      JSON.stringify({ event: "media_blob_failed", err: error instanceof Error ? error.message : "unknown" }),
-    );
+    logEvent("media_blob_failed", { err: error instanceof Error ? error.message : "unknown" }, "error");
     return apiError(500, "storage_failed", "Could not store the image. Try again.");
   }
 

@@ -1,4 +1,5 @@
 import type { Prisma } from "@prisma/client";
+import { logEvent } from "@/lib/observability/log";
 import { NextResponse } from "next/server";
 import { requireStaff, perUserGate } from "@/lib/auth/guards";
 import { getDb } from "@/lib/db";
@@ -136,7 +137,7 @@ export async function DELETE(request: Request, { params }: Params) {
   await db.post.delete({ where: { id } });
   revalidatePostTags(existing.slug);
 
-  console.info(JSON.stringify({ event: "post_deleted", userId: guard.session.user.id, postId: id }));
+  logEvent("post_deleted", { userId: guard.session.user.id, postId: id });
 
   return new Response(null, { status: 204 });
 }

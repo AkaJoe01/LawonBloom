@@ -1,5 +1,6 @@
 import { getDb } from "@/lib/db";
 import { sendMail } from "@/lib/mail";
+import { logEvent } from "@/lib/observability/log";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { verifyPassword } from "./password";
 import { decryptTotpSecret, hashBackupCode, verifyTotpCode } from "./totp";
@@ -9,6 +10,7 @@ export interface AuthorizeInput {
   password: string;
   totp?: string;
   ip: string;
+  rid?: string;
 }
 
 export interface SessionClaims {
@@ -37,11 +39,14 @@ async function consumeFailureBucket(email: string, ip: string): Promise<boolean>
   return !bucket.ok;
 }
 
-async function applyLockout(user: {
-  id: string;
-  email: string;
-  lockoutCount: number;
-}): Promise<Date> {
+async function applyLockout(
+  user: {
+    id: string;
+    email: string;
+    lockoutCount: number;
+  },
+  rid?: string,
+): Promise<Date> {
   const db = getDb();
   const lockedUntil = new Date(Date.now() + LOCKOUT_MS);
   const lockoutCount = user.lockoutCount + 1;
@@ -49,22 +54,33 @@ async function applyLockout(user: {
     where: { id: user.id },
     data: { lockedUntil, lockoutCount, failedLogins: 0 },
   });
+  logEvent("lockout", { rid, userId: user.id, lockoutCount, lockedUntil: lockedUntil.toISOString() }, "warn");
   if (lockoutCount % 3 === 0) {
-    await sendMail("account_lockout_alert", {
-      email: user.email,
-      lockoutCount,
-      lockedUntilIso: lockedUntil.toISOString(),
-    });
+    await sendMail(
+      "account_lockout_alert",
+      {
+        email: user.email,
+        lockoutCount,
+        lockedUntilIso: lockedUntil.toISOString(),
+      },
+      { rid },
+    );
   }
   return lockedUntil;
 }
 
 export async function authorizeCredentials(input: AuthorizeInput): Promise<AuthorizeOutcome> {
+  const startedAt = Date.now();
   const db = getDb();
   const now = new Date();
   const user = await db.user.findUnique({ where: { email: input.email } });
 
   if (user?.lockedUntil && user.lockedUntil > now) {
+    logEvent(
+      "login_failed",
+      { rid: input.rid, ms: Date.now() - startedAt, reason: "locked", userId: user.id },
+      "warn",
+    );
     return { status: "locked", lockedUntil: user.lockedUntil };
   }
 
@@ -74,7 +90,7 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
     const tripped = await consumeFailureBucket(input.email, input.ip);
     if (user) {
       if (tripped) {
-        await applyLockout(user);
+        await applyLockout(user, input.rid);
       } else {
         await db.user.update({
           where: { id: user.id },
@@ -82,10 +98,20 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
         });
       }
     }
+    logEvent(
+      "login_failed",
+      { rid: input.rid, ms: Date.now() - startedAt, reason: "invalid_credentials", userId: user?.id },
+      "warn",
+    );
     return { status: "invalid" };
   }
 
   if (!user || !user.isActive) {
+    logEvent(
+      "login_failed",
+      { rid: input.rid, ms: Date.now() - startedAt, reason: "inactive", userId: user?.id },
+      "warn",
+    );
     return { status: "invalid" };
   }
 
@@ -108,8 +134,13 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
       if (!valid) {
         const tripped = await consumeFailureBucket(input.email, input.ip);
         if (tripped) {
-          await applyLockout(user);
+          await applyLockout(user, input.rid);
         }
+        logEvent(
+          "login_failed",
+          { rid: input.rid, ms: Date.now() - startedAt, reason: "two_factor_invalid", userId: user.id },
+          "warn",
+        );
         return { status: "two_factor" };
       }
     } else if (/^[A-Z0-9]{10}$/.test(input.totp)) {
@@ -120,15 +151,20 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
       if (!backup) {
         const tripped = await consumeFailureBucket(input.email, input.ip);
         if (tripped) {
-          await applyLockout(user);
+          await applyLockout(user, input.rid);
         }
+        logEvent(
+          "login_failed",
+          { rid: input.rid, ms: Date.now() - startedAt, reason: "backup_code_invalid", userId: user.id },
+          "warn",
+        );
         return { status: "two_factor" };
       }
       await db.backupCode.update({
         where: { id: backup.id },
         data: { usedAt: new Date() },
       });
-      console.info(JSON.stringify({ event: "backup_code_used", userId: user.id }));
+      logEvent("backup_code_used", { rid: input.rid, userId: user.id });
     } else {
       return { status: "two_factor" };
     }
@@ -138,6 +174,8 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
     where: { id: user.id },
     data: { failedLogins: 0, lastLoginAt: now },
   });
+
+  logEvent("login_success", { rid: input.rid, ms: Date.now() - startedAt, userId: user.id });
 
   return {
     status: "ok",

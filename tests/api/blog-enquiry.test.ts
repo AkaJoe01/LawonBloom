@@ -133,16 +133,20 @@ describe("POST /api/blog-enquiry", () => {
       name: "Ada Obi",
       email: "ada@example.com",
       postSlug: "understanding-ivf",
-      consentVersion: "v1",
+      consentVersion: "v2",
     });
     expect(data.consentAt).toBeInstanceOf(Date);
-    expect(mocks.sendMail).toHaveBeenCalledWith("blog_enquiry", {
-      name: "Ada Obi",
-      email: "ada@example.com",
-      phone: "+2348001112222",
-      message: "I would like to know more about IVF success rates.",
-      postSlug: "understanding-ivf",
-    });
+    expect(mocks.sendMail).toHaveBeenCalledWith(
+      "blog_enquiry",
+      {
+        name: "Ada Obi",
+        email: "ada@example.com",
+        phone: "+2348001112222",
+        message: "I would like to know more about IVF success rates.",
+        postSlug: "understanding-ivf",
+      },
+      { rid: undefined },
+    );
   });
 
   it("returns notified:false (degraded mode) when mail is disabled", async () => {
@@ -150,7 +154,7 @@ describe("POST /api/blog-enquiry", () => {
     const response = await POST(request(validBody()));
     expect(response.status).toBe(201);
     expect(await response.json()).toEqual({ received: true, notified: false });
-    expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"enquiry_created"'));
+    expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"enquiry_created"'));
   });
 
   it("returns mailFailed when the store succeeds but the notification fails", async () => {
@@ -158,7 +162,7 @@ describe("POST /api/blog-enquiry", () => {
     const response = await POST(request(validBody()));
     expect(response.status).toBe(201);
     expect(await response.json()).toEqual({ received: true, notified: false, mailFailed: true });
-    expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"enquiry_partial"'));
+    expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"enquiry_partial"'));
   });
 
   it("never logs enquiry PII", async () => {

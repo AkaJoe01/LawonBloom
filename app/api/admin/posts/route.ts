@@ -1,4 +1,5 @@
 import type { Prisma } from "@prisma/client";
+import { logEvent } from "@/lib/observability/log";
 import { NextResponse } from "next/server";
 import { requireStaff, perUserGate } from "@/lib/auth/guards";
 import { getDb } from "@/lib/db";
@@ -119,7 +120,7 @@ export async function POST(request: Request) {
     select: { id: true, slug: true, status: true, createdAt: true },
   });
 
-  console.info(JSON.stringify({ event: "post_created", userId: guard.session.user.id, postId: post.id }));
+  logEvent("post_created", { userId: guard.session.user.id, postId: post.id });
 
   return NextResponse.json(post, { status: 201 });
 }

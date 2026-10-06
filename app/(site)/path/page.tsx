@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
+    alternates: { canonical: "/path" },
     title: "The Path to Parenthood - Lawonbloom",
     description: "Your journey to parenthood illuminated.",
 };

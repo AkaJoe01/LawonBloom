@@ -130,6 +130,7 @@ describe("authorizeCredentials", () => {
     expect(mocks.sendMail).toHaveBeenCalledWith(
       "account_lockout_alert",
       expect.objectContaining({ email: "admin@clinic.test", lockoutCount: 3 }),
+      { rid: undefined },
     );
   });
 

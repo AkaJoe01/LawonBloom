@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { CATEGORIES } from "../lib/categories";
 import { hashPassword } from "../lib/auth/password";
+import { logEvent } from "../lib/observability/log";
 import { emailSchema } from "../lib/validation/common";
 
 loadEnv({ path: ".env.local", quiet: true });
@@ -31,14 +32,14 @@ async function main(): Promise<void> {
   try {
     const existing = await db.user.findUnique({ where: { email } });
     if (existing) {
-      console.info(JSON.stringify({ event: "seed_admin_exists" }));
+      logEvent("seed_admin_exists");
     } else {
       const passwordHash = await hashPassword(password);
       const created = await db.user.create({
         data: { email, passwordHash, role: "ADMIN" },
         select: { id: true },
       });
-      console.info(JSON.stringify({ event: "seed_admin_created", adminId: created.id }));
+      logEvent("seed_admin_created", { adminId: created.id });
     }
 
     for (const [index, category] of CATEGORIES.entries()) {
@@ -53,7 +54,7 @@ async function main(): Promise<void> {
         },
       });
     }
-    console.info(JSON.stringify({ event: "seed_categories_upserted", count: CATEGORIES.length }));
+    logEvent("seed_categories_upserted", { count: CATEGORIES.length });
   } finally {
     await db.$disconnect();
   }

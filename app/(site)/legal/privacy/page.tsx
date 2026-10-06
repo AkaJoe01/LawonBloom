@@ -1,43 +1,43 @@
 export const metadata = {
+  alternates: { canonical: "/legal/privacy" },
   title: "Privacy Registry | Lawonbloom",
   description: "Lawonbloom Fertility Centre's commitment to protecting your privacy and personal data.",
 };
 
-const sections = [
+const subProcessors = [
+  { name: "Neon", purpose: "PostgreSQL database hosting" },
+  { name: "Vercel", purpose: "Application hosting and CDN" },
+  { name: "Vercel Blob", purpose: "Image and media storage" },
+  { name: "Resend", purpose: "Transactional email delivery" },
+  { name: "Upstash", purpose: "Rate limiting (Redis)" },
+  { name: "Sentry", purpose: "Error monitoring (PII-scrubbed)" },
+];
+
+const sections: { title: string; content: string }[] = [
   {
-    title: "Information We Collect",
+    title: "Blog & Enquiry Processing",
     content:
-      "We collect personal information necessary to provide you with exceptional fertility care. This includes your name, contact details, medical history, genetic information, insurance details, and any other data relevant to your treatment journey. All information is collected with your explicit consent and in accordance with applicable data protection regulations.",
-  },
-  {
-    title: "How We Use Your Information",
-    content:
-      "Your personal data is used exclusively to deliver, coordinate, and improve your care at Lawonbloom. This includes scheduling consultations, processing medical records, communicating with your care team, and fulfilling regulatory obligations. We may also use anonymized data for clinical research to advance reproductive medicine.",
-  },
-  {
-    title: "Data Protection & Security",
-    content:
-      "We employ industry-leading encryption, biometric access controls, and strict internal protocols to safeguard your information. Our systems are regularly audited and comply with GDPR, HIPAA, and all applicable data protection frameworks. Access to your data is limited to authorized personnel bound by confidentiality agreements.",
-  },
-  {
-    title: "Your Rights",
-    content:
-      "You have the right to access, correct, or request deletion of your personal data at any time. You may withdraw consent for data processing, request a copy of your records, or lodge a complaint with your local data protection authority. To exercise these rights, contact our Data Protection Officer at lawonbloomfertilitycentre@gmail.com.",
+      "Public forms on our blog collect your name, email, optional phone number, the message you write, a consent timestamp with the policy version, and the article you were reading when you enquired. We use this information solely to respond to your health enquiries. The lawful basis is your captured consent. Enquiry messages are never written to application logs, error monitoring, or analytics — they are visible only to clinic staff.",
   },
   {
     title: "Data Retention",
     content:
-      "We retain your personal data for the duration of your care relationship with Lawonbloom and as required by regulatory obligations thereafter. Medical records are retained in accordance with applicable laws governing reproductive health documentation.",
+      "Blog enquiries are retained for 24 months and then deleted automatically. Staff accounts are kept indefinitely for attribution and provenance of published medical content, with personal data erased on a valid request while post attribution is preserved. Published posts and media are retained while they remain public.",
   },
   {
-    title: "Third-Party Sharing",
+    title: "Analytics & Cookies",
     content:
-      "We do not sell your personal data. Information may be shared with trusted partners only when necessary for your care — such as laboratories, pharmacies, or insurance providers — and always under strict data processing agreements that ensure your information remains protected.",
+      "This site uses no analytics cookies, no tracking pixels, no profiling, and no advertising trackers. For this reason no cookie banner is shown. Only the session cookies required for staff sign-in exist, and they are never used for analytics.",
   },
   {
-    title: "Cookies & Analytics",
+    title: "Your Rights",
     content:
-      "Our website uses essential cookies for functionality and optional analytics cookies to improve your experience. You can manage your cookie preferences at any time. We do not use tracking cookies for advertising purposes.",
+      "Under the NDPA 2023 / NDPR you may request access to, correction of, or deletion of your personal data, and you may withdraw consent at any time. Submit a request to our Data Protection Officer and we will respond within 30 days with either a data export (your enquiries and account record) or a deletion (enquiry records erased, personal identifiers anonymised while published attribution is preserved).",
+  },
+  {
+    title: "Clinic-Care Information",
+    content:
+      "Information you share as part of treatment at the physical clinic is processed under your treatment consent and applicable health-records law, separately from this website. Contact our Data Protection Officer for care-record requests.",
   },
 ];
 
@@ -52,8 +52,8 @@ export default function PrivacyPage() {
         <p className="mx-auto max-w-2xl text-on-surface-variant leading-7">
           Your privacy is the bedrock of our sanctuary. We handle your personal information with the same precision and care as your treatment.
         </p>
-        <p className="mt-4 text-sm text-on-surface-variant/60">
-          Last updated: May 2026
+        <p className="mt-4 text-sm text-on-surface-variant">
+          Policy version v2 &middot; Last updated: October 2026 &middot; Governed by the NDPA 2023 and NDPR
         </p>
       </section>
 
@@ -67,6 +67,30 @@ export default function PrivacyPage() {
               <p className="text-on-surface-variant leading-8">{section.content}</p>
             </div>
           ))}
+
+          <div>
+            <h2 className="font-display text-2xl text-foreground mb-4 md:text-3xl">
+              Sub-processors Table
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-outline-variant/40 text-on-surface-variant">
+                    <th scope="col" className="py-3 pr-6 font-semibold">Sub-processor</th>
+                    <th scope="col" className="py-3 font-semibold">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subProcessors.map((entry) => (
+                    <tr key={entry.name} className="border-b border-outline-variant/20">
+                      <td className="py-3 pr-6 text-foreground">{entry.name}</td>
+                      <td className="py-3 text-on-surface-variant">{entry.purpose}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
         <div className="mt-16 rounded-[32px] border border-outline-variant/30 bg-surface-container-low p-8 text-center md:p-12">

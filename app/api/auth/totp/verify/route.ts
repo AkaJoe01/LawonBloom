@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logEvent } from "@/lib/observability/log";
 import { auth } from "@/auth";
 import { decryptTotpSecret, generateBackupCodes, hashBackupCode, verifyTotpCode } from "@/lib/auth/totp";
 import { getDb } from "@/lib/db";
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
       data: codes.map((code) => ({ userId: user.id, codeHash: hashBackupCode(code) })),
     }),
   ]);
-  console.info(JSON.stringify({ event: "totp_enabled", userId: user.id }));
+  logEvent("totp_enabled", { userId: user.id });
 
   return NextResponse.json({ ok: true, backupCodes: codes });
 }

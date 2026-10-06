@@ -20,7 +20,7 @@ describe("enquiryInput", () => {
     const parsed = enquiryInput.safeParse(validEnquiry());
     expect(parsed.success).toBe(true);
     if (!parsed.success) return;
-    expect(parsed.data.consentVersion).toBe("v1");
+    expect(parsed.data.consentVersion).toBe("v2");
     expect(parsed.data.consentAt).toBeInstanceOf(Date);
     expect(parsed.data.phone).toBe("+234 800 111 2222");
   });

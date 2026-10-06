@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import { headers } from "next/headers";
 import { authorizeCredentials } from "@/lib/auth/authorize";
 import { getDb } from "@/lib/db";
+import { ridOf } from "@/lib/observability/log";
 import { loginSchema } from "@/lib/validation/auth";
 
 const ABSOLUTE_SESSION_SECONDS = 12 * 60 * 60;
@@ -15,8 +16,7 @@ class AccountLocked extends CredentialsSignin {
   code = "locked";
 }
 
-async function clientIp(): Promise<string> {
-  const headerStore = await headers();
+async function clientIp(headerStore: Headers): Promise<string> {
   const forwarded = headerStore.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0]?.trim() || "unknown";
   return headerStore.get("x-real-ip")?.trim() || "unknown";
@@ -42,8 +42,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!parsed.success) {
           return null;
         }
-        const ip = await clientIp();
-        const outcome = await authorizeCredentials({ ...parsed.data, ip });
+        const headerStore = await headers();
+        const ip = await clientIp(headerStore);
+        const rid = ridOf(headerStore) ?? undefined;
+        const outcome = await authorizeCredentials({ ...parsed.data, ip, rid });
         if (outcome.status === "ok") {
           return {
             id: outcome.user.id,

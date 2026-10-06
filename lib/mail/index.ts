@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { z } from "zod";
+import { logEvent } from "@/lib/observability/log";
 import { renderTemplate, type MailTemplateMap, type TemplateName } from "./templates";
 
 const mailEnvSchema = z
@@ -36,15 +37,16 @@ export type MailResult =
 export async function sendMail<T extends TemplateName>(
   template: T,
   data: MailTemplateMap[T],
+  opts?: { rid?: string },
 ): Promise<MailResult> {
   const rendered = renderTemplate(template, data);
+  const rid = opts?.rid;
 
   const parsed = mailEnvSchema.safeParse(process.env);
   if (!parsed.success) {
-    return {
-      sent: false,
-      error: `mail env invalid: ${parsed.error.issues.map((issue) => issue.message).join("; ")}`,
-    };
+    const error = `mail env invalid: ${parsed.error.issues.map((issue) => issue.message).join("; ")}`;
+    logEvent("mail_failed", { template, rid, err: error }, "error");
+    return { sent: false, error };
   }
   const env = parsed.data;
 
@@ -67,11 +69,13 @@ export async function sendMail<T extends TemplateName>(
       html: rendered.html,
     });
     if (error) {
+      logEvent("mail_failed", { template, rid, err: error.message }, "error");
       return { sent: false, error: error.message };
     }
     return { sent: true, id: result?.id };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown mail error";
+    logEvent("mail_failed", { template, rid, err: message }, "error");
     return { sent: false, error: message };
   }
 }

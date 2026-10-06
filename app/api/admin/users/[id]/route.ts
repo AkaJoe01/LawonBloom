@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logEvent } from "@/lib/observability/log";
 import { getDb } from "@/lib/db";
 import { adminMutationGate, requireAdmin } from "@/lib/auth/guards";
 import { generatePassword, hashPassword } from "@/lib/auth/password";
@@ -49,13 +50,13 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       where: { id: target.id },
       data: { isActive: false, sessionEpoch: { increment: 1 } },
     });
-    console.info(JSON.stringify({ event: "user_deactivated", adminId, targetId: target.id }));
+    logEvent("user_deactivated", { adminId, targetId: target.id });
     return NextResponse.json({ ok: true });
   }
 
   if (parsed.data.action === "activate") {
     await db.user.update({ where: { id: target.id }, data: { isActive: true } });
-    console.info(JSON.stringify({ event: "user_activated", adminId, targetId: target.id }));
+    logEvent("user_activated", { adminId, targetId: target.id });
     return NextResponse.json({ ok: true });
   }
 
@@ -65,6 +66,6 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     where: { id: target.id },
     data: { passwordHash, sessionEpoch: { increment: 1 }, failedLogins: 0, lockedUntil: null },
   });
-  console.info(JSON.stringify({ event: "password_reset", adminId, targetId: target.id }));
+  logEvent("password_reset", { adminId, targetId: target.id });
   return NextResponse.json({ displayOncePassword });
 }

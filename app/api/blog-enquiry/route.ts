@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { sendMail } from "@/lib/mail";
+import { logEvent, ridOf } from "@/lib/observability/log";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { originRejection } from "@/lib/security/origin";
 import { enquiryInput } from "@/lib/validation/blog";
@@ -15,6 +16,7 @@ function clientIp(request: Request): string {
 export async function POST(request: Request) {
   const rejected = originRejection(request);
   if (rejected) return rejected;
+  const rid = ridOf(request) ?? undefined;
 
   const ip = clientIp(request);
   const ipRate = await checkRateLimit(
@@ -80,11 +82,10 @@ export async function POST(request: Request) {
     });
     createdId = created.id;
   } catch (error) {
-    console.error(
-      JSON.stringify({
-        event: "enquiry_store_failed",
-        reason: error instanceof Error ? error.message : "unknown",
-      }),
+    logEvent(
+      "enquiry_store_failed",
+      { rid, reason: error instanceof Error ? error.message : "unknown" },
+      "error",
     );
     return NextResponse.json(
       { error: { code: "server_error", message: "We could not receive your enquiry right now. Please try again." } },
@@ -92,21 +93,25 @@ export async function POST(request: Request) {
     );
   }
 
-  const mail = await sendMail("blog_enquiry", {
-    name: input.name,
-    email: input.email,
-    phone: input.phone ?? undefined,
-    message: input.message,
-    postSlug: input.postSlug ?? undefined,
-  });
+  const mail = await sendMail(
+    "blog_enquiry",
+    {
+      name: input.name,
+      email: input.email,
+      phone: input.phone ?? undefined,
+      message: input.message,
+      postSlug: input.postSlug ?? undefined,
+    },
+    { rid },
+  );
 
   const notified = mail.sent;
   const mailFailed = !mail.sent && !mail.skipped;
 
   if (mailFailed) {
-    console.info(JSON.stringify({ event: "enquiry_partial", id: createdId }));
+    logEvent("enquiry_partial", { rid, id: createdId });
   } else {
-    console.info(JSON.stringify({ event: "enquiry_created", id: createdId, notified }));
+    logEvent("enquiry_created", { rid, id: createdId, notified });
   }
 
   return NextResponse.json(

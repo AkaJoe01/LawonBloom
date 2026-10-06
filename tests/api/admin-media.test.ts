@@ -439,7 +439,7 @@ describe("admin media endpoints", () => {
       expect(await response.json()).toEqual({ usedBy: 0 });
       expect(mocks.blobDel).toHaveBeenCalledWith("media/abc.png");
       expect(mocks.mediaDelete).toHaveBeenCalledWith({ where: { id: "m1" } });
-      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"event":"media_delete"'));
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"media_delete"'));
     });
 
     it("returns an honest 500 when blob deletion fails", async () => {

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logEvent } from "@/lib/observability/log";
 import { requireStaff, perUserGate } from "@/lib/auth/guards";
 import { getDb } from "@/lib/db";
 import { apiError } from "@/lib/api-error";
@@ -35,7 +36,7 @@ export async function POST(request: Request, { params }: Params) {
 
   revalidatePostTags(existing.slug);
 
-  console.info(JSON.stringify({ event: "post_unpublished", userId: guard.session.user.id, postId: id }));
+  logEvent("post_unpublished", { userId: guard.session.user.id, postId: id });
 
   return NextResponse.json(unpublished);
 }
