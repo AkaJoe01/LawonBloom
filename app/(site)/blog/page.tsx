@@ -4,9 +4,8 @@ import BlogPagination from "@/components/blog/BlogPagination";
 import CategoryNav from "@/components/blog/CategoryNav";
 import EnquiryForm from "@/components/blog/EnquiryForm";
 import PostCard from "@/components/blog/PostCard";
-import JsonLd from "@/components/seo/JsonLd";
 import { BLOG_PAGE_SIZE, getBlogCategories, getBlogIndex } from "@/lib/blog/queries";
-import { buildIndexMetadata, organizationJsonLd } from "@/lib/seo";
+import { buildIndexMetadata } from "@/lib/seo";
 import { blogPageQuery } from "@/lib/validation/blog";
 
 export const dynamic = "force-dynamic";
@@ -44,7 +43,6 @@ export default async function BlogIndexPage({
 
   return (
     <div className="mx-auto max-w-6xl px-6 pb-24 pt-10 md:pt-16">
-      <JsonLd data={organizationJsonLd()} />
       <BlogHeader />
       <CategoryNav categories={categories} />
 

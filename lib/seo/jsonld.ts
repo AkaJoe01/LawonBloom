@@ -1,9 +1,14 @@
 import { clampText } from "./metadata";
 import {
+  ADDRESS,
   APEX,
+  CLINIC_ID,
+  EMAIL,
   ORG_ID,
   ORG_LOGO_URL,
   ORG_NAME,
+  PHONE,
+  WEBSITE_ID,
   apexUrl,
   postOgImageUrl,
   postUrl,
@@ -24,6 +29,57 @@ export function organizationJsonLd(): JsonLd {
       width: 512,
       height: 512,
     },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Patient enquiries",
+      telephone: PHONE,
+      email: EMAIL,
+      areaServed: "NG",
+    },
+  };
+}
+
+export function websiteJsonLd(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    url: APEX,
+    name: ORG_NAME,
+    publisher: { "@id": ORG_ID },
+  };
+}
+
+const CLINIC_SERVICES = [
+  "In Vitro Fertilization (IVF)",
+  "Intrauterine Insemination (IUI)",
+  "Genetic Testing",
+  "Fertility Preservation",
+  "Holistic Support",
+  "Surrogacy Services",
+] as const;
+
+export function clinicJsonLd(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "@id": CLINIC_ID,
+    name: ORG_NAME,
+    url: APEX,
+    telephone: PHONE,
+    image: ORG_LOGO_URL,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: ADDRESS.street,
+      addressLocality: ADDRESS.locality,
+      addressRegion: ADDRESS.region,
+      addressCountry: ADDRESS.country,
+    },
+    availableService: CLINIC_SERVICES.map((name) => ({
+      "@type": "MedicalProcedure",
+      name,
+    })),
+    parentOrganization: { "@id": ORG_ID },
   };
 }
 

@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/seo/JsonLd";
 import {
   APEX,
   DEFAULT_DESCRIPTION,
@@ -12,6 +13,9 @@ import {
   OG_IMAGE_WIDTH,
   ORG_NAME,
   TITLE_TEMPLATE,
+  clinicJsonLd,
+  organizationJsonLd,
+  websiteJsonLd,
 } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -42,6 +46,9 @@ export default async function SiteRootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-[var(--surface)] text-[var(--foreground)]">
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={clinicJsonLd()} />
         <Header />
         <main className="grow pt-20">{children}</main>
         <Footer />
