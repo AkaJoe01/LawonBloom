@@ -17,6 +17,7 @@
  * Exit 0 = green, 1 = failures.
  */
 import { parse } from "parse5";
+import { confirmedFaqs } from "../app/(site)/faq/faqs";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
@@ -105,6 +106,35 @@ function findCanonical(doc: N): string | null {
   return null;
 }
 
+function findJsonLdNodes(doc: N): Record<string, unknown>[] {
+  const nodes: Record<string, unknown>[] = [];
+  for (const el of walk(doc, [])) {
+    if (el.tagName !== "script") continue;
+    const type = (el.attrs ?? []).find((a) => a.name === "type")?.value;
+    if (type !== "application/ld+json") continue;
+    const raw = textOf(el).trim();
+    if (!raw) continue;
+    try {
+      const parsed = JSON.parse(raw) as Record<string, unknown>;
+      if (Array.isArray(parsed)) nodes.push(...(parsed as Record<string, unknown>[]));
+      else nodes.push(parsed);
+    } catch {
+      // unparseable JSON-LD is reported by the caller via node count
+    }
+  }
+  return nodes;
+}
+
+function nodeTypes(nodes: Record<string, unknown>[]): Set<string> {
+  const types = new Set<string>();
+  for (const node of nodes) {
+    const t = node["@type"];
+    if (Array.isArray(t)) t.forEach((x) => types.add(String(x)));
+    else if (t) types.add(String(t));
+  }
+  return types;
+}
+
 async function fetchText(url: string): Promise<{ status: number; body: string; contentType: string }> {
   const res = await fetch(url, { redirect: "manual" });
   return { status: res.status, body: await res.text(), contentType: res.headers.get("content-type") ?? "" };
@@ -119,6 +149,7 @@ async function auditRoute(
     ogTitle: string;
     noindex: boolean;
     ogUrl?: string;
+    faqCount?: number;
   },
 ): Promise<string | null> {
   const res = await fetchText(`${BASE}${route}`);
@@ -151,6 +182,36 @@ async function auditRoute(
   const robots = findMeta(doc, "name", "robots");
   if (want.noindex) {
     expectTrue(route, "meta robots noindex", !!robots && robots.includes("noindex"), `got ${JSON.stringify(robots)}`);
+  }
+
+  // Heading audit (plan Q4 regression): exactly one h1 per route.
+  const h1s = walk(doc, []).filter((el) => el.tagName === "h1");
+  expectTrue(route, "exactly one <h1>", h1s.length === 1, `got ${h1s.length}`);
+
+  // Sitewide JSON-LD (M8b): Organization + WebSite + MedicalClinic from layout.
+  const nodes = findJsonLdNodes(doc);
+  const types = nodeTypes(nodes);
+  for (const t of ["Organization", "WebSite", "MedicalClinic"]) {
+    expectTrue(route, `JSON-LD ${t}`, types.has(t));
+  }
+  const ids = nodes.map((n) => n["@id"]).filter((id): id is string => typeof id === "string");
+  expectTrue(route, "unique JSON-LD @ids", new Set(ids).size === ids.length, ids.join(", "));
+
+  // FAQPage is gated on H1 sign-off (confirmed flags in app/(site)/faq/faqs.ts).
+  if (want.faqCount !== undefined) {
+    if (want.faqCount > 0) {
+      expectTrue(route, "JSON-LD FAQPage", types.has("FAQPage"));
+      const faqNode = nodes.find((n) => n["@type"] === "FAQPage");
+      const main = faqNode?.mainEntity;
+      expectTrue(
+        route,
+        "FAQPage mainEntity length",
+        Array.isArray(main) && main.length === want.faqCount,
+        `got ${Array.isArray(main) ? main.length : "none"}, want ${want.faqCount}`,
+      );
+    } else {
+      expectTrue(route, "no FAQPage before H1 sign-off", !types.has("FAQPage"));
+    }
   }
   return title;
 }
@@ -187,6 +248,7 @@ async function main(): Promise<void> {
         canonical,
         ogTitle,
         noindex: false,
+        ...(path === "/faq" ? { faqCount: confirmedFaqs().length } : {}),
       }),
     );
   }

@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   APEX,
+  CLINIC_ID,
+  EMAIL,
   OG_FALLBACK_URL,
   ORG_ID,
   ORG_LOGO_URL,
   ORG_NAME,
+  PHONE,
+  WEBSITE_ID,
   articleJsonLd,
   apexUrl,
   blogAlternates,
@@ -12,6 +16,7 @@ import {
   buildCategoryMetadata,
   buildIndexMetadata,
   buildPostMetadata,
+  clinicJsonLd,
   clampText,
   faqJsonLd,
   organizationJsonLd,
@@ -21,6 +26,7 @@ import {
   postUrl,
   rssDescription,
   serializeJsonLd,
+  websiteJsonLd,
 } from "@/lib/seo";
 
 const post = {
@@ -158,6 +164,50 @@ describe("JSON-LD builders", () => {
     expect(org["@type"]).toBe("Organization");
     expect(org["@id"]).toBe(ORG_ID);
     expect(org.logo).toEqual({ "@type": "ImageObject", url: ORG_LOGO_URL, width: 512, height: 512 });
+  });
+
+  it("carries the Q15 contactPoint on the Organization", () => {
+    const org = organizationJsonLd();
+    expect(org.contactPoint).toEqual({
+      "@type": "ContactPoint",
+      contactType: "Patient enquiries",
+      telephone: PHONE,
+      email: EMAIL,
+      areaServed: "NG",
+    });
+  });
+
+  it("emits WebSite referencing the Organization (M8b)", () => {
+    const site = websiteJsonLd();
+    expect(site["@type"]).toBe("WebSite");
+    expect(site["@id"]).toBe(WEBSITE_ID);
+    expect(site.url).toBe(APEX);
+    expect(site.name).toBe(ORG_NAME);
+    expect(site.publisher).toEqual({ "@id": ORG_ID });
+  });
+
+  it("emits MedicalClinic with address, phone and the six services, no hours (Q2)", () => {
+    const clinic = clinicJsonLd();
+    expect(clinic["@type"]).toBe("MedicalClinic");
+    expect(clinic["@id"]).toBe(CLINIC_ID);
+    expect(clinic.telephone).toBe(PHONE);
+    expect(clinic.address).toEqual({
+      "@type": "PostalAddress",
+      streetAddress: expect.stringContaining("Canon Odusanwo"),
+      addressLocality: "Ibadan",
+      addressRegion: "Oyo",
+      addressCountry: "NG",
+    });
+    const services = (clinic.availableService as { "@type": string; name: string }[]).map((s) => s.name);
+    expect(services).toHaveLength(6);
+    expect(services.join(" ")).toContain("IVF");
+    expect(services.join(" ")).toContain("IUI");
+    expect(services.join(" ")).toContain("Genetic Testing");
+    expect(services.join(" ")).toContain("Fertility Preservation");
+    expect(services.join(" ")).toContain("Holistic Support");
+    expect(services.join(" ")).toContain("Surrogacy");
+    expect(clinic.parentOrganization).toEqual({ "@id": ORG_ID });
+    expect(clinic).not.toHaveProperty("openingHours");
   });
 
   it("builds an Article with publisher reference and ISO dates", () => {

@@ -46,9 +46,11 @@ const EXPECTED_SURFACE = [
   // lib/seo/jsonld.ts
   "articleJsonLd",
   "breadcrumbJsonLd",
+  "clinicJsonLd",
   "faqJsonLd",
   "organizationJsonLd",
   "serializeJsonLd",
+  "websiteJsonLd",
 ];
 
 describe("lib/seo.ts barrel", () => {
