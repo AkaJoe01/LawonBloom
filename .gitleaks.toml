@@ -1,0 +1,23 @@
+# Gitleaks config — extends the default ruleset.
+#
+# CI (gitleaks-action) has been red since run 5 on three findings that are
+# committed test/CI placeholders, not secrets. Allowlist is value/path based
+# (NOT fingerprint based, so it stays valid across new commits).
+[extend]
+useDefault = true
+
+[allowlist]
+  # Password alphabet constant — a charset, not a credential.
+  paths = ['''lib/auth/password\.ts$''']
+  # Known committed placeholders (same values as .github/workflows/ci.yml):
+  # AUTH_SECRET/TOTP_ENCRYPTION_KEY hex, seeded admin password, and the
+  # "placeholder"-suffixed third-party tokens (Blob, Resend, Upstash).
+  regexes = [
+    '''0123456789abcdef''',
+    '''ci-admin-password-012345''',
+    '''ci-upstash-placeholder-token''',
+    '''vercel_blob_rw_ci_placeholder''',
+    '''re_ci_placeholder''',
+    '''ci@example\.com''',
+  ]
+  stopwords = ['placeholder', 'example']

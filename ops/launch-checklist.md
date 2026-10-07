@@ -9,6 +9,10 @@
       OG/Twitter tags on all 25 checked routes, noindex on 404/`/blog/search`/`/admin/login`,
       `robots.txt` `Host:`, sitemap static entries without `lastModified`,
       `scripts/seo-audit.ts` (parse5, 396 checks) wired into CI.
+- [x] **Vercel preview builds:** `scripts/vercel-build.mjs` skips
+      `prisma migrate deploy` when DB env is absent on previews (hard-fails
+      without it on production); `next build` verified env-free locally.
+      `.gitleaks.toml` returns CI's secret scan to green (0 leaks, 85 commits).
 - [x] Structured logs: all §15a events wired through `lib/observability/log.ts`
       (`login_success|login_failed|lockout|backup_code_used|editor_created|publish|
       media_delete|enquiry_partial|mail_failed`), PII-redacting.
@@ -23,6 +27,16 @@
       (LG-1 verification), `scripts/csp-audit.ts`, `scripts/a11y-audit.ts`.
 - [ ] Rich Results Test passes (Article + FAQ sample); sitemap drift test green;
       OG cards validate in LinkedIn/X.
+      **M8b DoD note:** previews (and the production *.vercel.app alias) are
+      behind Vercel Authentication — verified 2026-10-07, unauthenticated
+      probe returns the "Protected Deployment" login wall. Google's Rich
+      Results Test and social-card scrapers cannot fetch previews, so these
+      checks **move to post-deploy** against the production custom domain;
+      pre-launch verification is local (`seo-audit` + JSON-LD unit tests).
+- [ ] **M8c DoD:** lint warnings drop **5 → 0** (raw `<img>` → `next/image`
+      conversions per §8-E); budget stays `--max-warnings 0` afterwards.
+- [ ] **M8b H1 precondition:** FAQ array confirmed (see Owner actions H1);
+      FAQPage schema gated on per-entry `confirmed` flags in code.
 - [ ] Enquiry honest-state matrix verified (success / partial / failed / rate-limited /
       honeypot).
 - [ ] Open relay + false-success verifiably gone, with regression test.
@@ -50,9 +64,11 @@
 - [ ] C-1 confirmed (Vercel Hobby + Neon Free baseline) or upgraded.
 - [ ] **H1:** clinic sign-off (written OK) on the M8a metadata copy — catalog titles
       and descriptions shipped as-draft (≤60/≤160 chars) per the SEO plan.
-- [ ] **H1:** confirm the **7 FAQ answers** in `app/(site)/faq/faqs.ts` are clinically
-      accurate before M8b ships `FAQPage` schema; unconfirmed answers stay out of
-      schema (remain visible in the UI).
+- [ ] **H1:** confirm the **6 FAQ answers** in the FAQ array
+      (`app/(site)/faq/` — the historical "7" was a wrong count; file is
+      authoritative) are clinically accurate before M8b ships `FAQPage`
+      schema; schema ships only entries flagged `confirmed` (unconfirmed
+      answers stay visible in the UI, out of schema).
 
 ## Post-launch 24h
 
