@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/sanctuaryServices/Hero";
 import ServicesGrid from "@/components/sanctuaryServices/ServicesGrid";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/sanctuary/services" },
-};
+export const metadata = pageMetadata("/sanctuary/services");
 
 export default function SanctuaryServicesPage() {
     return (

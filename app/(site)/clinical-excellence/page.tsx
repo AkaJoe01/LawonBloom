@@ -1,11 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import { ArrowRight, Wind, Thermometer, Shield } from "lucide-react";
 import Image from "next/image";
 
-export const metadata = {
-    alternates: { canonical: "/clinical-excellence" },
-    title: "Clinical Excellence | Lawonbloom",
-    description: "The Science of New Beginnings. Where uncompromising technological precision meets profound human empathy.",
-};
+export const metadata = pageMetadata("/clinical-excellence");
 
 export default function ClinicalExcellencePage() {
     return (

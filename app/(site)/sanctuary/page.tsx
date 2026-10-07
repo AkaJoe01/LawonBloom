@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/sanctuary/Hero";
 import VisionMission from "@/components/sanctuary/VisionMission";
 import Serenity from "@/components/sanctuary/Serenity";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/sanctuary" },
-};
+export const metadata = pageMetadata("/sanctuary");
 
 export default function SanctuaryPage() {
     return(

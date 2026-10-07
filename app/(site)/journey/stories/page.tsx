@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/journeyStories/Hero";
 import Cinematic from "@/components/journeyStories/Cinematic";
 import Families from "@/components/journeyStories/Families";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/journey/stories" },
-};
+export const metadata = pageMetadata("/journey/stories");
 
 export default function JourneyStoriesPage() {
     return (

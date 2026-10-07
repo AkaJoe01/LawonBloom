@@ -51,6 +51,22 @@ const eslintConfig = defineConfig([
       "no-restricted-syntax": "off",
     },
   },
+  {
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["**/seo/index", "**/seo/index.*"],
+              message:
+                "lib/seo.ts shadows the lib/seo/ directory; lib/seo/index.ts would be unreachable dead code. Import from the barrel (@/lib/seo) or a subpath (lib/seo/site etc.). See the resolution-rule header in lib/seo.ts.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;

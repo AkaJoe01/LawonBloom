@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from 'next/image';
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/about" },
-};
+export const metadata = pageMetadata("/about");
 
 export default function AboutPage() {
   return (

@@ -24,7 +24,6 @@ function routePriority(path: string): number {
 export function staticSitemapEntries(): MetadataRoute.Sitemap {
   return SITE_ROUTES.filter(isStaticSitemapRoute).map((path) => ({
     url: apexUrl(path),
-    lastModified: new Date(),
     changeFrequency: path === "/blog" ? ("weekly" as const) : ("monthly" as const),
     priority: routePriority(path),
   }));

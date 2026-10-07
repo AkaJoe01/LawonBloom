@@ -28,7 +28,7 @@ import {
   staticSitemapEntries,
 } from "@/lib/sitemap";
 import { SITE_ROUTES } from "@/lib/routes";
-import { APEX } from "@/lib/seo";
+import { APEX, SITE_PAGE_CATALOG } from "@/lib/seo";
 
 describe("isStaticSitemapRoute", () => {
   it("excludes admin, dynamic, and search routes", () => {
@@ -67,6 +67,20 @@ describe("staticSitemapEntries", () => {
     expect(byUrl.get(`${APEX}/blog`)!.priority).toBe(0.9);
     expect(byUrl.get(`${APEX}/blog`)!.changeFrequency).toBe("weekly");
     expect(byUrl.get(`${APEX}/faq`)!.priority).toBe(0.7);
+  });
+
+  it("omits lastModified on static entries and matches the SEO catalog (Q16)", () => {
+    const entries = staticSitemapEntries();
+    expect(entries).toHaveLength(24);
+    for (const entry of entries) {
+      expect(entry).not.toHaveProperty("lastModified");
+    }
+    const expected = new Set([
+      APEX,
+      ...Object.keys(SITE_PAGE_CATALOG).map((path) => `${APEX}${path}`),
+      `${APEX}/blog`,
+    ]);
+    expect(new Set(entries.map((entry) => entry.url))).toEqual(expected);
   });
 });
 

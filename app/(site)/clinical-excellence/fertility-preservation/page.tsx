@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/fertilityPreservation/Hero";
 import PrecisionSection from "@/components/fertilityPreservation/PrecisionSection";
 import TimelineSection from "@/components/fertilityPreservation/TimelineSection";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/clinical-excellence/fertility-preservation" },
-};
+export const metadata = pageMetadata("/clinical-excellence/fertility-preservation");
 
 export default function FertilityPreservationPage() {
     return(

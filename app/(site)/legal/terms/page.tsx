@@ -1,8 +1,5 @@
-export const metadata = {
-  alternates: { canonical: "/legal/terms" },
-  title: "Terms of Care | Lawonbloom",
-  description: "The terms and conditions governing the provision of care and services at Lawonbloom Fertility Centre.",
-};
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata("/legal/terms");
 
 const sections = [
   {

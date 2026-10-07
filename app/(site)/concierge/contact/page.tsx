@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/conciergeContact/Hero";
 import Location from "@/components/conciergeContact/Location";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/concierge/contact" },
-};
+export const metadata = pageMetadata("/concierge/contact");
 
 export default function ConciergeContactPage(){
     return(

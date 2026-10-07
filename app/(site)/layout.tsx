@@ -3,15 +3,32 @@ import { connection } from "next/server";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import {
+  APEX,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_WIDTH,
+  ORG_NAME,
+  TITLE_TEMPLATE,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lawonbloomfertilitycentre.com"),
-  title: "Lawon Bloom Fertility Centre | IVF & Fertility Clinic in Ibadan",
-  description:
-    "Lawon Bloom Fertility Centre offers IVF, IUI, egg freezing, and fertility testing in Ibadan. Personalized care with advanced technology. Book a consultation.",
+  metadataBase: new URL(APEX),
+  title: { default: DEFAULT_TITLE, template: TITLE_TEMPLATE },
+  description: DEFAULT_DESCRIPTION,
   icons: [{ rel: "icon", url: "/logo/logo.png" }],
   alternates: {
     types: { "application/rss+xml": "https://lawonbloomfertilitycentre.com/blog/rss.xml" },
+  },
+  openGraph: {
+    type: "website",
+    url: APEX,
+    siteName: ORG_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [{ url: OG_IMAGE_PATH, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT }],
   },
   twitter: { card: "summary_large_image" },
 };

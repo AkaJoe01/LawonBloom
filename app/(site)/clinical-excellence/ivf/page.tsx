@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/clinicalExcellence/ivf/Hero";
 import ProcessSection from "@/components/clinicalExcellence/ivf/ProcessSection";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/clinical-excellence/ivf" },
-};
+export const metadata = pageMetadata("/clinical-excellence/ivf");
 
 export default function IVFPage() {
   return (

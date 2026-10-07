@@ -67,6 +67,10 @@ jobs:
         run: |
           npx next start -p 3123 &
           sleep 10
+      - name: SEO metadata audit
+        run: npx tsx scripts/seo-audit.ts
+        env:
+          BASE_URL: http://localhost:3123
       - name: CSP + nonce audit
         run: npx tsx scripts/csp-audit.ts
         env:

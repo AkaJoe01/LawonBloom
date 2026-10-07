@@ -1,8 +1,5 @@
-export const metadata = {
-  alternates: { canonical: "/legal/privacy" },
-  title: "Privacy Registry | Lawonbloom",
-  description: "Lawonbloom Fertility Centre's commitment to protecting your privacy and personal data.",
-};
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata("/legal/privacy");
 
 const subProcessors = [
   { name: "Neon", purpose: "PostgreSQL database hosting" },

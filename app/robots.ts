@@ -11,5 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: apexUrl("/sitemap.xml"),
+    host: apexUrl("/"),
   };
 }

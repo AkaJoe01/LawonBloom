@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/iui/Hero";
 import CandidateSection from "@/components/iui/CandidatesSection";
 import SequenceSection from "@/components/iui/SequenceSection";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/clinical-excellence/iui" },
-};
+export const metadata = pageMetadata("/clinical-excellence/iui");
 
 export default function IUIPage(){
     return(

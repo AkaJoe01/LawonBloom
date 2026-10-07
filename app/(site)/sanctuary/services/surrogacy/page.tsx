@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/sanctuary/services/surrogacy/Hero";
 import ServicesSection from "@/components/sanctuary/services/surrogacy/ServicesSection";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/sanctuary/services/surrogacy" },
-};
+export const metadata = pageMetadata("/sanctuary/services/surrogacy");
 
 export default function SurrogacyPage() {
   return (

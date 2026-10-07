@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/components/clinicalExcellence/holisticSupport/Hero";
 import ServicesSection from "@/components/clinicalExcellence/holisticSupport/ServicesSection";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/clinical-excellence/holistic-support" },
-};
+export const metadata = pageMetadata("/clinical-excellence/holistic-support");
 
 export default function HolisticSupportPage() {
   return (

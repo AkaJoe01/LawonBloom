@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Timeline from "@/components/journey/Timeline";
 
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/journey" },
-};
+export const metadata = pageMetadata("/journey");
 
 export default function JourneyPage() {
     return (
