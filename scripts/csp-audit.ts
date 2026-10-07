@@ -1,7 +1,13 @@
 import { chromium } from "playwright";
 
-const BASE = "http://localhost:3123";
-const PATHS = ["/", "/blog", "/faq", "/journey/consultation", "/admin/login", "/blog/search"];
+const BASE = process.env.AUDIT_BASE_URL ?? "http://localhost:3123";
+const PATHS = (
+  process.env.AUDIT_PATHS ??
+  "/,/blog,/faq,/journey/consultation,/admin/login,/blog/search"
+)
+  .split(",")
+  .map((path) => path.trim())
+  .filter(Boolean);
 
 async function main() {
   const browser = await chromium.launch();
