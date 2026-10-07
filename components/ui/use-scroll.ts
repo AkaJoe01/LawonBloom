@@ -2,7 +2,12 @@
 import React from 'react';
 
 export function useScroll(threshold: number) {
-  const [scrolled, setScrolled] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.scrollY > threshold;
+    }
+    return false;
+  });
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > threshold);

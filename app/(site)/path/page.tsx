@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = pageMetadata("/path");
@@ -27,10 +28,12 @@ export default function PathPage() {
             {/* Hero Section */}
             <section className="relative w-full min-h-[600px] md:min-h-[921px] flex items-end justify-center pb-16 md:pb-32 px-6 lg:px-16 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <img 
+                    <Image 
                         alt="Your Journey, Illuminated" 
-                        className="w-full h-full object-cover object-center" 
+                        className="object-cover object-center" 
                         src="/WhatsApp/1 (6).jpeg"
+                        fill
+                        sizes="100vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
                 </div>
@@ -45,10 +48,12 @@ export default function PathPage() {
                 <div className="max-w-360 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div className="col-span-1 md:col-span-7 relative">
                         <div className="w-full h-[819px] overflow-hidden rounded-sm relative">
-                            <img 
+                            <Image 
                                 alt="Consultation Room" 
-                                className="w-full h-full object-cover" 
+                                className="object-cover" 
                                 src="/WhatsApp/1 (3).jpeg"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 60vw"
                             />
                             <div className="absolute inset-0 border border-white/10 mix-blend-overlay pointer-events-none"></div>
                         </div>
@@ -78,10 +83,12 @@ export default function PathPage() {
                     </div>
                     <div className="col-span-1 md:col-start-7 md:col-span-6 relative order-1 md:order-2 mt-16 md:mt-0 md:-mt-24">
                         <div className="w-full aspect-[4/5] overflow-hidden rounded-sm relative">
-                            <img 
+                            <Image 
                                 alt="Abstract medical detail" 
-                                className="w-full h-full object-cover" 
+                                className="object-cover" 
                                 src="/WhatsApp/Lizzy_Microscope.jpg"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                             {/* Soft vignette overlay */}
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-transparent to-surface-container-low/60 pointer-events-none"></div>
@@ -97,10 +104,12 @@ export default function PathPage() {
                     <h2 className="font-display text-5xl leading-[0.95] text-on-surface sm:text-6xl md:text-7xl lg:text-[84px] lg:leading-[1.1] max-w-3xl mb-16 lg:mb-24">Guided Healing</h2>
                     
                     <div className="w-full min-h-[400px] md:h-[819px] relative rounded-sm overflow-hidden ambient-shadow">
-                        <img 
+                        <Image 
                             alt="Sanctuary recovery space" 
-                            className="w-full h-full object-cover" 
+                            className="object-cover" 
                             src="/WhatsApp/Integra.jpg"
+                            fill
+                            sizes="100vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90"></div>
                         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex justify-center">

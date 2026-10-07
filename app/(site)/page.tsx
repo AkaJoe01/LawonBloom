@@ -24,7 +24,7 @@ const services = [
         title: "Oocyte Preservation",
         description:
             "Securing your future timeline with advanced vitrification techniques, empowering your choices on your own terms.",
-        image: "/WhatsApp/theater.jpg",
+        image: "/WhatsApp/1 (7).jpeg",
         icon: ShieldCheck,
         tone: "from-rose-200/20 to-surface",
     },
@@ -132,7 +132,7 @@ export default function HomePage() {
                     <div className="relative">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-4xl cinematic-shadow">
                             <Image
-                                src="/WhatsApp/theater.jpg"
+                                src="/WhatsApp/1 (7).jpeg"
                                 alt="Soft sunlight in clinic room"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 40vw"
