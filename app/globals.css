@@ -255,3 +255,227 @@ html {
     clip-path: none;
   }
 }
+
+/* Blog post body - sanitized Tiptap output rendered by PostBody */
+.post-body {
+  max-width: 65ch;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .post-body {
+    font-size: 18px;
+  }
+}
+
+.post-body > * + * {
+  margin-top: 1em;
+}
+
+.post-body h2 {
+  margin-top: 1.75em;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.post-body h3 {
+  margin-top: 1.5em;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.post-body ul,
+.post-body ol {
+  padding-left: 1.35em;
+}
+
+.post-body ul {
+  list-style: disc;
+}
+
+.post-body ol {
+  list-style: decimal;
+}
+
+.post-body li + li {
+  margin-top: 0.35em;
+}
+
+.post-body blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 1em;
+  font-style: italic;
+  color: var(--on-surface-variant);
+}
+
+.post-body hr {
+  border: 0;
+  border-top: 1px solid var(--outline-variant);
+  margin: 2em 0;
+}
+
+.post-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-body code {
+  background: var(--surface-container-high);
+  padding: 0.1em 0.35em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+}
+
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.post-body figure figcaption {
+  margin-top: 0.5em;
+  font-size: 0.85em;
+  text-align: center;
+  color: var(--on-surface-variant);
+}
+
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.post-body th,
+.post-body td {
+  border: 1px solid var(--outline-variant);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.post-body th {
+  background: var(--surface-container-low);
+  font-weight: 600;
+}
+
+.post-body .callout {
+  border-left: 4px solid var(--primary);
+  border-radius: 0.5rem;
+  background: var(--surface-container-low);
+  padding: 1em 1.25em;
+}
+
+.post-body .callout[data-variant="medical"] {
+  border-left-color: var(--tertiary);
+}
+
+.post-body .callout > * + * {
+  margin-top: 0.75em;
+}
+
+.post-body iframe {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  border-radius: 0.75rem;
+}
+
+/* Header entrance + nav underline (CSS replaces framer-motion for bundle weight) */
+@keyframes header-enter {
+  from { transform: translateY(-24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.header-enter {
+  animation: header-enter 0.5s ease-out both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header-underline {
+  animation: fade-in 0.3s ease-out both;
+}
+
+/* Video embed facade: click-to-load keeps third-party player JS off the page */
+[data-embed-src] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  border-radius: 0.75rem;
+  background: var(--surface-container-low);
+}
+
+[data-embed-src] p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+.embed-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--primary);
+  cursor: pointer;
+  transition: transform 0.2s ease-out, background 0.2s ease-out;
+}
+
+.embed-play:hover {
+  transform: scale(1.06);
+  background: var(--surface-bright);
+}
+
+.embed-play:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.embed-play svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: 0.15rem;
+}
+
+[data-embed-playing] {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.post-embed-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-enter,
+  .header-underline {
+    animation: none;
+  }
+
+  .embed-play {
+    transition: none;
+  }
+}

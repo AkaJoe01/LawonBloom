@@ -34,21 +34,37 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ["components/blog/**/*.tsx", "app/blog/**/*.tsx"],
+    files: ["components/blog/**/*.tsx", "app/(site)/blog/**/*.tsx"],
     rules: {
       "no-restricted-syntax": ["error", dangerouslyRestricted, legacyFontClasses],
     },
   },
   {
-    files: ["components/blog/PostBody.tsx"],
+    files: ["components/blog/PostBody.tsx", "components/seo/**/*.tsx"],
     rules: {
       "no-restricted-syntax": "off",
     },
   },
   {
-    files: ["app/clinical-excellence/page.tsx", "app/path/page.tsx"],
+    files: ["app/(site)/clinical-excellence/page.tsx", "app/(site)/path/page.tsx"],
     rules: {
       "no-restricted-syntax": "off",
+    },
+  },
+  {
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["**/seo/index", "**/seo/index.*"],
+              message:
+                "lib/seo.ts shadows the lib/seo/ directory; lib/seo/index.ts would be unreachable dead code. Import from the barrel (@/lib/seo) or a subpath (lib/seo/site etc.). See the resolution-rule header in lib/seo.ts.",
+            },
+          ],
+        },
+      ],
     },
   },
 ]);

@@ -1,6 +1,10 @@
 export const SITE_ROUTES = [
   "/",
   "/about",
+  "/blog",
+  "/blog/[slug]",
+  "/blog/category/[slug]",
+  "/blog/search",
   "/clinical-excellence",
   "/clinical-excellence/fertility-preservation",
   "/clinical-excellence/genetic-testing",
@@ -22,6 +26,14 @@ export const SITE_ROUTES = [
   "/sanctuary/services",
   "/sanctuary/services/surrogacy",
   "/sanctuary/team",
+  "/admin",
+  "/admin/login",
+  "/admin/onboarding/2fa",
+  "/admin/media",
+  "/admin/posts",
+  "/admin/posts/new",
+  "/admin/posts/[id]",
+  "/admin/preview/[id]",
 ] as const;
 
 export type SiteRoute = (typeof SITE_ROUTES)[number];

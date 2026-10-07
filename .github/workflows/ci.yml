@@ -35,3 +35,54 @@ jobs:
             echo "no prisma schema yet - skipping"
           fi
       - run: npm audit --omit=dev --audit-level=high
+
+  build-audit:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      DIRECT_URL: postgresql://ci:ci@localhost:5432/ci
+      AUTH_SECRET: ci-secret-0123456789abcdef0123456789abcdef
+      AUTH_URL: https://lawonbloomfertilitycentre.com
+      RESEND_API_KEY: re_ci_placeholder_key
+      MAIL_FROM: ci@example.com
+      MAIL_TO: ci@example.com
+      MAIL_ENABLED: "false"
+      BLOB_READ_WRITE_TOKEN: vercel_blob_rw_ci_placeholder_token
+      UPSTASH_REDIS_REST_URL: https://example.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: ci-upstash-placeholder-token
+      TOTP_ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef
+      SEED_ADMIN_EMAIL: ci@example.com
+      SEED_ADMIN_PASSWORD: ci-admin-password-012345
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run secrets:check
+      - run: npx playwright install chromium --with-deps
+      - name: start server
+        run: |
+          npx next start -p 3123 &
+          sleep 10
+      - name: SEO metadata audit
+        run: npx tsx scripts/seo-audit.ts
+        env:
+          BASE_URL: http://localhost:3123
+      - name: CSP + nonce audit
+        run: npx tsx scripts/csp-audit.ts
+        env:
+          AUDIT_PATHS: /, /faq, /admin/login
+      - name: axe a11y audit
+        run: npx tsx scripts/a11y-audit.ts
+        env:
+          AUDIT_PATHS: /, /faq, /admin/login
+      # Q41's hard gate runs against the preview URL (plan 14b stage 15) once
+      # preview env exists; here LHCI is a perf smoke on DB-free pages.
+      - name: LHCI perf smoke
+        run: npx lhci autorun
+        env:
+          LHCI_URLS: http://localhost:3123/faq
+        continue-on-error: true
