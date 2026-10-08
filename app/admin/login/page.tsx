@@ -9,7 +9,8 @@ export const metadata: Metadata = { title: "Sign in" };
 export default async function AdminLoginPage() {
   const session = await auth();
   if (session?.user) {
-    redirect(session.user.needsEnrollment ? "/admin/onboarding/2fa" : "/admin");
+    // 2FA-DISABLED: redirect(session.user.needsEnrollment ? "/admin/onboarding/2fa" : "/admin");
+    redirect("/admin");
   }
 
   return (

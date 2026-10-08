@@ -45,7 +45,7 @@ export default async function AdminMediaPage({
       page={page}
       pageSize={MEDIA_PAGE_SIZE}
       detail={detail}
-      canDelete={session?.user.role === "ADMIN" && session.user.totpEnabled === true}
+      canDelete={session?.user.role === "ADMIN" /* 2FA-DISABLED: && session.user.totpEnabled === true */}
     />
   );
 }

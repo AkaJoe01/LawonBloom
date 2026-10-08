@@ -5,17 +5,18 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-type Step = "credentials" | "code";
+// 2FA-DISABLED: second-factor sign-in step — re-enable with the markers below.
+// type Step = "credentials" | "code";
 
 const inputClass =
   "mt-1 w-full rounded-md border border-outline-variant bg-background px-3 py-2 text-sm text-foreground placeholder:text-on-surface-variant/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
 export default function LoginForm() {
   const router = useRouter();
-  const [step, setStep] = useState<Step>("credentials");
+  // 2FA-DISABLED: const [step, setStep] = useState<Step>("credentials");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
+  // 2FA-DISABLED: const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -28,7 +29,7 @@ export default function LoginForm() {
       const res = await signIn("credentials", {
         email,
         password,
-        ...(step === "code" ? { totp: code.replace(/\s/g, "") } : {}),
+        // 2FA-DISABLED: ...(step === "code" ? { totp: code.replace(/\s/g, "") } : {}),
         redirect: false,
         redirectTo: "/admin",
       });
@@ -37,18 +38,19 @@ export default function LoginForm() {
         router.refresh();
         return;
       }
-      if (res?.code === "two_factor") {
-        setStep("code");
-        return;
-      }
+      // 2FA-DISABLED: server never returns "two_factor" while authorize.ts is commented.
+      // if (res?.code === "two_factor") {
+      //   setStep("code");
+      //   return;
+      // }
       if (res?.code === "locked") {
         setError("Account temporarily locked. Try again in 10 minutes.");
         return;
       }
-      if (step === "code") {
-        setError("That code is not valid. Try again, or use a 10-character backup code.");
-        return;
-      }
+      // 2FA-DISABLED: if (step === "code") {
+      //   setError("That code is not valid. Try again, or use a 10-character backup code.");
+      //   return;
+      // }
       setError("Invalid email or password.");
     } catch {
       setError("Something went wrong. Please try again.");
@@ -77,8 +79,8 @@ export default function LoginForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={busy || step === "code"}
-          aria-invalid={error !== null && step === "credentials" ? true : undefined}
+          disabled={busy}
+          aria-invalid={error !== null ? true : undefined}
           className={inputClass}
         />
       </div>
@@ -95,12 +97,13 @@ export default function LoginForm() {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          disabled={busy || step === "code"}
-          aria-invalid={error !== null && step === "credentials" ? true : undefined}
+          disabled={busy}
+          aria-invalid={error !== null ? true : undefined}
           className={inputClass}
         />
       </div>
 
+      {/* 2FA-DISABLED: authenticator/backup-code input step.
       {step === "code" ? (
         <div>
           <label htmlFor="totp" className="text-sm font-medium text-foreground">
@@ -127,11 +130,13 @@ export default function LoginForm() {
           </p>
         </div>
       ) : null}
+      */}
 
-      <Button type="submit" disabled={busy || !email || !password || (step === "code" && !code)} className="w-full">
-        {busy ? "Signing in…" : step === "code" ? "Verify and sign in" : "Sign in"}
+      <Button type="submit" disabled={busy || !email || !password} className="w-full">
+        {busy ? "Signing in…" : "Sign in"}
       </Button>
 
+      {/* 2FA-DISABLED: back link for the code step.
       {step === "code" ? (
         <button
           type="button"
@@ -146,6 +151,7 @@ export default function LoginForm() {
           Back to email and password
         </button>
       ) : null}
+      */}
     </form>
   );
 }

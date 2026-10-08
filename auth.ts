@@ -8,9 +8,10 @@ import { loginSchema } from "@/lib/validation/auth";
 
 const ABSOLUTE_SESSION_SECONDS = 12 * 60 * 60;
 
-class TwoFactorRequired extends CredentialsSignin {
-  code = "two_factor";
-}
+// 2FA-DISABLED: re-enable together with the two_factor branch in authorize().
+// class TwoFactorRequired extends CredentialsSignin {
+//   code = "two_factor";
+// }
 
 class AccountLocked extends CredentialsSignin {
   code = "locked";
@@ -35,7 +36,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       credentials: {
         email: {},
         password: {},
-        totp: {},
+        // 2FA-DISABLED: totp: {},
       },
       authorize: async (credentials) => {
         const parsed = loginSchema.safeParse(credentials);
@@ -57,9 +58,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             needsEnrollment: outcome.user.needsEnrollment,
           };
         }
-        if (outcome.status === "two_factor") {
-          throw new TwoFactorRequired();
-        }
+        // 2FA-DISABLED: outcome can no longer be "two_factor" while the
+        // second-factor block in authorize() is commented out.
+        // if (outcome.status === "two_factor") {
+        //   throw new TwoFactorRequired();
+        // }
         if (outcome.status === "locked") {
           throw new AccountLocked();
         }

@@ -378,6 +378,7 @@ describe("admin media endpoints", () => {
       expect(mocks.mediaDelete).not.toHaveBeenCalled();
     });
 
+    /* 2FA-DISABLED: the totp_enrollment_required 403 is commented out in requireAdmin().
     it("returns 403 when the admin has not enrolled in TOTP", async () => {
       mocks.auth.mockResolvedValue(session("ADMIN", false));
       const response = await DELETE(
@@ -387,6 +388,7 @@ describe("admin media endpoints", () => {
       expect(response.status).toBe(403);
       expect((await response.json()).error.code).toBe("totp_enrollment_required");
     });
+    */
 
     it("returns 404 for missing media", async () => {
       mocks.auth.mockResolvedValue(session("ADMIN", true));

@@ -7,9 +7,10 @@ export default async function AuthedLayout({ children }: { children: React.React
   if (!session?.user) {
     redirect("/admin/login");
   }
-  if (session.user.needsEnrollment) {
-    redirect("/admin/onboarding/2fa");
-  }
+  // 2FA-DISABLED: re-enable the forced-enrollment redirect below.
+  // if (session.user.needsEnrollment) {
+  //   redirect("/admin/onboarding/2fa");
+  // }
 
   return (
     <div className="min-h-screen md:flex">

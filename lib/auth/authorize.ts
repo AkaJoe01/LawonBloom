@@ -3,7 +3,8 @@ import { sendMail } from "@/lib/mail";
 import { logEvent } from "@/lib/observability/log";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { verifyPassword } from "./password";
-import { decryptTotpSecret, hashBackupCode, verifyTotpCode } from "./totp";
+// 2FA-DISABLED: re-enable together with the second-factor block below.
+// import { decryptTotpSecret, hashBackupCode, verifyTotpCode } from "./totp";
 
 export interface AuthorizeInput {
   email: string;
@@ -115,60 +116,64 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
     return { status: "invalid" };
   }
 
-  if (user.totpEnabled) {
-    if (!input.totp) {
-      return { status: "two_factor" };
-    }
-
-    if (/^\d{6}$/.test(input.totp)) {
-      if (!user.totpSecret) {
-        return { status: "two_factor" };
-      }
-      let secret: string;
-      try {
-        secret = decryptTotpSecret(user.totpSecret);
-      } catch {
-        return { status: "two_factor" };
-      }
-      const valid = await verifyTotpCode(input.totp, secret);
-      if (!valid) {
-        const tripped = await consumeFailureBucket(input.email, input.ip);
-        if (tripped) {
-          await applyLockout(user, input.rid);
-        }
-        logEvent(
-          "login_failed",
-          { rid: input.rid, ms: Date.now() - startedAt, reason: "two_factor_invalid", userId: user.id },
-          "warn",
-        );
-        return { status: "two_factor" };
-      }
-    } else if (/^[A-Z0-9]{10}$/.test(input.totp)) {
-      const codeHash = hashBackupCode(input.totp);
-      const backup = await db.backupCode.findFirst({
-        where: { userId: user.id, codeHash, usedAt: null },
-      });
-      if (!backup) {
-        const tripped = await consumeFailureBucket(input.email, input.ip);
-        if (tripped) {
-          await applyLockout(user, input.rid);
-        }
-        logEvent(
-          "login_failed",
-          { rid: input.rid, ms: Date.now() - startedAt, reason: "backup_code_invalid", userId: user.id },
-          "warn",
-        );
-        return { status: "two_factor" };
-      }
-      await db.backupCode.update({
-        where: { id: backup.id },
-        data: { usedAt: new Date() },
-      });
-      logEvent("backup_code_used", { rid: input.rid, userId: user.id });
-    } else {
-      return { status: "two_factor" };
-    }
-  }
+  // 2FA-DISABLED: second-factor verification commented out for now.
+  // Re-enable by uncommenting this block, the totp import above, and the
+  // enforcement points in guards.ts, (authed)/layout.tsx, login/page.tsx,
+  // login-form.tsx, media/page.tsx and auth.ts (search: 2FA-DISABLED).
+  // if (user.totpEnabled) {
+  //   if (!input.totp) {
+  //     return { status: "two_factor" };
+  //   }
+  //
+  //   if (/^\d{6}$/.test(input.totp)) {
+  //     if (!user.totpSecret) {
+  //       return { status: "two_factor" };
+  //     }
+  //     let secret: string;
+  //     try {
+  //       secret = decryptTotpSecret(user.totpSecret);
+  //     } catch {
+  //       return { status: "two_factor" };
+  //     }
+  //     const valid = await verifyTotpCode(input.totp, secret);
+  //     if (!valid) {
+  //       const tripped = await consumeFailureBucket(input.email, input.ip);
+  //       if (tripped) {
+  //         await applyLockout(user, input.rid);
+  //       }
+  //       logEvent(
+  //         "login_failed",
+  //         { rid: input.rid, ms: Date.now() - startedAt, reason: "two_factor_invalid", userId: user.id },
+  //         "warn",
+  //       );
+  //       return { status: "two_factor" };
+  //     }
+  //   } else if (/^[A-Z0-9]{10}$/.test(input.totp)) {
+  //     const codeHash = hashBackupCode(input.totp);
+  //     const backup = await db.backupCode.findFirst({
+  //       where: { userId: user.id, codeHash, usedAt: null },
+  //     });
+  //     if (!backup) {
+  //       const tripped = await consumeFailureBucket(input.email, input.ip);
+  //       if (tripped) {
+  //         await applyLockout(user, input.rid);
+  //       }
+  //       logEvent(
+  //         "login_failed",
+  //         { rid: input.rid, ms: Date.now() - startedAt, reason: "backup_code_invalid", userId: user.id },
+  //         "warn",
+  //       );
+  //       return { status: "two_factor" };
+  //     }
+  //     await db.backupCode.update({
+  //       where: { id: backup.id },
+  //       data: { usedAt: new Date() },
+  //     });
+  //     logEvent("backup_code_used", { rid: input.rid, userId: user.id });
+  //   } else {
+  //     return { status: "two_factor" };
+  //   }
+  // }
 
   await db.user.update({
     where: { id: user.id },
@@ -186,7 +191,8 @@ export async function authorizeCredentials(input: AuthorizeInput): Promise<Autho
       role: user.role,
       sessionEpoch: user.sessionEpoch,
       totpEnabled: user.totpEnabled,
-      needsEnrollment: user.role === "ADMIN" && !user.totpEnabled,
+      // 2FA-DISABLED: needsEnrollment: user.role === "ADMIN" && !user.totpEnabled,
+      needsEnrollment: false,
     },
   };
 }

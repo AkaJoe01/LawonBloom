@@ -24,12 +24,13 @@ export async function requireAdmin(): Promise<SessionGuard> {
   if (user.role !== "ADMIN") {
     return { ok: false, response: errorResponse(403, "forbidden", "Admin access required.") };
   }
-  if (!user.totpEnabled) {
-    return {
-      ok: false,
-      response: errorResponse(403, "totp_enrollment_required", "Enable two-factor authentication to continue."),
-    };
-  }
+  // 2FA-DISABLED: re-enable the totp_enrollment_required gate below.
+  // if (!user.totpEnabled) {
+  //   return {
+  //     ok: false,
+  //     response: errorResponse(403, "totp_enrollment_required", "Enable two-factor authentication to continue."),
+  //   };
+  // }
   return result;
 }
 

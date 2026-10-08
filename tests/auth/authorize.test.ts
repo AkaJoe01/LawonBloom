@@ -142,6 +142,7 @@ describe("authorizeCredentials", () => {
     expect(mocks.userUpdate).not.toHaveBeenCalled();
   });
 
+  /* 2FA-DISABLED: forced-enrollment assertion — needsEnrollment is hardcoded false while 2FA is commented out.
   it("lets an admin without TOTP in but flags forced enrollment (step 5)", async () => {
     mocks.userFindUnique.mockResolvedValue(makeUser());
     mocks.verifyPassword.mockResolvedValue(true);
@@ -163,6 +164,7 @@ describe("authorizeCredentials", () => {
       data: { failedLogins: 0, lastLoginAt: expect.any(Date) },
     });
   });
+  */
 
   it("lets an editor without TOTP in without an enrollment flag", async () => {
     mocks.userFindUnique.mockResolvedValue(makeUser({ role: "EDITOR", failedLogins: 1 }));
@@ -175,6 +177,8 @@ describe("authorizeCredentials", () => {
     }
   });
 
+  /* 2FA-DISABLED: all second-factor tests below — authorize() skips the TOTP
+     block while it is commented out. Re-enable together with the source.
   it("asks for the second factor when totp is enabled but absent (step 6)", async () => {
     mocks.userFindUnique.mockResolvedValue(
       makeUser({ totpEnabled: true, totpSecret: "enc.blob" }),
@@ -282,4 +286,5 @@ describe("authorizeCredentials", () => {
     const outcome = await authorizeCredentials({ ...baseInput, totp: "not-a-code" });
     expect(outcome).toEqual({ status: "two_factor" });
   });
+  */
 });

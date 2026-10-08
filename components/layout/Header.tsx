@@ -45,85 +45,95 @@ export default function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "header-enter sticky top-0 z-50 mx-auto w-full max-w-5xl border-b border-transparent md:rounded-md md:border md:transition-all md:ease-out",
-        {
-          "bg-surface/80 supports-[backdrop-filter]:bg-surface/50 border-outline-variant/25 backdrop-blur-2xl md:top-4 md:max-w-4xl md:shadow":
-            scrolled && !open,
-          "bg-surface/90": open,
-        },
-      )}
-    >
-      <nav
+    <>
+      <header
         className={cn(
-          "flex h-16 w-full items-center justify-between px-4 md:h-12 md:transition-all md:ease-out",
+          "header-enter sticky top-0 z-50 mx-auto w-full max-w-5xl border-b border-transparent md:rounded-md md:border md:transition-all md:ease-out",
           {
-            "md:px-2": scrolled,
+            "bg-surface/80 supports-[backdrop-filter]:bg-surface/50 border-outline-variant/25 backdrop-blur-2xl md:top-4 md:max-w-4xl md:shadow":
+              scrolled && !open,
+            "bg-surface/90": open,
           },
         )}
       >
-        <Link href="/" className="relative z-10 flex items-center gap-3">
-          <span className="overflow-hidden rounded-full ring-1 ring-primary/10">
-            <Image
-              src="/logo/logo.png"
-              alt="Lawonbloom"
-              width={44}
-              height={44}
-              className="h-9 w-9 object-cover md:h-8 md:w-8"
-              priority
-            />
-          </span>
-          {/* <span className="font-display hidden text-lg tracking-tight text-foreground sm:inline md:text-base">
-            LawonBloom
-          </span> */}
-        </Link>
-
-        <div className="hidden items-center gap-2 lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "relative",
-              )}
-            >
-              {item.label}
-              {isActive(item.href) && (
-                <span
-                  className="header-underline absolute bottom-0 left-4 right-4 h-px bg-primary"
-                />
-              )}
-            </Link>
-          ))}
-          <div className="ml-2 pl-2 border-l border-outline-variant/20">
-            <Link
-              href="/journey/consultation"
-              className={buttonVariants({
-                variant: "default",
-                className: "section-label h-9 rounded-full px-5",
-              })}
-            >
-              Begin Your Journey
-            </Link>
-          </div>
-        </div>
-
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={() => setOpen(!open)}
-          className="lg:hidden rounded-full"
+        <nav
+          className={cn(
+            "flex h-16 w-full items-center justify-between px-4 md:h-12 md:transition-all md:ease-out",
+            {
+              "md:px-2": scrolled,
+            },
+          )}
         >
-          <MenuToggleIcon open={open} className="size-5" duration={300} />
-        </Button>
-      </nav>
+          <Link href="/" className="relative z-10 flex items-center gap-3">
+            <span className="overflow-hidden rounded-full ring-1 ring-primary/10">
+              <Image
+                src="/logo/logo.png"
+                alt="Lawonbloom"
+                width={44}
+                height={44}
+                className="h-9 w-9 object-cover md:h-8 md:w-8"
+                priority
+              />
+            </span>
+            {/* <span className="font-display hidden text-lg tracking-tight text-foreground sm:inline md:text-base">
+              LawonBloom
+            </span> */}
+          </Link>
 
+          <div className="hidden items-center gap-2 lg:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "relative",
+                )}
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span
+                    className="header-underline absolute bottom-0 left-4 right-4 h-px bg-primary"
+                  />
+                )}
+              </Link>
+            ))}
+            <div className="ml-2 pl-2 border-l border-outline-variant/20">
+              <Link
+                href="/journey/consultation"
+                className={buttonVariants({
+                  variant: "default",
+                  className: "section-label h-9 rounded-full px-5",
+                })}
+              >
+                Begin Your Journey
+              </Link>
+            </div>
+          </div>
+
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={() => setOpen(!open)}
+            className="lg:hidden rounded-full"
+          >
+            <MenuToggleIcon open={open} className="size-5" duration={300} />
+          </Button>
+        </nav>
+      </header>
+
+      {/*
+        Mobile menu lives OUTSIDE <header> on purpose: the header's entrance
+        animation (fill-mode: both) and conditional backdrop-filter both create
+        a containing block, which would trap this position:fixed overlay inside
+        the 64px-tall header (links clipped to a ~2px strip). As a sibling it
+        always resolves against the viewport.
+        md:top-12 matches the md header height (md:h-12 nav + 1px borders).
+      */}
       <div
         key={`mobile-menu-${pathname}`}
         className={cn(
-          "bg-surface/90 fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y lg:hidden",
+          "bg-surface/90 fixed top-16 md:top-12 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y lg:hidden",
           open ? "block" : "hidden",
         )}
       >
@@ -163,6 +173,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
