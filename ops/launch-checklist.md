@@ -93,6 +93,7 @@
 - [ ] Submit sitemap in Google Search Console; run Rich Results Test.
       Sequencing: there is no separate blog launch — one production deploy carries
       blog + M8, and GSC submission waits for that deploy (both must be live).
-      Pre-reqs spot-checked 2026-10-08 (live JSON-LD parses on served pages;
-      sitemap/robots serve correctly; canonicals render); full live
-      `seo-audit` re-runs after the next deploy. Needs the clinic's Google account.
+      Pre-reqs verified 2026-10-08: live JSON-LD parses on served pages,
+      sitemap/robots serve correctly, full live `seo-audit` green
+      post-deploy (27 routes, 522 checks, 0 warnings). Submission itself
+      needs the clinic's Google account.
