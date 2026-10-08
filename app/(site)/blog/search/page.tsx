@@ -3,6 +3,15 @@ import CategoryNav from "@/components/blog/CategoryNav";
 import PostCard from "@/components/blog/PostCard";
 import BlogPagination from "@/components/blog/BlogPagination";
 import { BLOG_PAGE_SIZE, getBlogCategories, searchPublishedPosts } from "@/lib/blog/queries";
+import {
+  DEFAULT_DESCRIPTION,
+  OG_FALLBACK_URL,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  ORG_NAME,
+  TITLE_SUFFIX,
+  apexUrl,
+} from "@/lib/seo";
 import { searchQuery } from "@/lib/validation/blog";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +20,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog/search" },
   title: "Search the journal",
   robots: { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    title: `Search the journal${TITLE_SUFFIX}`,
+    description: DEFAULT_DESCRIPTION,
+    url: apexUrl("/blog/search"),
+    siteName: ORG_NAME,
+    images: [{ url: OG_FALLBACK_URL, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT }],
+  },
 };
 
 export default async function BlogSearchPage({

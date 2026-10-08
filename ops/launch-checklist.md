@@ -25,16 +25,23 @@
 - [x] Monitoring doc: `ops/monitoring.md` (UptimeRobot monitors + Sentry alert rules).
 - [x] Helpers: `scripts/smoke.ts` (drill/post-deploy smoke), `scripts/check-resend-dns.ts`
       (LG-1 verification), `scripts/csp-audit.ts`, `scripts/a11y-audit.ts`.
-- [ ] Rich Results Test passes (Article + FAQ sample); sitemap drift test green;
-      OG cards validate in LinkedIn/X.
+- [x] Sitemap drift test green (`tests/lib/sitemap.test.ts` in the 411-test
+      suite; live sitemap = 30 URLs incl. all published posts) and live
+      JSON-LD validated against served HTML 2026-10-08: Organization /
+      WebSite / MedicalClinic parse on every audited route with unique
+      `@id`s, Article parses on the published post, FAQPage correctly
+      withheld (0 of 6 FAQ entries confirmed, pre-H1).
+- [ ] Rich Results Test (Google UI, Article + FAQ sample) and OG card
+      rendering in LinkedIn/X — manual, run against the live host.
       **M8b DoD note:** previews (and the production *.vercel.app alias) are
       behind Vercel Authentication — verified 2026-10-07, unauthenticated
       probe returns the "Protected Deployment" login wall. Google's Rich
       Results Test and social-card scrapers cannot fetch previews, so these
       checks **move to post-deploy** against the production custom domain;
       pre-launch verification is local (`seo-audit` + JSON-LD unit tests).
-- [ ] **M8c DoD:** lint warnings drop **5 → 0** (raw `<img>` → `next/image`
+- [x] **M8c DoD:** lint warnings drop **5 → 0** (raw `<img>` → `next/image`
       conversions per §8-E); budget stays `--max-warnings 0` afterwards.
+      Verified 2026-10-08: `npx eslint . --max-warnings 0` exits 0.
 - [ ] **M8b H1 precondition:** FAQ array confirmed (see Owner actions H1);
       FAQPage schema gated on per-entry `confirmed` flags in code.
 - [ ] Enquiry honest-state matrix verified (success / partial / failed / rate-limited /
@@ -61,6 +68,15 @@
 - [ ] **Restore drill #1** executed and logged in `ops/restore-drills.md`.
 - [ ] Vercel env complete (12 required keys, `lib/env.ts`) + Blob store created.
 - [ ] GitHub secrets/environments for stages 8–16 (plan §14b).
+- [ ] **Domain config (2026-10-08):** Vercel's primary domain currently
+      serves `www.lawonbloomfertilitycentre.com` — the apex answers
+      `307 → www` for every path (including `robots.txt`/`sitemap.xml`),
+      while every canonical, sitemap `<loc>` and robots `Host:` in code
+      points at the apex (`lib/seo/site.ts` `APEX`). Set primary = apex in
+      Vercel (apex serves 200; www `308` → apex), *or* approve switching
+      the code's canonical host to www. Until then crawlers cross a
+      temporary redirect between hosts. `seo-audit` follows redirects, so
+      audits pass on either config.
 - [ ] C-1 confirmed (Vercel Hobby + Neon Free baseline) or upgraded.
 - [ ] **H1:** clinic sign-off (written OK) on the M8a metadata copy — catalog titles
       and descriptions shipped as-draft (≤60/≤160 chars) per the SEO plan.
@@ -77,3 +93,6 @@
 - [ ] Submit sitemap in Google Search Console; run Rich Results Test.
       Sequencing: there is no separate blog launch — one production deploy carries
       blog + M8, and GSC submission waits for that deploy (both must be live).
+      Pre-reqs spot-checked 2026-10-08 (live JSON-LD parses on served pages;
+      sitemap/robots serve correctly; canonicals render); full live
+      `seo-audit` re-runs after the next deploy. Needs the clinic's Google account.

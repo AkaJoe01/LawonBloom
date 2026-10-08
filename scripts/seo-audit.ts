@@ -136,7 +136,11 @@ function nodeTypes(nodes: Record<string, unknown>[]): Set<string> {
 }
 
 async function fetchText(url: string): Promise<{ status: number; body: string; contentType: string }> {
-  const res = await fetch(url, { redirect: "manual" });
+  // Follow redirects: the deployment host may differ from APEX (e.g. Vercel
+  // primary domain serves www while canonicals point at the apex — infra
+  // config, see ops/seo-audit.md). The audit validates the HTML that is
+  // actually served, not the redirect table.
+  const res = await fetch(url, { redirect: "follow" });
   return { status: res.status, body: await res.text(), contentType: res.headers.get("content-type") ?? "" };
 }
 
@@ -270,18 +274,17 @@ async function main(): Promise<void> {
     );
   }
 
-  // /blog/search — custom metadata, noindex, inherits layout description + og.
-  // Its page metadata defines no openGraph, so og:url/title/description come
-  // from the site layout (og:url = apex). §9-owned file: do not modify in M8a.
+  // /blog/search — custom metadata, noindex, full openGraph defined on the
+  // page (Next shallow-merges top-level metadata keys, so a partial og would
+  // drop og:description/image inherited from the site layout).
   titles.set(
     "/blog/search",
     await auditRoute("/blog/search", {
       title: `Search the journal${TITLE_SUFFIX}`,
       description: DEFAULT_DESCRIPTION,
       canonical: apexUrl("/blog/search"),
-      ogTitle: DEFAULT_TITLE,
+      ogTitle: `Search the journal${TITLE_SUFFIX}`,
       noindex: true,
-      ogUrl: APEX,
     }),
   );
 
