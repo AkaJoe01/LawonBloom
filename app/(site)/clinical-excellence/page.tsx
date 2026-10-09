@@ -92,7 +92,7 @@ export default function ClinicalExcellencePage() {
                                     <Image 
                                         alt="Precision IVF Cultivation" 
                                         className="w-full h-full object-cover" 
-                                        src="/WhatsApp/Incubtor.jpg"
+                                        src="/WhatsApp/Incubator.jpg"
                                         fill
                                         unoptimized
                                     />

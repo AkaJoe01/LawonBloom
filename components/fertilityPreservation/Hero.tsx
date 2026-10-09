@@ -6,7 +6,7 @@ export default function Hero(){
 
             {/* IMAGES */}
             <Image
-                src="/WhatsApp/Incubtor.jpg"
+                src="/WhatsApp/Incubator.jpg"
                 alt="scan"
                 fill
                 priority
