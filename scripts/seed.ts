@@ -2,6 +2,7 @@ import { config as loadEnv } from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { CATEGORIES } from "../lib/categories";
+import { isNeonConnectionString } from "../lib/db";
 import { hashPassword } from "../lib/auth/password";
 import { logEvent } from "../lib/observability/log";
 import { emailSchema } from "../lib/validation/common";
@@ -26,8 +27,9 @@ async function main(): Promise<void> {
   const connectionString = process.env.DATABASE_URL;
   if (!connectionString) fail("DATABASE_URL is not set");
 
-  const adapter = new PrismaNeon({ connectionString });
-  const db = new PrismaClient({ adapter });
+  const db = isNeonConnectionString(connectionString)
+    ? new PrismaClient({ adapter: new PrismaNeon({ connectionString }) })
+    : new PrismaClient();
 
   try {
     const existing = await db.user.findUnique({ where: { email } });

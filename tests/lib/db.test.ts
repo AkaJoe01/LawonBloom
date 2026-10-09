@@ -43,6 +43,14 @@ describe("getDb", () => {
     });
   });
 
+  it("uses native PrismaClient for non-Neon URLs", async () => {
+    process.env.DATABASE_URL = "******localhost:5432/ci";
+    const getDb = await loadGetDb();
+    getDb();
+    expect(mocks.PrismaNeon).not.toHaveBeenCalled();
+    expect(mocks.PrismaClient).toHaveBeenCalledWith();
+  });
+
   it("throws when both URLs are missing", async () => {
     delete process.env.DATABASE_URL;
     delete process.env.DIRECT_URL;
