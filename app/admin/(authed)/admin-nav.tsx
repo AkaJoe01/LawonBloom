@@ -5,10 +5,9 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 interface NavItem {
-  href?: string;
+  href: string;
   label: string;
   adminOnly?: boolean;
-  soon?: boolean;
   exact?: boolean;
 }
 
@@ -16,13 +15,12 @@ const ITEMS: NavItem[] = [
   { href: "/admin", label: "Dashboard", exact: true },
   { href: "/admin/posts", label: "Posts" },
   { href: "/admin/media", label: "Media" },
-  { label: "Enquiries", adminOnly: true, soon: true },
-  { label: "Users", adminOnly: true, soon: true },
-  { label: "Account", soon: true },
+  { href: "/admin/enquiries", label: "Enquiries", adminOnly: true },
+  { href: "/admin/users", label: "Users", adminOnly: true },
+  { href: "/admin/account", label: "Account" },
 ];
 
 function isActive(pathname: string, item: NavItem): boolean {
-  if (!item.href) return false;
   if (item.exact) return pathname === item.href;
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
@@ -59,21 +57,6 @@ export default function AdminNav({
       <ul className="flex gap-1 overflow-x-auto px-2 py-2 md:flex-col md:gap-0.5 md:overflow-visible md:px-2 md:py-0">
         {items.map((item) => {
           const active = isActive(pathname, item);
-          if (item.soon || !item.href) {
-            return (
-              <li key={item.label} className="shrink-0">
-                <span
-                  aria-disabled="true"
-                  className="flex items-center gap-2 whitespace-nowrap rounded-md px-3 py-2 text-sm text-on-surface-variant/60"
-                >
-                  {item.label}
-                  <span className="rounded bg-surface-container-high px-1 py-0.5 text-[10px] uppercase tracking-wide">
-                    soon
-                  </span>
-                </span>
-              </li>
-            );
-          }
           return (
             <li key={item.label} className="shrink-0">
               <Link

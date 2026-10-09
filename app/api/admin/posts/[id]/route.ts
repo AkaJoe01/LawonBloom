@@ -97,6 +97,7 @@ export async function PATCH(request: Request, { params }: Params) {
   if (provided("faqs")) data.faqs = body.faqs as unknown as Prisma.InputJsonValue;
   if (provided("metaTitle")) data.metaTitle = body.metaTitle ?? null;
   if (provided("metaDescription")) data.metaDescription = body.metaDescription ?? null;
+  if (provided("noindex")) data.noindex = body.noindex ?? false;
   if (provided("categoryId")) data.categoryId = body.categoryId;
   if (provided("coverImageId")) data.coverImageId = body.coverImageId ?? null;
   if (nextContent !== null) {

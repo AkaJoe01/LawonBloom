@@ -41,6 +41,7 @@ export async function generateMetadata({
     updatedAt: post.updatedAt,
     categoryName: post.category.name,
     authorName: post.createdByUser.name,
+    noindex: post.noindex,
   });
 }
 

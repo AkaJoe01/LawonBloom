@@ -95,6 +95,7 @@ export async function POST(request: Request, { params }: Params) {
       faqs: input.faqs as unknown as Prisma.InputJsonValue,
       metaTitle: input.metaTitle ?? null,
       metaDescription: input.metaDescription ?? null,
+      noindex: input.noindex,
       status: "PUBLISHED",
       publishedAt: existing.publishedAt ?? new Date(),
       publishedBy: guard.session.user.id,

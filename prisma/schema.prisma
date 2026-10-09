@@ -95,6 +95,7 @@ model Post {
   faqs               Json?
   metaTitle          String?
   metaDescription    String?
+  noindex            Boolean  @default(false)
   readingTime        Int        @default(0)
   createdBy          String
   createdByUser      User       @relation("postCreatedBy", fields: [createdBy], references: [id])
@@ -135,6 +136,7 @@ model Enquiry {
   postSlug       String?
   consentAt      DateTime
   consentVersion String
+  readAt         DateTime?
   createdAt      DateTime @default(now())
 
   @@index([createdAt])

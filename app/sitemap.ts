@@ -9,7 +9,7 @@ import {
 export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let data: { posts: { slug: string; updatedAt: Date }[]; categories: { slug: string }[] } = {
+  let data: { posts: { slug: string; updatedAt: Date; noindex: boolean }[]; categories: { slug: string }[] } = {
     posts: [],
     categories: [],
   };

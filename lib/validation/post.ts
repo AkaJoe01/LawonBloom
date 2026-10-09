@@ -207,6 +207,7 @@ export const postBase = z.object({
   faqs: faqSchema.default([]),
   metaTitle: z.string().trim().max(60).nullish(),
   metaDescription: z.string().trim().max(160).nullish(),
+  noindex: z.boolean().default(false),
 });
 
 export const postCreate = postBase;
@@ -226,6 +227,8 @@ export const postPublish = postBase
     disclaimer: z.string().trim().min(20, "Disclaimer required before publish"),
     coverImageId: z.string().min(1, "Cover image required before publish"),
     reviewedAt: z.coerce.date().refine((date) => date.getTime() <= todayPlus1d().getTime(), "Review date cannot be in the future"),
+    reviewerName: z.string().trim().min(2, "Reviewer name required before publish").max(120),
+    reviewerCredential: z.string().trim().min(2, "Reviewer credential required before publish").max(120),
   });
 
 export const postListQuery = z.object({

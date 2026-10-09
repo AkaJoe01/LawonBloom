@@ -115,6 +115,7 @@ export async function POST(request: Request) {
       faqs: input.faqs as unknown as Prisma.InputJsonValue,
       metaTitle: input.metaTitle ?? null,
       metaDescription: input.metaDescription ?? null,
+      noindex: input.noindex,
       createdBy: guard.session.user.id,
     },
     select: { id: true, slug: true, status: true, createdAt: true },

@@ -118,6 +118,12 @@ describe("route metadata builders", () => {
     );
   });
 
+  it("adds a noindex robots directive only when the post is noindex", () => {
+    const hidden = buildPostMetadata({ ...post, noindex: true });
+    expect(hidden.robots).toEqual({ index: false, follow: true });
+    expect(buildPostMetadata(post).robots).toBeUndefined();
+  });
+
   it("falls back to plainText description and omits missing author", () => {
     const metadata = buildPostMetadata({
       ...post,

@@ -136,6 +136,15 @@ describe("postCreate", () => {
     if (result.success) {
       expect(result.data.disclaimer).toBe("");
       expect(result.data.faqs).toEqual([]);
+      expect(result.data.noindex).toBe(false);
+    }
+  });
+
+  it("accepts an explicit noindex flag", () => {
+    const result = postCreate.safeParse({ ...validBase, noindex: true });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.noindex).toBe(true);
     }
   });
 
@@ -164,12 +173,14 @@ describe("postCreate", () => {
 });
 
 describe("postPublish", () => {
-  it("requires disclaimer ≥20, cover, content, and a non-future review date", () => {
+  it("requires disclaimer ≥20, cover, content, reviewer, and a non-future review date", () => {
     const publishable = {
       ...validBase,
       disclaimer: "Always consult a qualified fertility specialist.",
       coverImageId: "clcover1234",
       reviewedAt: new Date().toISOString(),
+      reviewerName: "Dr. Amina Lawal",
+      reviewerCredential: "MBBS, FRCOG",
       content: { type: "doc", content: [paragraph("Real content here.")] },
     };
     const result = postPublish.safeParse(publishable);
@@ -183,6 +194,10 @@ describe("postPublish", () => {
     expect(
       postPublish.safeParse({ ...publishable, reviewedAt: new Date(Date.now() + 5 * 86400_000).toISOString() }).success,
     ).toBe(false);
+    expect(postPublish.safeParse({ ...publishable, reviewerName: null }).success).toBe(false);
+    expect(postPublish.safeParse({ ...publishable, reviewerName: "x" }).success).toBe(false);
+    expect(postPublish.safeParse({ ...publishable, reviewerCredential: null }).success).toBe(false);
+    expect(postPublish.safeParse({ ...publishable, reviewerCredential: "  " }).success).toBe(false);
   });
 });
 

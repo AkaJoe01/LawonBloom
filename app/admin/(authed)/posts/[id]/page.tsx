@@ -38,6 +38,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ id: s
     faqs: Array.isArray(post.faqs) ? (post.faqs as unknown as Faq[]) : null,
     metaTitle: post.metaTitle,
     metaDescription: post.metaDescription,
+    noindex: post.noindex,
   };
 
   return <PostEditor categories={categories} initial={initial} />;

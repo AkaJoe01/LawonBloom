@@ -1,4 +1,4 @@
-import type { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { unstable_cache } from "next/cache";
 import { BLOG_TAG, postTag } from "@/lib/cache";
 import { getDb } from "@/lib/db";
@@ -31,6 +31,7 @@ export const postPageSelect = {
   faqs: true,
   metaTitle: true,
   metaDescription: true,
+  noindex: true,
   updatedAt: true,
   createdByUser: { select: { name: true } },
 } satisfies Prisma.PostSelect;
@@ -122,29 +123,42 @@ export async function getBlogCategory(
   return { category: data.category, total: data.total, items: data.items.map(reviveCard) };
 }
 
+function searchWhere(q: string): Prisma.Sql {
+  const pattern = `%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+  return Prisma.sql`status = 'PUBLISHED' AND (
+    "searchTsv" @@ websearch_to_tsquery('english', ${q})
+    OR "title" ILIKE ${pattern} ESCAPE '\\'
+    OR "plainText" ILIKE ${pattern} ESCAPE '\\'
+  )`;
+}
+
 export async function searchPublishedPosts(
   q: string,
   page: number,
 ): Promise<{ items: PostCardData[]; total: number }> {
   const db = getDb();
-  const where: Prisma.PostWhereInput = {
-    status: PUBLISHED,
-    OR: [
-      { title: { contains: q, mode: "insensitive" } },
-      { plainText: { contains: q, mode: "insensitive" } },
-    ],
-  };
-  const [items, total] = await Promise.all([
-    db.post.findMany({
-      where,
-      orderBy: { publishedAt: "desc" },
-      skip: (page - 1) * BLOG_PAGE_SIZE,
-      take: BLOG_PAGE_SIZE,
-      select: postCardSelect,
-    }),
-    db.post.count({ where }),
+  const where = searchWhere(q);
+  const offset = (page - 1) * BLOG_PAGE_SIZE;
+  const [idRows, countRows] = await Promise.all([
+    db.$queryRaw<{ id: string }[]>(
+      Prisma.sql`SELECT id FROM "Post" WHERE ${where}
+        ORDER BY ts_rank_cd("searchTsv", websearch_to_tsquery('english', ${q})) DESC, "publishedAt" DESC
+        LIMIT ${BLOG_PAGE_SIZE} OFFSET ${offset}`,
+    ),
+    db.$queryRaw<{ count: bigint }[]>(
+      Prisma.sql`SELECT COUNT(*) AS count FROM "Post" WHERE ${where}`,
+    ),
   ]);
-  return { items: items.map(reviveCard), total };
+  const total = countRows.length > 0 ? Number(countRows[0].count) : 0;
+  const ids = idRows.map((row) => row.id);
+  if (ids.length === 0) return { items: [], total };
+  const rows = await db.post.findMany({ where: { id: { in: ids } }, select: postCardSelect });
+  const byId = new Map(rows.map((row) => [row.id, row]));
+  const items = ids.flatMap((id) => {
+    const row = byId.get(id);
+    return row ? [reviveCard(row)] : [];
+  });
+  return { items, total };
 }
 
 async function fetchPostBySlug(slug: string): Promise<PostPageData | null> {

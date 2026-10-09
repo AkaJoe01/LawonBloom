@@ -34,6 +34,7 @@ export interface EditorPost {
   faqs: { question: string; answer: string }[] | null;
   metaTitle: string | null;
   metaDescription: string | null;
+  noindex: boolean;
 }
 
 type SaveState = "idle" | "dirty" | "saving" | "saved" | "error";
@@ -80,6 +81,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
   });
   const [metaTitle, setMetaTitle] = useState(initial?.metaTitle ?? "");
   const [metaDescription, setMetaDescription] = useState(initial?.metaDescription ?? "");
+  const [noindex, setNoindex] = useState(initial?.noindex ?? false);
   const [status, setStatus] = useState<"DRAFT" | "PUBLISHED">(initial?.status ?? "DRAFT");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [saveState, setSaveState] = useState<SaveState>("idle");
@@ -108,6 +110,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       reviewedAt,
       metaTitle,
       metaDescription,
+      noindex,
       status,
     };
   });
@@ -136,6 +139,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       reviewedAt: string;
       metaTitle: string;
       metaDescription: string;
+      noindex: boolean;
     };
     return {
       title: s.title.trim(),
@@ -151,6 +155,7 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
       faqs: s.faqs,
       metaTitle: s.metaTitle.trim() || null,
       metaDescription: s.metaDescription.trim() || null,
+      noindex: s.noindex,
     };
   }, []);
 
@@ -341,6 +346,8 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
   if (!cover) blockers.push("Attach a cover image");
   else if (cover.width < MIN_COVER_WIDTH)
     blockers.push(`Cover image must be at least ${MIN_COVER_WIDTH}px wide (this one is ${cover.width}px)`);
+  if (!reviewerName.trim() || !reviewerCredential.trim())
+    blockers.push("Add the reviewing clinician's name and credential");
   const publishBlocked = blockers.length > 0;
 
   const slugLocked = status === "PUBLISHED";
@@ -834,6 +841,27 @@ export default function PostEditor({ categories, initial }: { categories: AdminC
           />
           <p className="mt-1 text-xs text-on-surface-variant">{metaDescription.length}/160</p>
           <FieldError message={fieldErrors.metaDescription} />
+        </div>
+        <div className="flex items-start gap-2">
+          <input
+            id="noindex"
+            type="checkbox"
+            checked={noindex}
+            onChange={(event) => {
+              setNoindex(event.target.checked);
+              markDirty();
+            }}
+            className="mt-1 h-4 w-4 rounded border-outline-variant text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          />
+          <div>
+            <label htmlFor="noindex" className={labelClass}>
+              Hide from search engines
+            </label>
+            <p className="text-xs text-on-surface-variant">
+              Adds <code>noindex</code> and removes this post from the sitemap. Use for placeholder or
+              unpublished-in-search content.
+            </p>
+          </div>
         </div>
         <div className="rounded-lg border border-outline-variant bg-background p-4">
           <p className="text-xs font-medium uppercase tracking-wide text-on-surface-variant">Search preview</p>

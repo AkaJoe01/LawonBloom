@@ -60,6 +60,21 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     return NextResponse.json({ ok: true });
   }
 
+  if (parsed.data.action === "set-role") {
+    if (target.id === adminId) {
+      return NextResponse.json(
+        { error: { code: "self_role_change", message: "You cannot change your own role." } },
+        { status: 403 },
+      );
+    }
+    await db.user.update({
+      where: { id: target.id },
+      data: { role: parsed.data.role, sessionEpoch: { increment: 1 } },
+    });
+    logEvent("user_role_changed", { adminId, targetId: target.id, role: parsed.data.role });
+    return NextResponse.json({ ok: true });
+  }
+
   const displayOncePassword = generatePassword();
   const passwordHash = await hashPassword(displayOncePassword);
   await db.user.update({

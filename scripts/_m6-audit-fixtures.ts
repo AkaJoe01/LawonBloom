@@ -103,6 +103,7 @@ async function main() {
       content: content as never,
       plainText,
       updatedAt: new Date(),
+      noindex: true,
     },
     create: {
       slug: SLUG,
@@ -135,6 +136,7 @@ async function main() {
       metaTitle: "IVF Success Rates Explained | Lawon Bloom Journal",
       metaDescription:
         "Clear, clinically reviewed guidance on how age, embryo quality, and protocol choices shape IVF success rates.",
+      noindex: true,
       createdBy: user.id,
       publishedBy: user.id,
     },

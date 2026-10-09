@@ -72,6 +72,8 @@ const publishablePost = {
   coverImageId: "media_1",
   disclaimer: "This article is informational and not medical advice.",
   reviewedAt: "2026-09-01T00:00:00.000Z",
+  reviewerName: "Dr. Amina Lawal",
+  reviewerCredential: "MBBS, FRCOG",
 };
 
 function session(role: "ADMIN" | "EDITOR", totpEnabled: boolean) {
@@ -246,6 +248,7 @@ describe("admin posts endpoints", () => {
       expect(data.readingTime).toBe(1);
       expect(data.createdBy).toBe("editor_1");
       expect(data.excerpt).toBe("A short summary of IVF.");
+      expect(data.noindex).toBe(false);
       expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"post_created"'));
     });
   });
@@ -340,7 +343,19 @@ describe("admin posts endpoints", () => {
       expect(data).not.toHaveProperty("title");
       expect(data).not.toHaveProperty("disclaimer");
       expect(data).not.toHaveProperty("content");
+      expect(data).not.toHaveProperty("noindex");
       expect(mocks.revalidateTag).not.toHaveBeenCalled();
+    });
+
+    it("persists the noindex flag when provided", async () => {
+      mocks.auth.mockResolvedValue(session("EDITOR", false));
+      mocks.postFindUnique.mockResolvedValue({ ...basePost });
+      const response = await PATCH(
+        request("http://localhost/api/admin/posts/p1", "PATCH", { noindex: true }),
+        context("p1"),
+      );
+      expect(response.status).toBe(200);
+      expect(mocks.postUpdate.mock.calls[0][0].data.noindex).toBe(true);
     });
 
     it("recomputes stats and revalidates when editing published content", async () => {
@@ -409,6 +424,23 @@ describe("admin posts endpoints", () => {
       expect((await response.json()).error.fieldErrors.content).toBeTruthy();
     });
 
+    it("returns 422 when the reviewer is missing", async () => {
+      mocks.auth.mockResolvedValue(session("EDITOR", false));
+      const response = await publishPOST(
+        request("http://localhost/api/admin/posts/p1/publish", "POST", {
+          ...publishablePost,
+          reviewerName: null,
+          reviewerCredential: null,
+        }),
+        context("p1"),
+      );
+      expect(response.status).toBe(422);
+      const payload = await response.json();
+      expect(payload.error.fieldErrors.reviewerName).toBeTruthy();
+      expect(payload.error.fieldErrors.reviewerCredential).toBeTruthy();
+      expect(mocks.postUpdate).not.toHaveBeenCalled();
+    });
+
     it("returns 404 for a missing post", async () => {
       mocks.auth.mockResolvedValue(session("EDITOR", false));
       const response = await publishPOST(
@@ -466,6 +498,7 @@ describe("admin posts endpoints", () => {
       expect(data.publishedBy).toBe("editor_1");
       expect(data.updatedBy).toBe("editor_1");
       expect(data.plainText).toContain("Hello world body content");
+      expect(data.noindex).toBe(false);
       expect(mocks.revalidateTag).toHaveBeenCalledWith("post:understanding-ivf", { expire: 0 });
       expect(mocks.revalidateTag).toHaveBeenCalledWith("blog", { expire: 0 });
       expect(vi.mocked(console.info)).toHaveBeenCalledWith(expect.stringContaining('"evt":"publish"'));

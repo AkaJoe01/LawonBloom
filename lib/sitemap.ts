@@ -32,6 +32,7 @@ export function staticSitemapEntries(): MetadataRoute.Sitemap {
 export interface SitemapPost {
   slug: string;
   updatedAt: Date;
+  noindex: boolean;
 }
 
 export interface SitemapCategory {
@@ -47,7 +48,7 @@ async function fetchSitemapData(): Promise<{
     db.post.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { publishedAt: "desc" },
-      select: { slug: true, updatedAt: true },
+      select: { slug: true, updatedAt: true, noindex: true },
     }),
     db.category.findMany({ select: { slug: true } }),
   ]);
@@ -65,6 +66,7 @@ export async function getSitemapData(): Promise<{
   return {
     posts: data.posts.map((post) => ({
       slug: post.slug,
+      noindex: post.noindex,
       updatedAt:
         post.updatedAt instanceof Date ? post.updatedAt : new Date(post.updatedAt),
     })),
@@ -73,12 +75,14 @@ export async function getSitemapData(): Promise<{
 }
 
 export function postSitemapEntries(posts: SitemapPost[]): MetadataRoute.Sitemap {
-  return posts.map((post) => ({
-    url: apexUrl(`/blog/${post.slug}`),
-    lastModified: post.updatedAt,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  return posts
+    .filter((post) => !post.noindex)
+    .map((post) => ({
+      url: apexUrl(`/blog/${post.slug}`),
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
 }
 
 export function categorySitemapEntries(

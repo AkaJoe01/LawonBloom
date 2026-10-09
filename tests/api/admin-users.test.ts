@@ -227,6 +227,44 @@ describe("admin users endpoints", () => {
       });
     });
 
+    it("rejects set-role without a target role", async () => {
+      mocks.auth.mockResolvedValue(session("ADMIN", true));
+      const response = await PATCH(patchRequest("u2", { action: "set-role" }), context("u2"));
+      expect(response.status).toBe(400);
+      expect((await response.json()).error.code).toBe("validation");
+      expect(mocks.userUpdate).not.toHaveBeenCalled();
+    });
+
+    it("blocks changing your own role with 403", async () => {
+      mocks.auth.mockResolvedValue(session("ADMIN", true));
+      mocks.userFindUnique.mockResolvedValue({ id: "admin_1", email: "admin@clinic.test" });
+      const response = await PATCH(
+        patchRequest("admin_1", { action: "set-role", role: "EDITOR" }),
+        context("admin_1"),
+      );
+      expect(response.status).toBe(403);
+      expect((await response.json()).error.code).toBe("self_role_change");
+      expect(mocks.userUpdate).not.toHaveBeenCalled();
+    });
+
+    it("changes a role and bumps the session epoch", async () => {
+      mocks.auth.mockResolvedValue(session("ADMIN", true));
+      mocks.userFindUnique.mockResolvedValue({ id: "u2", email: "editor@x.test" });
+      const response = await PATCH(
+        patchRequest("u2", { action: "set-role", role: "ADMIN" }),
+        context("u2"),
+      );
+      expect(response.status).toBe(200);
+      expect(await response.json()).toEqual({ ok: true });
+      expect(mocks.userUpdate).toHaveBeenCalledWith({
+        where: { id: "u2" },
+        data: { role: "ADMIN", sessionEpoch: { increment: 1 } },
+      });
+      expect(vi.mocked(console.info)).toHaveBeenCalledWith(
+        expect.stringContaining('"evt":"user_role_changed"'),
+      );
+    });
+
     it("resets a password with epoch bump and returns it once", async () => {
       mocks.auth.mockResolvedValue(session("ADMIN", true));
       mocks.userFindUnique.mockResolvedValue({ id: "u2", email: "editor@x.test" });

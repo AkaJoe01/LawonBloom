@@ -29,11 +29,14 @@ export const SITE_ROUTES = [
   "/admin",
   "/admin/login",
   "/admin/onboarding/2fa",
+  "/admin/account",
+  "/admin/enquiries",
   "/admin/media",
   "/admin/posts",
   "/admin/posts/new",
   "/admin/posts/[id]",
   "/admin/preview/[id]",
+  "/admin/users",
 ] as const;
 
 export type SiteRoute = (typeof SITE_ROUTES)[number];

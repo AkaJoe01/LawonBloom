@@ -43,3 +43,9 @@ export const enquiryInput = z
 export type BlogPageQuery = z.infer<typeof blogPageQuery>;
 export type SearchQuery = z.infer<typeof searchQuery>;
 export type EnquiryInput = z.infer<typeof enquiryInput>;
+
+export const enquiryActionSchema = z.object({
+  action: z.enum(["read", "unread"]),
+});
+
+export type EnquiryActionInput = z.infer<typeof enquiryActionSchema>;

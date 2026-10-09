@@ -119,6 +119,7 @@ export interface PostMetadataInput {
   updatedAt: Date;
   categoryName: string;
   authorName: string | null;
+  noindex?: boolean;
 }
 
 export function buildPostMetadata(post: PostMetadataInput): Metadata {
@@ -132,6 +133,7 @@ export function buildPostMetadata(post: PostMetadataInput): Metadata {
   return {
     title,
     description,
+    ...(post.noindex ? { robots: { index: false, follow: true as const } } : {}),
     alternates: blogAlternates(`/blog/${post.slug}`),
     openGraph: {
       type: "article",

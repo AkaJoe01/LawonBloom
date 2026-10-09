@@ -4,6 +4,7 @@ const mocks = vi.hoisted(() => ({
   postFindMany: vi.fn(),
   postCount: vi.fn(),
   postFindFirst: vi.fn(),
+  queryRaw: vi.fn(),
   categoryFindUnique: vi.fn(),
   categoryFindMany: vi.fn(),
   configs: [] as { keyParts: string[]; options: { revalidate?: number; tags?: string[] } }[],
@@ -26,6 +27,7 @@ vi.mock("@/lib/db", () => ({
   getDb: () => ({
     post: { findMany: mocks.postFindMany, count: mocks.postCount, findFirst: mocks.postFindFirst },
     category: { findUnique: mocks.categoryFindUnique, findMany: mocks.categoryFindMany },
+    $queryRaw: mocks.queryRaw,
   }),
 }));
 
@@ -63,6 +65,7 @@ describe("blog queries", () => {
       updatedAt: new Date("2026-01-02T00:00:00.000Z"),
       reviewedAt: new Date("2026-01-01T00:00:00.000Z"),
     });
+    mocks.queryRaw.mockResolvedValue([]);
     mocks.categoryFindUnique.mockResolvedValue({ name: "IVF", slug: "ivf", description: null });
     mocks.categoryFindMany.mockResolvedValue([
       { name: "IVF", slug: "ivf", _count: { posts: 3 } },
@@ -103,21 +106,54 @@ describe("blog queries", () => {
     );
   });
 
-  it("searches title and plain text case-insensitively without caching", async () => {
+  it("searches with full-text ranking and an ILIKE fallback without caching", async () => {
+    mocks.queryRaw
+      .mockResolvedValueOnce([{ id: "p1" }])
+      .mockResolvedValueOnce([{ count: BigInt(1) }]);
+
     const result = await searchPublishedPosts("implantation", 1);
+
     expect(result.items).toHaveLength(1);
+    expect(result.total).toBe(1);
+    expect(result.items[0].publishedAt).toBeInstanceOf(Date);
+    expect(mocks.queryRaw).toHaveBeenCalledTimes(2);
+
+    const [idsArg, countArg] = mocks.queryRaw.mock.calls.map((call) => call[0]) as {
+      strings: string[];
+      values: unknown[];
+    }[];
+    const idsSql = idsArg.strings.join("");
+    expect(idsSql).toContain("websearch_to_tsquery");
+    expect(idsSql).toContain('"searchTsv"');
+    expect(idsSql).toContain("ts_rank_cd");
+    expect(idsSql).toContain(`LIMIT`);
+    expect(idsArg.values).toContain("implantation");
+    expect(idsArg.values).toContain(9);
+    expect(idsArg.values).toContain(0);
+    const countSql = countArg.strings.join("");
+    expect(countSql).toContain("COUNT(*)");
+
     expect(mocks.postFindMany).toHaveBeenCalledWith(
       expect.objectContaining({
-        where: {
-          status: "PUBLISHED",
-          OR: [
-            { title: { contains: "implantation", mode: "insensitive" } },
-            { plainText: { contains: "implantation", mode: "insensitive" } },
-          ],
-        },
+        where: { id: { in: ["p1"] } },
       }),
     );
     expect(mocks.configs).toHaveLength(0);
+  });
+
+  it("returns ranked ids in order and skips findMany when nothing matches", async () => {
+    mocks.queryRaw
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([{ count: BigInt(0) }]);
+
+    const result = await searchPublishedPosts("no-match-query", 3);
+
+    expect(result).toEqual({ items: [], total: 0 });
+    expect(mocks.postFindMany).not.toHaveBeenCalled();
+
+    const idsValues = (mocks.queryRaw.mock.calls[0][0] as { values: unknown[] }).values;
+    expect(idsValues).toContain(9);
+    expect(idsValues).toContain(18);
   });
 
   it("fetches only published posts by slug with post tag + blog tag", async () => {
@@ -134,6 +170,7 @@ describe("blog queries", () => {
     const select = mocks.postFindFirst.mock.calls[0][0].select as Record<string, unknown>;
     expect(select.plainText).toBe(true);
     expect(select.updatedAt).toBe(true);
+    expect(select.noindex).toBe(true);
     expect(select.createdByUser).toEqual({ select: { name: true } });
     expect(mocks.configs[0]).toEqual({
       keyParts: ["blog-post"],

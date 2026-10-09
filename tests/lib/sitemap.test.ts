@@ -87,9 +87,26 @@ describe("staticSitemapEntries", () => {
 describe("dynamic sitemap entries", () => {
   it("maps posts with lastModified from updatedAt", () => {
     const updatedAt = new Date("2026-02-01T10:00:00.000Z");
-    expect(postSitemapEntries([{ slug: "ivf-101", updatedAt }])).toEqual([
+    expect(postSitemapEntries([{ slug: "ivf-101", updatedAt, noindex: false }])).toEqual([
       {
         url: `${APEX}/blog/ivf-101`,
+        lastModified: updatedAt,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      },
+    ]);
+  });
+
+  it("excludes noindex posts", () => {
+    const updatedAt = new Date("2026-02-01T10:00:00.000Z");
+    expect(
+      postSitemapEntries([
+        { slug: "keep-me", updatedAt, noindex: false },
+        { slug: "hidden-post", updatedAt, noindex: true },
+      ]),
+    ).toEqual([
+      {
+        url: `${APEX}/blog/keep-me`,
         lastModified: updatedAt,
         changeFrequency: "monthly",
         priority: 0.6,
@@ -111,7 +128,7 @@ describe("dynamic sitemap entries", () => {
 describe("getSitemapData", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mocks.postFindMany.mockResolvedValue([{ slug: "a", updatedAt: new Date() }]);
+    mocks.postFindMany.mockResolvedValue([{ slug: "a", updatedAt: new Date(), noindex: false }]);
     mocks.categoryFindMany.mockResolvedValue([{ slug: "ivf" }]);
   });
 
@@ -123,7 +140,7 @@ describe("getSitemapData", () => {
     expect(mocks.postFindMany).toHaveBeenCalledWith(
       expect.objectContaining({
         where: { status: "PUBLISHED" },
-        select: { slug: true, updatedAt: true },
+        select: { slug: true, updatedAt: true, noindex: true },
       }),
     );
     expect(mocks.categoryFindMany).toHaveBeenCalledWith({ select: { slug: true } });
