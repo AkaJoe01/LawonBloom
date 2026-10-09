@@ -1,7 +1,23 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 let client: PrismaClient | undefined;
+
+export function isNeonConnectionString(connectionString: string): boolean {
+  try {
+    return new URL(connectionString).hostname.endsWith(".neon.tech");
+  } catch {
+    return connectionString.includes(".neon.tech");
+  }
+}
+
+export function createAdapter(connectionString: string): PrismaNeon | PrismaPg {
+  if (isNeonConnectionString(connectionString)) {
+    return new PrismaNeon({ connectionString });
+  }
+  return new PrismaPg({ connectionString });
+}
 
 export function getDb(): PrismaClient {
   if (!client) {
@@ -12,8 +28,7 @@ export function getDb(): PrismaClient {
     if (!process.env.DATABASE_URL) {
       console.warn("[db] DATABASE_URL missing — falling back to DIRECT_URL");
     }
-    const adapter = new PrismaNeon({ connectionString });
-    client = new PrismaClient({ adapter });
+    client = new PrismaClient({ adapter: createAdapter(connectionString) });
   }
   return client;
 }
