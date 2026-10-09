@@ -142,7 +142,7 @@ export default function FaqView() {
       <section className="relative w-full px-6 py-20 lg:px-20 lg:py-28">
         <div className="absolute inset-0 z-0 bg-surface-container-low/50" />
         <div className="relative z-10 mx-auto grid max-w-360 items-center gap-8 md:grid-cols-12">
-          <div className="col-span-1 md:col-span-5 md:col-start-2">
+          <div className="col-span-1 min-w-0 md:col-span-5 md:col-start-2">
             <h2 className="font-h1-editorial mb-6 text-primary">Still Seeking Clarity?</h2>
             <p className="font-body-large mb-10 text-on-surface-variant">
               Our Concierge Team is available around the clock to provide deeply personal answers to any delicate questions you may hold.
@@ -157,13 +157,13 @@ export default function FaqView() {
             </div>
           </div>
 
-          <div className="col-span-1 mt-10 md:col-span-5 md:mt-0">
+          <div className="col-span-1 mt-10 min-w-0 md:col-span-5 md:mt-0">
             <div className="relative overflow-hidden rounded-[32px] border border-outline-variant/30 bg-surface-bright/60 p-8 backdrop-blur">
               <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary-fixed/30 blur-3xl" />
               <div className="absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-tertiary-fixed/20 blur-3xl" />
               <div className="relative z-10 flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface-container">
                     <MessageSquare className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -173,12 +173,12 @@ export default function FaqView() {
                 </div>
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface-container">
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-label-caps text-on-surface-variant">Confidential Email</p>
-                    <p className="text-base text-foreground">lawonbloomfertilitycentre@gmail.com</p>
+                    <p className="break-all text-base text-foreground">lawonbloomfertilitycentre@gmail.com</p>
                   </div>
                 </div>
               </div>

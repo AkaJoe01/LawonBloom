@@ -21,7 +21,7 @@ export default function TimelineSection(){
             <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
 
                 {/* IMAGES */}
-                <div className="relative">
+                <div className="relative w-fit max-w-md">
                     <Image
                         src="/WhatsApp/1 (2).jpeg"
                         alt="Elizabeth Nwachukwu"

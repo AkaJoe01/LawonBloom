@@ -6,7 +6,7 @@ return (
 The Fertility Journal
 </p>
 
-<h1 className="font-serif text-[72px] md:text-[96px] leading-[0.9] tracking-[-0.06em] mb-10">
+<h1 className="font-serif text-5xl sm:text-7xl md:text-[96px] leading-[0.9] tracking-[-0.06em] mb-10">
 
 Elevating
 <br />

@@ -4,7 +4,7 @@ export default function Hero(){
             <p className="uppercase tracking-[0.3em] text-xs text-[#9c5c67] mb-6">
                 Clinical Offerings
             </p>
-            <h1 className="font-serif text-[64px] md:text-[96px] leading-[0.95] mb-10">
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-[96px] leading-[0.95] mb-10">
                 The Science of <br />
                 <span className="text-[#9c5c67] italic">
                     Serenity
