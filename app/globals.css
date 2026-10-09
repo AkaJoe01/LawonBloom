@@ -129,6 +129,7 @@ html {
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 300;
+  text-wrap: balance;
 }
 
 .font-h1-editorial {
@@ -136,6 +137,7 @@ html {
   font-size: clamp(1.75rem, 4.5vw, 48px);
   line-height: 1.2;
   font-weight: 400;
+  text-wrap: balance;
 }
 
 .font-h2-subheading {
