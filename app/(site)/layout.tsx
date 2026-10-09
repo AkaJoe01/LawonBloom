@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AiFab from "@/components/aiChat/AiFab";
+import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   APEX,
@@ -54,6 +55,7 @@ export default async function SiteRootLayout({
         <main className="grow pt-20">{children}</main>
         <Footer />
         <AiFab />
+        <WhatsAppFab />
       </body>
     </html>
   );
