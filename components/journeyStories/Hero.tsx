@@ -9,6 +9,8 @@ export default function Hero() {
           src="/images/theater.jpg"
           alt="lab"
           fill
+          priority
+          sizes="100vw"
           className="object-cover opacity-20"
         />
       </div>

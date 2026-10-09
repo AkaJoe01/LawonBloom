@@ -31,6 +31,7 @@ export default function TeamPage(){
                         src="/images/Dr. Saanu.jpg"
                         alt="Lead Specialist"
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                     />
                 </div>
@@ -90,6 +91,7 @@ export default function TeamPage(){
                                 src="/images/Lizzy_Microscope.jpg"
                                 alt="Lizzy_Microscope"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
                                 className="object-cover"
                             />
                         </div>
@@ -108,6 +110,7 @@ export default function TeamPage(){
                                 src="/images/Doc_1.jpg"
                                 alt="Doctor"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
                                 className="object-cover"
                             />
                         </div>
@@ -126,6 +129,7 @@ export default function TeamPage(){
                                 src="/images/marcus.jpg"
                                 alt="marcus"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
                                 className="object-cover"
                             />
                         </div>

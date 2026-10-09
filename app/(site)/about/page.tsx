@@ -32,6 +32,7 @@ export default function AboutPage() {
             alt="Sanctuary Interior"
             src="/WhatsApp/1 (7).jpeg"
             fill
+            sizes="50vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>

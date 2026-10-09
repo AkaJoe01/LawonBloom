@@ -64,6 +64,7 @@ export default function Cinematic() {
                 src={slide.image}
                 alt={slide.subtitle}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition duration-700"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />

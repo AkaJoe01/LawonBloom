@@ -102,6 +102,7 @@ export default function ServicesGrid() {
                                         src={service.image}
                                         alt={service.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                         className="object-cover scale-110"
                                     />
                                 </div>

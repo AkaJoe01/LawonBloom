@@ -11,6 +11,7 @@ src="/images/scan_1.jpg"
 alt=""
 className="rounded-4xl w-full object-cover"
 fill
+sizes="(max-width: 1024px) 100vw, 50vw"
 />
 
 {/* OVERLAY CARD */}

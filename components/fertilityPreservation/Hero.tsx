@@ -10,6 +10,7 @@ export default function Hero(){
                 alt="scan"
                 fill
                 priority
+                sizes="100vw"
                 className="object-cover opacity-20"
             />
 

@@ -35,7 +35,8 @@ export default function ClinicalExcellencePage() {
                         className="w-full h-full object-cover filter blur-[2px] scale-105" 
                         src="/WhatsApp/Incubator_2.jpg"
                         fill
-                        unoptimized
+                        priority
+                        sizes="100vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background"></div>
                 </div>
@@ -94,7 +95,7 @@ export default function ClinicalExcellencePage() {
                                         className="w-full h-full object-cover" 
                                         src="/WhatsApp/Incubator.jpg"
                                         fill
-                                        unoptimized
+                                        sizes="(max-width: 768px) 100vw, 58vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
                                 </div>
@@ -110,7 +111,7 @@ export default function ClinicalExcellencePage() {
                                         className="w-full h-full object-cover" 
                                         src="/WhatsApp/Integra.jpg"
                                         fill
-                                        unoptimized
+                                        sizes="(max-width: 768px) 100vw, 58vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
                                 </div>
@@ -137,7 +138,7 @@ export default function ClinicalExcellencePage() {
                 
                 <div className="max-w-360 mx-auto px-6 lg:px-16">
                     <div className="text-center mb-24 relative z-10">
-                        <h2 className="font-display-hero text-[64px] md:text-display-hero text-on-surface leading-tight tracking-tight mb-6">The Lab Sanctuary</h2>
+                        <h2 className="font-display-hero text-4xl sm:text-5xl md:text-display-hero text-on-surface leading-tight tracking-tight mb-6">The Lab Sanctuary</h2>
                         <div className="elegant-divider w-24 mx-auto mb-8"></div>
                         <p className="font-body-large text-on-surface-variant max-w-3xl mx-auto">
                             Beyond standard medical safety, our environment is engineered to shield against microscopic variances in air quality, temperature, and light.

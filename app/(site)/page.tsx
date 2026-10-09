@@ -230,6 +230,7 @@ export default function HomePage() {
                                 src="/WhatsApp/1 (9).jpeg"
                                 alt="Medical director portrait"
                                 fill
+                                sizes="(max-width: 1024px) 100vw, 42vw"
                                 className="h-full w-full object-cover"
                             />
                         </div>

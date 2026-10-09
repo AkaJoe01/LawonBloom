@@ -33,7 +33,7 @@ export default function PrecisionSection(){
                         src="/WhatsApp/Clean.jpg"
                         alt="largeGrid"
                         fill
-                        priority
+                        sizes="(max-width: 1023px) 100vw, 66vw"
                         className="object-cover"
                     />
                     <div className="absolute inset-0 bg-black/20" />

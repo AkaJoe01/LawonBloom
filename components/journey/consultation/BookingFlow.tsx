@@ -199,6 +199,7 @@ export default function BookingFlow() {
                       src={doctor.image}
                       alt={doctor.name}
                       fill
+                      sizes="(max-width: 640px) 50vw, 448px"
                       className="object-cover"
                     />
                   </div>
