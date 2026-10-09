@@ -38,12 +38,12 @@ export default function Families() {
 
   return (
     <section id="lawonbloom-families" className="max-w-6xl mx-auto px-6 py-24">
-      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-20 items-start">
-        <div>
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-20 items-start">
+        <div className="min-w-0">
           <p className="uppercase text-xs tracking-[0.3em] text-[#9c5c67] mb-6">
             Written Archives
           </p>
-          <h2 className="font-serif text-[56px] leading-[1.1] mb-8">
+          <h2 className="font-serif text-4xl leading-[1.1] mb-8 sm:text-5xl lg:text-[56px]">
             The Lawonbloom Families
           </h2>
           <p className="text-gray-600 leading-8 mb-10">
@@ -57,7 +57,7 @@ export default function Families() {
           </a>
         </div>
 
-        <div className="bg-white/70 backdrop-blur rounded-2xl p-10 shadow-sm">
+        <div className="min-w-0 bg-white/70 backdrop-blur rounded-2xl p-6 shadow-sm sm:p-10">
           <Swiper
             modules={[Pagination, Autoplay, A11y, Keyboard]}
             pagination={{ clickable: true }}
@@ -73,7 +73,6 @@ export default function Families() {
             }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
-              swiper.update();
             }}
           >
             {testimonials.map((testimonial, index) => (

@@ -35,7 +35,7 @@ export default function Cinematic() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-serif text-5xl">Cinematic Journey</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl">Cinematic Journey</h2>
         </motion.div>
 
         <p className="text-gray-600 max-w-xl">

@@ -8,10 +8,10 @@ export const metadata = pageMetadata("/journey/stories");
 
 export default function JourneyStoriesPage() {
     return (
-        <main className="bg-surface text-foreground">
+        <div className="bg-surface text-foreground">
             <Hero />
             <Cinematic />
             <Families />
-        </main>
+        </div>
     );
 }
