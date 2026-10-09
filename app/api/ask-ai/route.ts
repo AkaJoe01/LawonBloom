@@ -1,7 +1,29 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { originRejection } from "@/lib/security/origin";
+
+function clientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0]?.trim() || "unknown";
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
 
 export async function POST(request: Request) {
+  const rejected = originRejection(request);
+  if (rejected) return rejected;
+
+  const ipRate = await checkRateLimit(
+    { key: `ask-ai:${clientIp(request)}`, limit: 10, windowSeconds: 60, prefix: "public" },
+    "open",
+  );
+  if (!ipRate.ok) {
+    return NextResponse.json(
+      { success: false, error: "Too many questions right now. Please wait a minute and try again." },
+      { status: 429 },
+    );
+  }
+
   try {
     const { question } = await request.json();
 

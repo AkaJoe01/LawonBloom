@@ -25,6 +25,7 @@ export const serverEnvSchema = z.object({
   UPSTASH_REDIS_REST_URL: z.url(),
   UPSTASH_REDIS_REST_TOKEN: required,
   TOTP_ENCRYPTION_KEY: z.string().min(32),
+  GEMINI_API_KEY: z.string().optional(),
   SENTRY_DSN: z.url().optional(),
   NEXT_PUBLIC_SENTRY_DSN: z.url().optional(),
   SEED_ADMIN_EMAIL: z.email(),

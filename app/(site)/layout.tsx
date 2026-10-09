@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AiFab from "@/components/aiChat/AiFab";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   APEX,
@@ -52,6 +53,7 @@ export default async function SiteRootLayout({
         <Header />
         <main className="grow pt-20">{children}</main>
         <Footer />
+        <AiFab />
       </body>
     </html>
   );

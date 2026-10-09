@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { generateContent } = vi.hoisted(() => ({
+const { generateContent, checkRateLimit } = vi.hoisted(() => ({
   generateContent: vi.fn(),
+  checkRateLimit: vi.fn(),
 }));
 
 vi.mock("@google/generative-ai", () => ({
@@ -12,12 +13,20 @@ vi.mock("@google/generative-ai", () => ({
   },
 }));
 
+vi.mock("@/lib/rate-limit", () => ({ checkRateLimit }));
+
 import { POST } from "../../app/api/ask-ai/route";
 
-function requestWith(body: unknown): Request {
+function requestWith(body: unknown, headers: Record<string, string> = {}): Request {
   return new Request("http://localhost/api/ask-ai", {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      origin: "http://localhost",
+      host: "localhost",
+      "content-type": "application/json",
+      "x-forwarded-for": "203.0.113.7",
+      ...headers,
+    },
     body: JSON.stringify(body),
   });
 }
@@ -26,12 +35,44 @@ describe("POST /api/ask-ai", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     process.env.GEMINI_API_KEY = "test-key";
+    checkRateLimit.mockResolvedValue({ ok: true });
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterEach(() => {
     delete process.env.GEMINI_API_KEY;
     vi.restoreAllMocks();
+  });
+
+  it("rejects a cross-origin request before touching the limiter", async () => {
+    const response = await POST(requestWith({ question: "Hi" }, { origin: "https://evil.example" }));
+    expect(response.status).toBe(403);
+    const payload = await response.json();
+    expect(payload.error.code).toBe("forbidden_origin");
+    expect(checkRateLimit).not.toHaveBeenCalled();
+    expect(generateContent).not.toHaveBeenCalled();
+  });
+
+  it("returns 429 when the IP rate limit is exhausted", async () => {
+    checkRateLimit.mockResolvedValue({ ok: false });
+    const response = await POST(requestWith({ question: "What is IVF?" }));
+    expect(response.status).toBe(429);
+    const payload = await response.json();
+    expect(payload.success).toBe(false);
+    expect(payload.error).toContain("Too many questions");
+    expect(generateContent).not.toHaveBeenCalled();
+  });
+
+  it("rate-limits per client IP under the ask-ai key", async () => {
+    generateContent.mockResolvedValue({
+      response: { text: () => "IVF is a fertility treatment." },
+    });
+    const response = await POST(requestWith({ question: "What is IVF?" }));
+    expect(response.status).toBe(200);
+    expect(checkRateLimit).toHaveBeenCalledWith(
+      { key: "ask-ai:203.0.113.7", limit: 10, windowSeconds: 60, prefix: "public" },
+      "open",
+    );
   });
 
   it("returns 400 when the question is missing", async () => {

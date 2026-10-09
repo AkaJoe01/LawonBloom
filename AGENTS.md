@@ -13,7 +13,7 @@ Single-package Next.js 16 App Router app (no workspaces). Public routes in `app/
 - Pre-handoff check, in CI order (`.github/workflows/ci.yml`): `npm run lint` → `npm run typecheck` → `npm run images:check` → `npm run test:coverage` → `npx prisma validate`. These are green on a clean checkout; keep them green.
 - `npm ci` (postinstall = `prisma generate`). If your npm gates install scripts (it does on this machine), `@prisma/client` may be stale — run `npx prisma generate` yourself.
 - Single test: `npx vitest run tests/lib/seo.test.ts`, or `-t "partial name"`.
-- Tests are hermetic — node env, Prisma/sharp/`next/cache` mocked. No `.env`, no database, no server needed. (43 files / 446 tests at last check.)
+- Tests are hermetic — node env, Prisma/sharp/`next/cache` mocked. No `.env`, no database, no server needed. (43 files / 449 tests at last check.)
 - `test:coverage` enforces 80% lines/functions/branches/statements over `lib/**` + `app/api/**`; CI fails below it.
 - `npm run lint` = bare `eslint`, which lints the whole repo. It fails on **errors only** — the `--max-warnings 0` budget mentioned in `ops/launch-checklist.md` is *not* wired into CI.
 - `next build` needs **no** env vars (verified). Deploy entry is `scripts/vercel-build.mjs` (via `vercel.json`): runs `prisma migrate deploy` when DB env exists, hard-fails on a production build without DB env, skips migrate on previews.
