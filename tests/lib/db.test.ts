@@ -22,25 +22,33 @@ afterEach(() => {
 });
 
 describe("getDb", () => {
-  it("uses DATABASE_URL when set", async () => {
-    process.env.DATABASE_URL = "postgresql://user:pass@pooler.neon.tech/neondb";
-    process.env.DIRECT_URL = "postgresql://user:pass@direct.neon.tech/neondb";
+  it("uses Neon adapter when DATABASE_URL points to Neon", async () => {
+    process.env.DATABASE_URL = "postgresql://pooler.neon.tech/neondb";
+    process.env.DIRECT_URL = "postgresql://direct.neon.tech/neondb";
     const getDb = await loadGetDb();
     getDb();
     expect(mocks.PrismaNeon).toHaveBeenCalledWith({
-      connectionString: "postgresql://user:pass@pooler.neon.tech/neondb",
+      connectionString: "postgresql://pooler.neon.tech/neondb",
     });
     expect(mocks.PrismaClient).toHaveBeenCalled();
   });
 
   it("falls back to DIRECT_URL when DATABASE_URL is unset", async () => {
     delete process.env.DATABASE_URL;
-    process.env.DIRECT_URL = "postgresql://user:pass@direct.neon.tech/neondb";
+    process.env.DIRECT_URL = "postgresql://direct.neon.tech/neondb";
     const getDb = await loadGetDb();
     getDb();
     expect(mocks.PrismaNeon).toHaveBeenCalledWith({
-      connectionString: "postgresql://user:pass@direct.neon.tech/neondb",
+      connectionString: "postgresql://direct.neon.tech/neondb",
     });
+  });
+
+  it("uses native Prisma client for non-Neon URLs", async () => {
+    process.env.DATABASE_URL = "postgresql://localhost:5432/ci";
+    const getDb = await loadGetDb();
+    getDb();
+    expect(mocks.PrismaNeon).not.toHaveBeenCalled();
+    expect(mocks.PrismaClient).toHaveBeenCalledWith();
   });
 
   it("throws when both URLs are missing", async () => {
@@ -52,7 +60,7 @@ describe("getDb", () => {
   });
 
   it("caches the client across calls", async () => {
-    process.env.DATABASE_URL = "postgresql://user:pass@pooler.neon.tech/neondb";
+    process.env.DATABASE_URL = "postgresql://pooler.neon.tech/neondb";
     const getDb = await loadGetDb();
     const first = getDb();
     const second = getDb();
