@@ -28,7 +28,10 @@ export default function AiChat({ className }: AiChatProps) {
       const res = await fetch("/api/ask-ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q }),
+        body: JSON.stringify({
+          question: q,
+          history: messages.slice(-12).map((m) => ({ role: m.role, text: m.text })),
+        }),
       });
       const data = await res.json();
       if (data.success) {
